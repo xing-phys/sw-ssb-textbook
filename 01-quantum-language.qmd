@@ -1,0 +1,234 @@
+# Quantum states, ensembles, and locality {#sec-quantum}
+
+## What a state must predict
+
+A theory of a noisy quantum magnet must answer two kinds of questions. What is the probability of a measurement outcome on one spin? What information is shared by distant regions, possibly only after conditioning on the rest? A wavefunction can answer both questions for an isolated pure system. A density matrix can answer them when the system is entangled with an inaccessible environment or prepared with classical randomness. SW-SSB concerns properties of that density matrix which ordinary expectation values can miss.
+
+We begin with finite-dimensional systems and set $\hbar=k_B=1$. Sites form a lattice of linear size $L$, containing $N$ sites. Each site has a finite-dimensional Hilbert space. Thermodynamic limits always refer to a sequence of such finite systems; they are not an instruction to manipulate an infinite matrix.
+
+### Vectors and operators
+
+A pure state is a normalized vector $\ket\psi$ in a complex vector space $\mathcal H$, with vectors differing by an overall phase representing the same physical state. In an orthonormal basis,
+
+$$
+\ket\psi=\sum_a\psi_a\ket a,\qquad
+\sum_a|\psi_a|^2=1.
+$$
+
+A linear operator $A$ maps vectors to vectors. Its adjoint satisfies $(A^\dagger)_{ab}=A_{ba}^*$. A Hermitian operator $A=A^\dagger$ represents an observable, with real eigenvalues. A unitary operator $U^\dagger U=I$ preserves inner products. The trace is $\operatorname{Tr}A=\sum_a A_{aa}$, independent of basis, and obeys $\operatorname{Tr}(AB)=\operatorname{Tr}(BA)$. Cyclicity permits cyclic permutations of factors, not arbitrary reorderings.
+
+For a spin one-half we use
+
+$$
+X=\begin{pmatrix}0&1\\1&0\end{pmatrix},\quad
+Y=\begin{pmatrix}0&-i\\i&0\end{pmatrix},\quad
+Z=\begin{pmatrix}1&0\\0&-1\end{pmatrix}.
+$$
+
+They satisfy $X^2=Y^2=Z^2=I$, $XY=iZ$, and $\{X,Z\}=0$. The $Z$ eigenvectors are $\ket0,\ket1$; the $X$ eigenvectors are $\ket\pm=(\ket0\pm\ket1)/\sqrt2$. Subscripts indicate sites: $X_i$ is the identity everywhere except site $i$.
+
+An important identity is
+
+$$
+\operatorname{Tr}\bigl(\ket\psi\bra\phi\,A\bigr)
+=\bra\phi A\ket\psi.
+$$
+
+It converts familiar wavefunction expressions into operator expressions.
+
+## Why density matrices are necessary
+
+Suppose preparation $a$ occurs with probability $p_a$ and produces $\ket{\psi_a}$. The probability of a projective measurement outcome with projector $P$ is
+
+$$
+\sum_a p_a\bra{\psi_a}P\ket{\psi_a}
+=\operatorname{Tr}(\rho P),\qquad
+\rho=\sum_a p_a\ket{\psi_a}\bra{\psi_a}.
+$$ {#eq-density-ensemble}
+
+Every density matrix obeys three conditions:
+
+1. $\rho=\rho^\dagger$;
+2. $\rho\geq0$, meaning $\bra v\rho\ket v\geq0$ for every vector;
+3. $\operatorname{Tr}\rho=1$.
+
+Conversely, a matrix with these properties has a spectral decomposition
+
+$$
+\rho=\sum_\alpha\lambda_\alpha\ket\alpha\bra\alpha,
+\qquad \lambda_\alpha\geq0,\quad\sum_\alpha\lambda_\alpha=1,
+$$
+
+and therefore describes a possible statistical preparation. The support of $\rho$ is the span of eigenvectors with positive eigenvalue. A projector onto the support is denoted $P_\rho$.
+
+For any observable,
+
+$$
+\langle A\rangle_\rho=\operatorname{Tr}(\rho A).
+$$ {#eq-born-density}
+
+A state is pure precisely when $\rho^2=\rho$, or equivalently $\operatorname{Tr}\rho^2=1$. Otherwise $0<\operatorname{Tr}\rho^2<1$. The quantity $\operatorname{Tr}\rho^2$ is its purity. For dimension $d$, the minimum purity is $1/d$, attained by $I/d$.
+
+### Worked example: the Bloch ball
+
+Any qubit density matrix can be written
+
+$$
+\rho=\frac12(I+r_xX+r_yY+r_zZ).
+$$
+
+Because $(\mathbf r\cdot\boldsymbol\sigma)^2=|\mathbf r|^2I$, the eigenvalues are $(1\pm|\mathbf r|)/2$. Positivity is equivalent to $|\mathbf r|\leq1$. The boundary sphere contains pure states; its interior contains mixtures. Direct multiplication gives
+
+$$
+\operatorname{Tr}\rho^2=\frac{1+|\mathbf r|^2}{2}.
+$$
+
+The maximally mixed state $I/2$ admits both decompositions
+
+$$
+\frac I2=\frac{\ket0\bra0+\ket1\bra1}{2}
+=\frac{\ket+\bra++\ket-\bra-}{2}.
+$$
+
+Thus an ensemble is not determined by its density matrix. A property of a chosen preparation record is not automatically a property of the state. This distinction becomes decisive when comparing trajectory order with intrinsic SW-SSB.
+
+## Composite systems and reduced states
+
+For subsystems $A,B$, the joint space is $\mathcal H_A\otimes\mathcal H_B$. If $A$ has basis $\ket a$ and $B$ has basis $\ket b$, a general vector is
+
+$$
+\ket\Psi=\sum_{a,b}\Psi_{ab}\ket a\otimes\ket b.
+$$
+
+A product vector factorizes as $\psi_a\phi_b$. A vector that cannot factorize is entangled. A mixed state is separable if it is a convex combination of product density matrices; otherwise it is entangled. Classical correlations need not be entanglement.
+
+If measurements act only on $A$, the appropriate state is the partial trace
+
+$$
+\rho_A=\operatorname{Tr}_B\rho_{AB},\qquad
+(\rho_A)_{aa'}=\sum_b(\rho_{AB})_{ab,a'b}.
+$$ {#eq-partial-trace}
+
+This definition is forced by $\operatorname{Tr}_{AB}[\rho_{AB}(O_A\otimes I_B)]=\operatorname{Tr}_A(\rho_AO_A)$ for every $O_A$. It discards correlations accessible only by joint measurements. It does not describe measuring $B$ and retaining its outcome.
+
+### Worked example: a Bell pair and a classical coin
+
+For $\ket{\Phi^+}=(\ket{00}+\ket{11})/\sqrt2$, write the projector as four outer products. The cross terms vanish on tracing $B$, because $\operatorname{Tr}(\ket0\bra1)=0$. Consequently $\rho_A=I/2$.
+
+The classical state
+
+$$
+\rho_{\rm coin}=\frac12\ket{00}\bra{00}
++\frac12\ket{11}\bra{11}
+$$
+
+has exactly the same reduced state. The two joint states are distinguished by $\langle X_AX_B\rangle$: it equals one for the Bell pair and zero for the coin. A subsystem's mixedness alone does not tell us whether its uncertainty originates in entanglement or classical preparation.
+
+For the $N$-spin cat state
+
+$$
+\ket{\mathrm{cat}}=\frac{\ket0^{\otimes N}+\ket1^{\otimes N}}{\sqrt2},
+$$
+
+tracing out even one spin removes the relative-phase coherence. Every proper reduced state equals that of the corresponding classical coin. Distinguishing these states globally requires access to a nonlocal observable such as $\prod_iX_i$.
+
+## Matrix functions and purification
+
+For a positive matrix $\rho$, define $f(\rho)=\sum_\alpha f(\lambda_\alpha)\ket\alpha\bra\alpha$. In particular $\sqrt\rho$ is the unique positive square root. Matrix square roots generally do not distribute over products: $\sqrt{AB}\neq\sqrt A\sqrt B$ unless suitable commutativity conditions hold.
+
+Every density matrix can be obtained by discarding an auxiliary system. Starting from its spectral decomposition, define
+
+$$
+\ket{\Psi_\rho}_{SE}=\sum_\alpha\sqrt{\lambda_\alpha}
+\ket\alpha_S\ket\alpha_E.
+$$ {#eq-spectral-purification}
+
+The norm is one. The orthogonality of the environment basis gives $\operatorname{Tr}_E\ket{\Psi_\rho}\bra{\Psi_\rho}=\rho$. This is a purification. Applying a unitary on $E$ changes the purification without changing $\rho$.
+
+More generally any bipartite pure vector has a Schmidt decomposition
+
+$$
+\ket\Psi=\sum_{\alpha=1}^r\sqrt{\lambda_\alpha}
+\ket{u_\alpha}_A\ket{v_\alpha}_B.
+$$
+
+It follows from the singular-value decomposition of the coefficient matrix $\Psi_{ab}$. The two reduced states have identical nonzero spectra. The Schmidt rank $r$ is one for a product vector; a large $r$ allows entanglement but its distribution of weights determines how much.
+
+In a fixed basis, one particularly useful purification is
+
+$$
+\ket{\sqrt\rho}\!\rangle
+=\sum_{a,b}(\sqrt\rho)_{ab}\ket a_L\ket b_R.
+$$ {#eq-canonical-first}
+
+Its norm is $\operatorname{Tr}\rho=1$. We introduce it now to make its ingredients familiar; its relation to doubled symmetry and Rényi-1 order is developed in @sec-purification. The right factor transforms in the conjugate representation under a change of basis. Forgetting this conjugation produces incorrect symmetry generators.
+
+## Local observables and thermodynamic statements
+
+An operator is local if its support lies in a region of bounded diameter as $L\to\infty$. A sum of local terms, such as a Hamiltonian $H=\sum_i h_i$, is an extensive operator; it is not itself local. A global symmetry $U=\bigotimes_i u_i$ has support across the entire system even when each factor is on-site.
+
+Two sequences of states can be globally orthogonal while becoming indistinguishable by every fixed local measurement. For example, the two parity-sector states
+
+$$
+\rho_\pm=\frac{I\pm\prod_iX_i}{2^N}
+$$ {#eq-first-parity}
+
+have orthogonal supports. Yet every proper subsystem has reduced state $I/2^{|A|}$ in both sectors, since tracing out an omitted factor gives $\operatorname{Tr}X=0$. Global charge information is entirely invisible on a proper region. These states will provide the simplest exact SW-SSB model.
+
+This example explains why the order of limits matters. A global fidelity computed before tracing is different from a fidelity of reduced states after tracing. Both are meaningful; they answer different operational questions.
+
+## Connected correlations and clustering
+
+For operators supported near $i$ and $j$, define
+
+$$
+\langle A_iB_j\rangle_c
+=\operatorname{Tr}(\rho A_iB_j)
+-\operatorname{Tr}(\rho A_i)\operatorname{Tr}(\rho B_j).
+$$
+
+Exponential clustering means that the magnitude is bounded by $c\|A_i\|\|B_j\|e^{-r/\xi}$, with $r=|i-j|$ and a correlation length $\xi$ independent of system size. Algebraic decay $r^{-\eta}$ has no finite exponential correlation length. A nonzero limit is long-range order.
+
+For the parity state in @eq-first-parity, all fixed-support connected correlators vanish once their total support omits a site. Nonetheless a global constraint survives. SW-SSB is not an exception to the Born rule: it uses nonlinear functions of the density matrix to expose a kind of organization that fixed-order linear observables do not detect.
+
+## Exercises and worked solutions
+
+### 1. Positivity is stronger than positive diagonal entries
+
+Consider $M=\frac12\begin{pmatrix}1&a\\a&1\end{pmatrix}$ with real $a$. For which values is $M$ a state?
+
+::: {.callout-note collapse="true" title="Solution"}
+Its eigenvectors are $\ket\pm$ with eigenvalues $(1\pm a)/2$. Hermiticity and trace one hold for every real $a$, but positivity requires $-1\leq a\leq1$. A matrix with apparently reasonable occupation probabilities can fail to define a physical state because its off-diagonal coherence is too large.
+:::
+
+### 2. A mixed state has many ensembles
+
+Show that the uniform mixture of the four pure states $\ket{\pm x},\ket{\pm y}$ is $I/2$. Does the preparation record follow from the density matrix?
+
+::: {.callout-note collapse="true" title="Solution"}
+The two $x$ projectors sum to $I$ and the two $y$ projectors also sum to $I$. Dividing their sum by four gives $I/2$. All measurements on the qubit alone reproduce the same probabilities as a $z$-basis coin. The record distinguishing these preparations is additional physical information, typically stored in an environment or a classical register.
+:::
+
+### 3. Entanglement versus correlation
+
+Compute $\langle Z_AZ_B\rangle$, $\langle Z_A\rangle$, and $\langle X_AX_B\rangle$ for the Bell state and the classical coin. Which measurement distinguishes them?
+
+::: {.callout-note collapse="true" title="Solution"}
+Both have $\langle Z_AZ_B\rangle=1$ and zero one-point $Z$ expectations. For the Bell state, $X_AX_B$ exchanges the two terms of the vector and hence has expectation one. For the coin, each diagonal basis vector has zero expectation of $X_AX_B$, giving zero. Thus correlated $Z$ outcomes alone do not certify entanglement; the complementary-basis correlation distinguishes these two examples.
+:::
+
+### 4. The invisible parity bit
+
+Prove normalization and positivity of $\rho_\pm$ and compute its purity and every proper reduced state.
+
+::: {.callout-note collapse="true" title="Solution"}
+Let $P_\pm=(I\pm U)/2$, where $U=\prod_iX_i$. Since $U^2=I$, these are orthogonal projectors of rank $2^{N-1}$. Therefore $\rho_\pm=P_\pm/2^{N-1}$ is positive and normalized. Its purity is $2^{1-N}$. If at least one site is traced out, the $U$ term vanishes. The identity term gives $\rho_A=I_A/2^{|A|}$. The sectors are globally distinguishable by measuring $U$ but locally indistinguishable on every proper subset.
+:::
+
+### 5. Basis conventions in a doubled space
+
+For the unnormalized vector $\ket I\!\rangle=\sum_a\ket a_L\ket a_R$, show $(A\otimes I)\ket I\!\rangle=(I\otimes A^T)\ket I\!\rangle$.
+
+::: {.callout-note collapse="true" title="Solution"}
+The first side is $\sum_{ab}A_{ba}\ket b_L\ket a_R$. The second is $\sum_{ab}(A^T)_{ba}\ket a_L\ket b_R=\sum_{ab}A_{ab}\ket a_L\ket b_R$, identical after exchanging dummy indices. A transpose, rather than an adjoint, arises because coefficients of kets have not been complex conjugated. This identity fixes all later vectorization rules.
+:::

@@ -1,0 +1,12 @@
+_site/
+.quarto/
+*.tex
+*.log
+*.aux
+*.out
+*.toc
+research/cache/
+research/wang-review.html
+research/wang-review.txt
+__pycache__/
+.DS_Store

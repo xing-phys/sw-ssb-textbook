@@ -1,0 +1,232 @@
+# Statistical mechanics and spontaneous symmetry breaking {#sec-statistical}
+
+## The puzzle of a symmetric magnet
+
+A finite ferromagnet with no magnetic field has a spin-flip symmetric Hamiltonian and a spin-flip symmetric Gibbs state. Its magnetization is exactly zero. Nevertheless a macroscopic magnet points in a definite direction. Resolving this apparent contradiction introduces the thermodynamic limit, selection of a state by an arbitrarily small perturbation, and long-range correlations. SW-SSB keeps these lessons but changes which correlations carry the order.
+
+An extensive thermodynamic quantity scales as $N$. An intensive quantity stays finite as $N\to\infty$. Energy density, entropy density, and magnetization per site are intensive. A phase is a stable family of macroscopic behavior, rather than an isolated density matrix with an unusual identity.
+
+## Deriving the Gibbs ensemble
+
+For probabilities $p_a$ over energy eigenstates with energies $E_a$, maximize the Shannon entropy $-\sum_ap_a\ln p_a$ subject to normalization and a specified mean energy. With multipliers $\alpha,\beta$, stationarity gives
+
+$$
+-\ln p_a-1-\alpha-\beta E_a=0,
+\qquad p_a=\frac{e^{-\beta E_a}}{Z},\quad
+Z=\sum_a e^{-\beta E_a}.
+$$
+
+In quantum mechanics, maximizing $S(\rho)=-\operatorname{Tr}(\rho\ln\rho)$ yields the same result in operator form,
+
+$$
+\rho_\beta=\frac{e^{-\beta H}}Z,\qquad
+F_{\rm th}=-T\ln Z.
+$$ {#eq-gibbs}
+
+Here $F_{\rm th}$ denotes thermodynamic free energy, not the root fidelity $F$ used later. Differentiation gives
+
+$$
+\langle H\rangle=-\partial_\beta\ln Z,\qquad
+\partial_\beta^2\ln Z=\operatorname{Var}(H)\geq0.
+$$
+
+The entropy is $S=\beta\langle H\rangle+\ln Z$. These identities illustrate a recurring principle: derivatives of a generating function measure fluctuations.
+
+### Fixed charge and fluctuating charge
+
+Suppose $[H,Q]=0$ and $P_q$ projects onto a charge eigenspace. A fixed-charge, or canonical-with-respect-to-$Q$, ensemble is
+
+$$
+\rho_{\beta,q}=\frac{P_qe^{-\beta H}}{Z_q},\qquad
+Z_q=\operatorname{Tr}(P_qe^{-\beta H}).
+$$ {#eq-canonical-charge}
+
+The grand-canonical ensemble is
+
+$$
+\rho_{\beta,\mu}=\frac{e^{-\beta(H-\mu Q)}}{Z_{\rm gc}}
+=\sum_q\frac{e^{\beta\mu q}Z_q}{Z_{\rm gc}}\rho_{\beta,q}.
+$$ {#eq-grand-canonical}
+
+The distinction is physical: an environment may exchange energy while preserving charge, or may exchange both. Both states commute with $Q$. Only the first has support in one charge sector. This is the seed of strong versus weak symmetry.
+
+Ensemble equivalence means that local observables agree in suitable thermodynamic limits, typically away from pathologies such as phase coexistence, long-range nonadditive interactions, or anomalous constraints. It does not mean that the global density matrices approach one another in trace distance. Measuring total charge still distinguishes an exactly fixed sector from a distribution of sectors.
+
+### Worked example: a fixed number of occupied sites
+
+Take $N$ two-level sites with occupation $n_i=0,1$. The infinite-temperature state at fixed $Q=\sum_i n_i=M$ is the uniform distribution over $\binom NM$ configurations. By symmetry,
+
+$$
+\langle n_i\rangle=\nu=\frac MN,\qquad
+\langle n_in_j\rangle=\frac{M(M-1)}{N(N-1)}\quad(i\ne j).
+$$
+
+Thus
+
+$$
+\langle n_in_j\rangle_c=-\frac{\nu(1-\nu)}{N-1}.
+$$
+
+Pairwise correlations vanish at fixed separation as $N\to\infty$, yet summing all of them cancels the on-site variances exactly so that $\operatorname{Var}(Q)=0$. A block of $\ell$ sites has a hypergeometric occupation distribution and
+
+$$
+\operatorname{Var}(Q_A)=\ell\nu(1-\nu)\frac{N-\ell}{N-1}.
+$$ {#eq-hypergeom-variance}
+
+For $\ell\ll N$, this approaches the grand-canonical binomial result. For $\ell=N$, it vanishes. Subsystem fluctuations and a fixed total charge are fully compatible. Charge scrambling later concerns additional information beyond this variance alone.
+
+## Conventional symmetry and selection rules
+
+Let $U$ be a unitary symmetry, $UHU^\dagger=H$. For a finite Gibbs state, $U\rho U^\dagger=\rho$. If an observable is charged, $UOU^\dagger=e^{i\theta}O$ with $e^{i\theta}\ne1$, then cyclicity gives
+
+$$
+\operatorname{Tr}(\rho O)
+=\operatorname{Tr}(U\rho U^\dagger O)
+=e^{-i\theta}\operatorname{Tr}(\rho O)=0.
+$$ {#eq-conventional-selection}
+
+For the Ising symmetry $U=\prod_iX_i$, $Z_i$ is odd. A symmetric state must have $\langle Z_i\rangle=0$. Its two-point function $\langle Z_iZ_j\rangle$ is neutral and can remain nonzero. A symmetric representative of a broken phase can therefore display order through correlations even when its one-point function vanishes.
+
+## The order of limits
+
+Consider the classical Ising Hamiltonian
+
+$$
+H_h=-J\sum_{\langle ij\rangle}Z_iZ_j-h\sum_iZ_i,\qquad J>0.
+$$
+
+At finite $N$, the partition function is a finite sum of analytic functions, and $m_N(0)=N^{-1}\langle\sum_iZ_i\rangle=0$. Spontaneous magnetization is defined by
+
+$$
+m_*=\lim_{h\to0^+}\lim_{N\to\infty}m_N(h).
+$$ {#eq-ssb-limits}
+
+Reversing the limits gives zero. A useful two-state approximation deep in an ordered phase retains only the two uniformly magnetized configurations. Their weights are proportional to $e^{\pm\beta hNm_0}$, giving
+
+$$
+m_N(h)\simeq m_0\tanh(\beta hNm_0).
+$$
+
+A field of order $1/N$ can select a branch. The approximation neglects domain walls and is justified only when their effects are sufficiently suppressed. Its purpose is to expose the nonuniformity of the limit, not to calculate a critical temperature.
+
+In the symmetric mixture of the two branches,
+
+$$
+\rho_{\rm coin}=\tfrac12\ket{0\cdots0}\bra{0\cdots0}
++\tfrac12\ket{1\cdots1}\bra{1\cdots1},
+$$
+
+we have $\langle Z_i\rangle=0$ but $\langle Z_iZ_j\rangle=1$. In either extremal branch the one-point magnetization is nonzero and the connected two-point function clusters. Confusing a symmetric mixture with a selected branch obscures what a nondecaying connected correlator means.
+
+## Exact one-dimensional Ising model
+
+The zero-field nearest-neighbor chain provides a complete example of how fluctuations destroy finite-temperature order. For a periodic chain, introduce the transfer matrix
+
+$$
+T_{s,s'}=e^{Kss'},\qquad
+T=\begin{pmatrix}e^K&e^{-K}\\e^{-K}&e^K\end{pmatrix},\quad K=\beta J.
+$$
+
+Its normalized eigenvectors are the symmetric and antisymmetric combinations, with eigenvalues $\lambda_+=2\cosh K$ and $\lambda_-=2\sinh K$. The partition function is $Z_N=\lambda_+^N+\lambda_-^N$. Insertions of $Z$ exchange the two transfer-matrix eigenvectors. In the infinite chain this gives
+
+$$
+\langle Z_iZ_{i+r}\rangle
+=\left(\frac{\lambda_-}{\lambda_+}\right)^r
+=(\tanh K)^r=e^{-r/\xi},
+\qquad \xi^{-1}=-\ln\tanh K.
+$$ {#eq-ising-chain}
+
+For every finite $K$, $\xi$ is finite. Only at $T=0$ does it diverge. At low temperature $\xi\simeq e^{2\beta J}/2$.
+
+The domain-wall explanation gives the same scale. Flipping all spins to one side of a bond costs $2J$. At nonzero temperature a domain wall has nonzero density of order $e^{-2\beta J}$. Distant spins are separated by many independently fluctuating walls, so their relative orientation becomes random. A finite chain shorter than $\xi$ appears ordered; increasing $L$ reveals that it is a crossover.
+
+For diagonal classical states, nonlinear overlaps also reduce to statistical-mechanical sums. The transfer matrix will reappear in the decoherence model, but its effective coupling and its boundary insertions must be derived afresh. A resemblance to an Ising partition function does not determine the physical transition automatically.
+
+## Landau theory and its limits
+
+For a uniform Ising order parameter $m$, symmetry permits an even free-energy density
+
+$$
+f(m)=f_0+\frac a2m^2+\frac b4m^4-hm,\qquad b>0.
+$$
+
+At $h=0$, stationarity requires $m(a+bm^2)=0$. For $a>0$, $m=0$ minimizes $f$. For $a<0$, the minima are $m=\pm\sqrt{-a/b}$. The susceptibility in the symmetric phase is $\chi=\partial m/\partial h=1/a$.
+
+Allow spatial variation by adding $\kappa(\nabla m)^2/2$. In the Gaussian symmetric regime,
+
+$$
+\langle|m_{\mathbf k}|^2\rangle\propto\frac{T}{a+\kappa k^2},
+\qquad \xi=\sqrt{\kappa/a}.
+$$
+
+Landau theory assumes a local analytic functional in a suitable order parameter and neglects sufficiently strong critical fluctuations. It predicts mean-field exponents, not universal exact exponents in arbitrary dimension. Disorder, topology, conservation laws, and nonlinear replica structures can require different theories. In particular, a purity-normalized observable may change singularly because it reweights the spectrum of $\rho$, even when the intrinsic mixed-state phase does not change.
+
+### Continuous symmetry and the infrared
+
+For a continuous order parameter with phase $\theta(\mathbf x)$, the low-energy energy cost is approximately $\frac\rho_s2\int d^dx\,(\nabla\theta)^2$. Thermal fluctuations give
+
+$$
+\langle[\theta(\mathbf r)-\theta(0)]^2\rangle
+\propto \frac T{\rho_s}\int\frac{d^dk}{(2\pi)^d}
+\frac{1-\cos(\mathbf k\cdot\mathbf r)}{k^2}.
+$$ {#eq-spinwave-infrared}
+
+For $d=1$ this grows linearly in $r$; for $d=2$ logarithmically. Gaussian averaging of $e^{i[\theta(\mathbf r)-\theta(0)]}$ then gives exponential or algebraic decay. The rigorous Mermin-Wagner theorem concerns continuous symmetries, locality assumptions, and equilibrium states, not all possible nonlinear observables [@mermin1966]. In two dimensions, vortex binding can produce a Berezinskii-Kosterlitz-Thouless phase with power-law correlations. Later SW-SSB analogues must specify which doubled-space state and which finite-time limit inherit such infrared physics.
+
+## Quantum ground-state order
+
+For the transverse-field Ising chain,
+
+$$
+H=-J\sum_iZ_iZ_{i+1}-g\sum_iX_i,
+$$
+
+the two terms compete. At $g\gg J$, the ground state approaches $\ket+^{\otimes N}$. At $J\gg g$, its low-energy space is spanned approximately by $\ket0^{\otimes N}$ and $\ket1^{\otimes N}$. At finite size, tunneling combines these into even and odd cats. Connecting the branches requires acting on all spins, so the splitting is exponentially small in system size in the ordered regime. A local perturbation can select a branch before that tunneling matters.
+
+This pure-state order differs from the state $\rho_+=(I+\prod_iX_i)/2^N$. Both have an exact even global charge, but the cat has $\langle Z_iZ_j\rangle=1$ while $\rho_+$ has zero ordinary two-point correlations. The latter is not an ordinary ferromagnet. Understanding how it can still carry a robust form of order is the task of Part II.
+
+## What must survive in a new notion of SSB?
+
+A useful extension should have a charged diagnostic, a thermodynamic long-distance limit, a response to suitable symmetry-breaking perturbations, and stability under physically appropriate local deformations. These conditions need not take the same mathematical form as equilibrium ground-state SSB. A dissipative channel can destroy information, so channel reachability has a direction. Exact global constraints can be locally invisible. Mixed states have no unique ensemble decomposition. Each fact forces a refinement of the conventional picture.
+
+## Exercises and worked solutions
+
+### 1. Susceptibility and fluctuations
+
+For a classical Gibbs distribution with energy $H_h=H_0-hM$, derive $\partial_h\langle M\rangle=\beta\operatorname{Var}(M)$. What changes for a quantum $M$ not commuting with $H_0$?
+
+::: {.callout-note collapse="true" title="Solution"}
+Differentiate the numerator and denominator of $\langle M\rangle=Z^{-1}\sum_sM(s)e^{-\beta H_h(s)}$. The two terms give $\beta\langle M^2\rangle-\beta\langle M\rangle^2$. For noncommuting quantum operators, differentiating an exponential requires the Duhamel integral: $\partial_he^{-\beta H_h}=\int_0^\beta d\tau\,e^{-(\beta-\tau)H_h}Me^{-\tau H_h}$. The susceptibility is an imaginary-time integrated connected correlator. Replacing it by $\beta$ times the equal-time variance is generally incorrect.
+:::
+
+### 2. Finite-size symmetry selection
+
+Using the two-state expression for $m_N(h)$, take $h=c/N$, then $h=c/N^2$, then fixed positive $h$, as $N\to\infty$.
+
+::: {.callout-note collapse="true" title="Solution"}
+The arguments of the hyperbolic tangent tend to $\beta cm_0$, zero, and infinity respectively. The magnetizations tend to $m_0\tanh(\beta cm_0)$, zero, and $m_0$. The thermodynamic limit depends on the scaling of the perturbation. A finite-size numerical calculation must specify that scaling before it is interpreted as spontaneous selection.
+:::
+
+### 3. A constraint hidden in weak correlations
+
+Derive @eq-hypergeom-variance from the on-site variance and the off-site covariance.
+
+::: {.callout-note collapse="true" title="Solution"}
+There are $\ell$ diagonal terms, each $\nu(1-\nu)$, and $\ell(\ell-1)$ ordered off-diagonal terms, each $-\nu(1-\nu)/(N-1)$. Their sum is $\ell\nu(1-\nu)[1-(\ell-1)/(N-1)]$. Every individual covariance is $O(1/N)$, but there are $O(N^2)$ such terms for the whole system. Dropping them before summing would falsely predict a fluctuating total charge.
+:::
+
+### 4. Correlation length and apparent order
+
+At $\beta J=3$, estimate the one-dimensional correlation length. Would a chain of length 30 reliably distinguish this finite-temperature state from a perfectly ordered state through short-distance correlations?
+
+::: {.callout-note collapse="true" title="Solution"}
+The low-temperature estimate gives $\xi\simeq e^6/2\simeq202$. At separation 30, $e^{-30/202}\simeq0.862$, still large. The finite chain could look strongly ordered. Establishing long-range order requires varying both size and separation beyond the inferred scale, rather than interpreting a large finite-size correlator as a nonzero asymptote.
+:::
+
+### 5. Canonical and grand-canonical are globally different
+
+Show that $\rho_{\beta,q}$ and $\rho_{\beta,\mu}$ can agree locally while a measurement of $P_q$ distinguishes them with probability approaching one.
+
+::: {.callout-note collapse="true" title="Solution"}
+The fixed-sector state returns outcome $q$ with probability one. In the grand-canonical state it returns $w_q=e^{\beta\mu q}Z_q/Z_{\rm gc}$. When a central-limit distribution spans $O(\sqrt N)$ sectors, an individual typical sector has weight $O(N^{-1/2})$. Thus the two-outcome test $\{P_q,I-P_q\}$ distinguishes them increasingly well even when every bounded local observable agrees. Local ensemble equivalence is not a statement of global trace-norm convergence.
+:::
