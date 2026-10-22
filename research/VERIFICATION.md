@@ -31,3 +31,11 @@ No browser surface is enabled in the available computer-use connection (inventor
 ## Build environment
 
 Quarto 1.10.18; Julia 1.12.6 with standard libraries; XeTeX/TeX Live 2023; Python for SVG/PDF conversion and validation. Numerical examples require no external Julia packages.
+
+## Publication verified
+
+- Public site: https://xing-phys.github.io/sw-ssb-textbook/
+- Repository: https://github.com/xing-phys/sw-ssb-textbook
+- Successful build and deployment: https://github.com/xing-phys/sw-ssb-textbook/actions/runs/39704411596
+- All 23 public chapter pages returned HTTP 200, together with search.json, the lab script, a numerical figure and the combined PDF (27 URLs total).
+- The public PDF has the same SHA-256 digest as the locally verified edition.
