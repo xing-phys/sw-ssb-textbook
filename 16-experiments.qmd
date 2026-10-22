@@ -1,0 +1,222 @@
+# Detecting mixed-state order in the laboratory {#sec-experiments}
+
+An order parameter is useful only when its relation to a measurement is understood. For ordinary SSB, one measures a spin or density correlation repeatedly and averages the outcomes. A nonlinear function of $\rho$ requires a different resource: multiple copies, a particular purification, a tractable model, or a sufficiently small subsystem for tomography. This chapter derives those options and explains how the first experimental platforms used them.
+
+The evidence reviewed here is restricted to work publicly available by **22 October 2026**. The cold-atom and superconducting-device results are described with their finite-size and modeling assumptions. Their existence does not turn arbitrary mixed-state fidelity into an efficiently measurable observable.
+
+## Why one expectation value is insufficient
+
+Every fixed measurement outcome probability has the form $\operatorname{Tr}(M\rho)$ and is linear in $\rho$. If two ensembles have the same density matrix, no measurement on one copy can determine which ensemble decomposition was used. Conversely, a nonlinear diagnostic is not the expectation of a fixed operator on one copy for all $\rho$.
+
+This does not forbid estimating a nonlinear quantity from many repetitions. Tomography estimates $\rho$ and then computes the quantity classically. The difficulty is scaling: an arbitrary $N$-qubit density matrix has $4^N-1$ real parameters. The purpose of specialized protocols is to exploit more structure than arbitrary tomography allows.
+
+For a unitary probe $A$, the Rényi-2 numerator and purity can be measured using two copies. The swap identity is
+
+$$
+\operatorname{Tr}[S(X\otimes Y)]=\operatorname{Tr}(XY),
+$$ {#eq-exp-swap}
+
+where $S|a\rangle|b\rangle=|b\rangle|a\rangle$. Therefore
+
+$$
+\operatorname{Tr}(\rho A\rho A^\dagger)
+=\operatorname{Tr}\big[S(\rho\otimes A\rho A^\dagger)\big],\qquad
+\operatorname{Tr}(\rho^2)=\operatorname{Tr}[S(\rho\otimes\rho)].
+$$ {#eq-exp-two-copy}
+
+One may use a controlled-swap circuit, or local interference/Bell-basis measurements whose product measures the global swap. For qubits, a single-site swap is $(I+X\otimes X+Y\otimes Y+Z\otimes Z)/2$. Joint-copy protocols trade circuit complexity for direct access to quadratic quantities.
+
+The denominator cannot be ignored. If purity is exponentially small, an additive error that is tiny on a scale of one can still overwhelm the normalized ratio. For instance, a swap outcome with variance of order one needs order $\epsilon^{-2}$ shots for additive precision $\epsilon$. Resolving a quantity of order $2^{-N}$ by such a generic estimator can require exponentially many repetitions.
+
+## Randomized measurements and their statistical cost
+
+Two physical copies need not coexist. One can measure independent preparations in randomly selected local Pauli bases. For one qubit, an unbiased density-matrix estimator from basis $U$ and outcome $b$ is
+
+$$
+\widehat\rho=3U^\dagger|b\rangle\langle b|U-I.
+$$
+
+Tensor products give an $N$-qubit estimator with $\mathbb E\widehat\rho=\rho$. Independent snapshots then satisfy
+$\mathbb E\operatorname{Tr}(\widehat\rho\widehat\sigma)=\operatorname{Tr}(\rho\sigma)$.
+Take $\sigma=A\rho A^\dagger$ and estimate the numerator and denominator separately. The resulting finite-sample ratio is generally biased even though each quadratic estimator is unbiased; resampling or bias analysis is needed for quantitative error bars.
+
+@sun2025randomized develops this route specifically for SW-SSB diagnostics and demonstrates it numerically for decohered Ising chains. Randomization provides an implementable measurement scheme, but does not remove the growth of variance for global nonlinear observables. Restricting to a region can make tomography or randomized estimates feasible, at the cost of replacing a global diagnostic with a local one.
+
+## Canonical purification is a measurement resource
+
+If a device can prepare
+
+$$
+|\sqrt\rho\rangle\!\rangle=\sum_{a,b}(\sqrt\rho)_{ab}|a\rangle_L|b\rangle_R,
+$$
+
+the Rényi-1 correlator becomes an ordinary doubled-state expectation:
+
+$$
+R_1(A)=\langle\!\langle\sqrt\rho|A\otimes A^*|\sqrt\rho\rangle\!\rangle.
+$$ {#eq-exp-canonical}
+
+For a two-point charged probe, this is a two-point function of local inter-copy operators. @weinstein2025 identifies this route to scalable detection for families whose canonical purifications have efficient preparations.
+
+Preparing *some* purification is not sufficient. If $|\Psi\rangle=(I\otimes V)|\sqrt\rho\rangle\!\rangle$, then the right-copy operator must be transformed by $V$ to obtain @eq-exp-canonical. That operator may become nonlocal or unknown. The resource is a controlled canonical purification or an equivalent preparation with a known, tractable environment operator.
+
+Local formulations offer another compromise. Estimate $F(\rho_A,O\rho_AO^\dagger)$ in regions of increasing radius around a charged insertion. The region size controls both the physical approximation and the measurement cost. If the required resources grow exponentially with region volume $v$, a budget polynomial in total system size can reach $v=O(\log N)$. @divi2026local develops this strategy; @liu2026local gives an infinite-volume local formulation. Global order implies suitable local fidelity order, but the converse needs additional hypotheses. Pure locally thermal states provide a warning against replacing every global definition by a finite-region test.
+
+If a matrix-product density-operator representation is available, variational sequential circuits can give certified lower and upper fidelity bounds [@liu2026certification]. This is valuable for one-dimensional numerical studies. Its efficiency presumes an economical representation and successful optimization; it is not a promise that arbitrary laboratory states have such a representation.
+
+## What the hardness theorem does and does not say
+
+@feng2025hardness constructs efficiently preparable ensembles without SW-SSB that are computationally indistinguishable from ensembles with it, under the paper's pseudorandomness assumptions. This rules out a universally efficient, state-agnostic detection algorithm with the stated experimental access. It does not prohibit efficient diagnostics for thermal states, known channels, Gaussian states, canonical purifications, or other structured families.
+
+The distinction can be phrased as a resource table:
+
+| Access supplied | Quantity obtained | Principal limitation |
+|---|---|---|
+| Arbitrary copies and global swap | $R_2$ numerator and purity | Small purity and global-measurement variance |
+| Random local measurements | Quadratic overlaps | Snapshot variance and ratio bias |
+| Canonical purification | $R_1$ as an ordinary correlator | Preparation and copy-basis control |
+| Local tomography | Reduced-state fidelity | Region-size cost; local/global distinction |
+| Known pure input and dephasing kernel | Fidelity and $R_2$ for compatible probes | Input-purity and channel assumptions; shot cost |
+| Samples plus a learned probability model | Diagonal-state $R_1,R_2$ estimators | Model bias and support errors |
+
+A successful experiment should explain which row it uses. The following platforms use different rows.
+
+## Dephased Fermi gas: turning snapshots into nonlinear correlations
+
+Occupation imaging completely dephases the measured state in the number basis. If a configuration is $\boldsymbol n$, the resulting diagonal density matrix has weights $p_{\boldsymbol n}$. For a transfer from $j$ to $i$, let $\boldsymbol n'$ be the allowed displaced configuration. Then
+
+$$
+R_1(i,j)=\sum_{\boldsymbol n}\sqrt{p_{\boldsymbol n}p_{\boldsymbol n'}},\qquad
+R_2(i,j)=\frac{\sum_{\boldsymbol n}p_{\boldsymbol n}p_{\boldsymbol n'}}{\sum_{\boldsymbol n}p_{\boldsymbol n}^2}.
+$$ {#eq-exp-diagonal}
+
+Disallowed transfers contribute zero. For a diagonal state and a compatible one-to-one charge move, the root-fidelity expression has the same classical square-root-overlap structure, with the appropriate subnormalized support for a nonunitary hopping probe. Fermionic hopping signs cancel between the two matrix elements in these nonlinear expressions.
+
+Direct frequency estimation of all $p_{\boldsymbol n}$ remains exponentially expensive. Suppose, however, a classical model supplies probabilities $q_{\boldsymbol n}$. Experimental samples $\boldsymbol n_m\sim p$ give
+
+$$
+\widehat R_{1,\mathrm{QC}}=\frac1M\sum_{m=1}^M
+\sqrt{\frac{q_{\boldsymbol n'_m}}{q_{\boldsymbol n_m}}},\qquad
+\widehat R_{2,\mathrm{QC}}=
+\frac{\sum_mq_{\boldsymbol n'_m}}{\sum_mq_{\boldsymbol n_m}}.
+$$ {#eq-exp-qc}
+
+If $q=p$, taking the sampling expectation reproduces @eq-exp-diagonal. If $q\ne p$, more shots remove sampling error but leave model bias. This distinction is essential: a smooth model can assign probability to a transferred partner that is actually absent from the true support, artificially raising an overlap. Validation must therefore probe the model assumptions as well as statistical convergence.
+
+The cold-atom experiment of @wang2026fermi uses a learned Gaussian fermionic reference because its weakly interacting gas is close to a number-conserving free-fermion state. Such a state is determined by its one-body correlation matrix $G$. To see why this helps, diagonalize the single-particle density matrix; the normal modes are independent Bernoulli occupations. In a nonsingular mixed Gaussian state, the probability for exactly the sites $S$ to be occupied can be written
+
+$$
+q(S)=\det(I-G)\det\big([G(I-G)^{-1}]_S\big).
+$$ {#eq-exp-gaussian-probability}
+
+This determinant formula follows from the Gaussian operator representation $\rho=\det(I-G)\exp[c^\dagger\log(G(I-G)^{-1})c]$. Singular pure-state limits are obtained continuously; a fixed-number Slater determinant instead gives configuration weights as squared orbital determinants. These polynomial calculations replace an exponentially large table of probabilities by a matrix model. The fitted $G$ minimizes the empirical negative log likelihood, equivalently the data-to-model KL divergence up to a data-only constant.
+
+The experiment loads $^6$Li into a square optical lattice, images one spin component, and analyzes a dephased effectively single-component gas. The full homogeneous system has approximately $14\times14$ sites; central subsystems are used to assess size dependence. It finds nondecaying nonlinear correlations in the dephased metallic regime. A commensurate superlattice drives a metal-to-insulator change in the underlying state, accompanied by suppression of the nonlinear order after dephasing. The paper compares quantum-classical estimates with correlators evaluated entirely in the learned reference, and studies subsystem condensate densities.
+
+A useful finite-size statistic is
+
+$$
+\varrho_1(L)=\frac1{V_L^2}\sum_{i,j\in A_L}R_1(i,j).
+$$ {#eq-exp-condensate}
+
+If $R_1\to r_\infty>0$, the double sum has leading term $r_\infty V_L^2$. Short-range contributions are only of order $V_L$, so $\varrho_1\to r_\infty$. If $R_1$ decays with a finite correlation length, $\varrho_1$ instead vanishes as $1/V_L$ away from boundary corrections. Algebraic order gives a different, size-dependent power. This diagnostic avoids choosing just one separation, although nearby-site contributions and fit windows still matter.
+
+At nonzero temperature, fixed-sector thermal states can already have nonlinear order on both metallic and insulating sides. Thus the ideal zero-temperature transition, the dephasing enhancement, and a finite-temperature experimental crossover should be separated. A finite subsystem is also not itself an exactly fixed-charge system, because it exchanges particles with its complement. The probability-based correlators remain meaningful, but interpreting them as bulk phase diagnostics uses a thermodynamic argument in addition to the estimator.
+
+## A five-qubit cluster array: the role of discarded records
+
+The superconducting-array experiment of @cao2026mixed prepares a five-qubit cluster state and contrasts selective dephasing, conditioned measurements, and discarded records. Its simplest ideal reduced state follows directly from cluster stabilizers. Trace out even sites 2 and 4. All stabilizer products with support on those sites vanish under the trace, leaving
+
+$$
+\rho_{1,3,5}=\frac18(I+X_1X_3X_5).
+$$ {#eq-exp-three-parity}
+
+It is the maximally mixed positive-parity state of three qubits. Its ordinary $Z_iZ_j$ expectations vanish, while $Z_iZ_j$ commutes with the parity and leaves $\rho$ unchanged. The root fidelity is therefore one. Conditioned on measurements of the even sublattice, the odd sites can instead form GHZ-like states with outcome-dependent correlation signs. Averaging discards the signs and removes the ordinary correlation while retaining the nonlinear overlap.
+
+This gives an exact consistency check: measuring the discarded subsystem in a different complete basis cannot change the unconditioned reduced density matrix. It can change the conditioned decomposition and the amount of visible trajectory order. A basis-dependent averaged state would indicate retained postselection, incomplete averaging, or an experimental imperfection.
+
+The reported experiment uses full few-qubit tomography and also symmetry resolution. The unprojected reduced state has appreciable leakage between parity sectors; projecting the tomographic estimate with $P_+=(I+X_1X_3X_5)/2$ produces a symmetry-resolved state. Such a projection is an analysis operation with a specified selection probability. The observations are therefore finite-size demonstrations of the diagnostic structure and mixed-SPT mechanisms, not a thermodynamic extrapolation from a three-site system.
+
+## Processor transitions using a known-channel kernel
+
+The work of @wei2026processor, submitted on 19 October 2026, studies matrix-product initial states under long-range pair dephasing. It reports finite-size crossings and scaling collapses for chains with $N=6,9,12$, together with decaying ordinary correlations. Its reconstruction protocol is especially instructive because it makes the extra prior information explicit.
+
+Let the initial state be pure, $|\psi\rangle$, and let pair errors $Z_kZ_l$ occur independently with known probabilities $p_{kl}$. Their net action is $Z(\boldsymbol s)=\prod_iZ_i^{s_i}$ with even parity. Instead of enumerating all error masks, form their characteristic kernel
+
+$$
+\mathcal K(\boldsymbol w)=\mathbb E_{\boldsymbol s}(-1)^{\boldsymbol s\cdot\boldsymbol w}
+=\prod_{k<l:\,w_k\ne w_l}(1-2p_{kl}).
+$$ {#eq-exp-channel-kernel}
+
+For each pair, the random sign is nontrivial only when $w_k\ne w_l$; independence turns the expectation into a product. This derives the kernel using $O(N^2)$ arithmetic, without computing the full distribution of masks.
+
+Write the input amplitudes as $e^{i\phi_z}\sqrt{P_z}$. After dephasing,
+
+$$
+\rho_{zz'}=e^{i(\phi_z-\phi_{z'})}\sqrt{P_zP_{z'}}\,\mathcal K(z\oplus z').
+$$ {#eq-exp-kernel-density}
+
+For a probe $A=Z_iZ_j$, the diagonal input-phase unitary commutes with both channel and probe. Common-unitary invariance of fidelity removes it. Consequently computational-basis samples from the input contain all the unknown state information needed for this particular reconstruction. The conclusion fails for arbitrary mixed inputs: two mixed density matrices can share $P_z$ but have different off-diagonal structure and different fidelity correlators.
+
+The Rényi-2 identity follows immediately by multiplying matrix elements:
+
+$$
+R_2(i,j)=\frac{\mathbb E_{z,z'}[d(z)d(z')\mathcal K(z\oplus z')^2]}
+{\mathbb E_{z,z'}[\mathcal K(z\oplus z')^2]},\qquad
+d(z)=(-1)^{z_i+z_j}.
+$$ {#eq-exp-kernel-r2}
+
+The denominator is purity. Independent sample pairs should exclude a shot paired with itself when estimating the quadratic averages.
+
+Fidelity can be reconstructed with a Gram matrix. For $M$ measured inputs $z_a$, define
+
+$$
+G_{ab}=\frac{\mathcal K(z_a\oplus z_b)}M,\qquad
+D_{ab}=\delta_{ab}d(z_a).
+$$
+
+Factoring the channel density matrix into error-ensemble vectors shows that the nonzero eigenvalues of the empirical probe-weighted operator equal those of $G^{1/2}DG^{1/2}$. Taking the trace norm yields
+
+$$
+\widehat F=\left\|G^{1/2}DG^{1/2}\right\|_1.
+$$ {#eq-exp-gram-fidelity}
+
+This shifts a potentially exponential Hilbert-space calculation to an $M\times M$ matrix calculation. Its dense classical cost scales as $O(N^2M^2+M^3)$. That statement is polynomial in the *number of supplied shots*; it does not prove a polynomial number of shots for fixed precision across all states and channels. The nonlinear estimator can also have finite-shot bias.
+
+Computational-basis measurements reconstruct the ordinary, fidelity, and Rényi-2 correlators. A second Hadamard-test setting accesses off-diagonal string expectations. The protocol evaluates a known target channel by classical processing of input data, so channel correctness and input purity are substantive assumptions. It is a different task from blind tomography of an unknown noisy output. The experiment explicitly distinguishes fidelity and Rényi-2 transition estimates; their agreement is not imposed as a universal identity.
+
+## Reading finite-size evidence responsibly
+
+A thermodynamic phase is defined by a limit, while every device is finite. A nonzero correlator at one separation establishes an overlap, not spontaneous symmetry breaking by itself. Increasing the separation with size, testing ordinary correlator decay, and comparing alternative finite-size fits make the interpretation stronger.
+
+For a conventional continuous transition a common ansatz is
+$R(L,p)=L^{-2\Delta}\mathcal F((p-p_c)L^{1/\nu})$.
+Crossings of $L^{2\Delta}R$ can estimate $p_c$, but the scaling dimension and correlation-length exponent are fitted parameters and may be effective over a narrow size window. BKT transitions have exponentially diverging lengths, $\xi\sim\exp[b/\sqrt{|p-p_c|}]$, so a simple power-law collapse may misidentify the asymptotic behavior. Hardware errors, symmetry leakage, boundary conditions, and estimator bias can imitate rounding or shift apparent crossings.
+
+The most convincing conclusion through the cutoff is that nonlinear mixed-state order has become experimentally accessible with well-specified resources. The next stage is to enlarge scaling windows, certify model assumptions, and design observables that remain economical as entropy and system size increase.
+
+## Worked exercises
+
+### An incorrect learned model
+
+Let the true distribution be concentrated on $|01\rangle$, and consider the hop between sites 1 and 2. A model assigns equal probabilities to $01$ and $10$. Compare true $R_1$ and the infinite-data quantum-classical estimator.
+
+::: {.callout-note collapse="true" title="Solution"}
+The transferred partner $10$ has true probability zero, so the true overlap is zero. Every observed sample is $01$, but the model ratio is one, so @eq-exp-qc returns one. Sampling more accurately cannot repair this support error. Prior knowledge and validation of the learned distribution are part of the measurement protocol.
+:::
+
+### The kernel at zero and maximal pair noise
+
+For a connected graph of pair channels with $p_{kl}=1/2$ on every graph edge, which masks $w$ have $\mathcal K(w)\ne0$?
+
+::: {.callout-note collapse="true" title="Solution"}
+Every edge crossing between $w=0$ and $w=1$ contributes a zero factor. A nonzero kernel therefore requires $w$ constant on each connected component. For a connected graph only the all-zero and all-one masks survive, with kernel one. This retains the global parity constraint while removing other computational-basis coherences.
+:::
+
+### Purity and error bars
+
+Suppose numerator and purity both equal $10^{-4}$, each with additive uncertainty $10^{-5}$. Estimate the uncertainty of their ratio if the estimates are independent.
+
+::: {.callout-note collapse="true" title="Solution"}
+Linear propagation gives relative variance $(10^{-5}/10^{-4})^2+(10^{-5}/10^{-4})^2=0.02$, so the ratio has uncertainty about $0.14$ around one. A seemingly small absolute uncertainty does not give a precise normalized correlator. Correlated estimators can improve or worsen this estimate and require their covariance in the propagation.
+:::

@@ -1,0 +1,243 @@
+# Information-critical phases and frontier transitions {#sec-critical-frontiers}
+
+A mixed-state phase transition need not make any ordinary two-point function singular. We have already seen how a nonlinear correlator or a recovery obstruction can reveal structure invisible to linear observables. A further possibility is an *extended* region where information correlations remain scale free. It resembles a critical phase of an ordinary magnet, but the diverging scale is the Markov length rather than the ordinary correlation length.
+
+This chapter develops the statistical mechanics behind that possibility. We first derive the connection between logical error probabilities and disordered clock models. We then explain why a clock variable can acquire an emergent continuous symmetry, and how this produces partial logical memory. Finally we examine other routes to transitions: informed decoding, long-range channels, absorbing-state dynamics, and postselection. These routes test different assumptions and should not be forced into one universality class.
+
+## A memory with more than two charge values
+
+On each oriented link of a square lattice, place an $N$-level system with
+
+$$
+Z|a\rangle=\omega^a|a\rangle,\qquad X|a\rangle=|a+1\!\pmod N\rangle,
+\qquad ZX=\omega XZ,\quad \omega=e^{2\pi i/N}.
+$$
+
+The $\mathbb Z_N$ toric code generalizes the qubit code. Vertex and plaquette constraints measure oriented products of $Z$ and $X$; appropriate inverse powers on incoming links make all stabilizers commute. On a torus, the ground space stores two logical $N$-level systems. An $X^k$ error shifts a charge by $k$ modulo $N$, and an error string's endpoints produce a syndrome.
+
+Let an independent link channel apply $X^k$ with probability $p_k$:
+
+$$
+\mathcal E_e(\rho)=\sum_{k=0}^{N-1}p_kX_e^k\rho X_e^{-k},\qquad \sum_kp_k=1.
+$$ {#eq-critical-qudit-channel}
+
+A full error is a flow $\boldsymbol k$ on links with probability $P(\boldsymbol k)=\prod_ep_{k_e}$. Its divergence is the charge syndrome $s=\partial\boldsymbol k$. Two errors have the same syndrome when their difference is divergence free. They can still differ by a flow winding around a cycle of the torus. That winding is a logical error.
+
+Fix a reference flow $\boldsymbol k_s$ for each syndrome. Every compatible flow can be written as the reference plus a contractible loop flow and a representative $h$ of the two winding numbers. Define
+
+$$
+Z_{s,h}=\sum_{\substack{\partial\boldsymbol k=s\\{}[\boldsymbol k-\boldsymbol k_s]=h}}
+\prod_ep_{k_e},\qquad
+p(h|s)=\frac{Z_{s,h}}{\sum_{h'}Z_{s,h'}}.
+$$ {#eq-critical-posterior}
+
+The maximum-likelihood decoder chooses the largest *total sector weight*. Choosing the single most probable microscopic error can fail because another sector can contain many individually less probable errors. This is the difference between energy minimization and free-energy minimization.
+
+In two dimensions, contractible divergence-free flows are lattice curls of a dual height $a_p\in\mathbb Z_N$. Thus $Z_{s,h}$ becomes
+
+$$
+Z_{s,h}=\sum_{\{a_p\}}\prod_e
+p_{(k_s)_e+(\operatorname{curl}a)_e+h_e}.
+$$ {#eq-critical-clock-partition}
+
+Writing each probability as an exponential of a bond energy makes this a disordered clock model, with boundary twists labeled by $h$. The syndrome or reference error supplies the disorder. Its distribution is not arbitrary: it comes from the same $p_k$ that defines the bond weights. This matched statistical-mechanical condition is the Nishimori condition. The quantum memory problem therefore selects a particular submanifold of a disordered-model phase diagram.
+
+## Deriving coherent information from posterior uncertainty
+
+To test quantum information, entangle the two encoded qudits with an ideal reference $R$. Let $Q$ denote the noisy physical code. Its initial logical entropy is $\log(N^2)=2\log N$. For independent $X$- and $Z$-type Pauli channels, syndrome sectors and reference-labeled logical error sectors provide an orthogonal basis in which the joint output is diagonal.
+
+Let $(s_x,h_x)$ and $(s_z,h_z)$ label the two error types. The physical code state alone is maximally mixed in the logical subspace within each syndrome sector, so
+
+$$
+S(Q)=2\log N+H(s_x)+H(s_z).
+$$
+
+The reference resolves the logical error labels, so
+
+$$
+S(QR)=H(s_x,h_x)+H(s_z,h_z).
+$$
+
+Subtracting gives the exact operational expression
+
+$$
+I_c(R\rangle Q)=2\log N-H(h_x|s_x)-H(h_z|s_z).
+$$ {#eq-critical-coherent-information}
+
+The conditional entropies include the average over syndromes. This derivation uses the orthogonality and factorization of the Pauli-noise code construction; arbitrary correlated or coherent errors need not yield the same formula. It avoids analytic continuation from integer Rényi indices. The direct spectrum and information calculation is central to @vijay2026information.
+
+When both posterior distributions concentrate in a unique winding sector, the memory retains $2\log N$ coherent information. If only $X$ errors occur and their posterior becomes uniform over $N^2$ windings, $I_c=0$. If both conjugate error types fully randomize their windings, $I_c=-2\log N$. Negative coherent information is permitted: it is not an entropy and should not be interpreted as a negative number of stored qudits.
+
+An intermediate posterior distribution can have a nonzero, nonmaximal entropy that persists as the lattice grows. This is the information-theoretic origin of fractional memory in the critical phase. It is not, by itself, a declaration that a particular fraction of a single qudit can be deterministically recovered with zero error. One must specify the coding task, asymptotic limit, and decoder performance. The work cited above also evaluates a maximum-likelihood decoder, whose logical error approaches a nontrivial fractional value in the information-critical region.
+
+## Why a discrete clock can behave like a continuous angle
+
+The clean clock model provides the simplest derivation of the mechanism. At long distances write the spin as $e^{i\theta}$, with effective action
+
+$$
+S_{\mathrm{sw}}=\frac K2\int d^2x\,(\nabla\theta)^2,
+$$ {#eq-critical-spinwave}
+
+where $K$ is a dimensionless stiffness. In this Gaussian theory
+$\langle[\theta(r)-\theta(0)]^2\rangle=(\pi K)^{-1}\log(r/a)$.
+Using the characteristic function of a Gaussian variable gives
+
+$$
+\langle e^{i\theta(r)}e^{-i\theta(0)}\rangle\sim r^{-1/(2\pi K)}.
+$$ {#eq-critical-clock-power}
+
+There are two distinct ways this scale-free theory can fail. The microscopic $N$-fold anisotropy contributes $u_N\cos(N\theta)$, whose scaling dimension is
+$\Delta_N=N^2/(4\pi K)$. It becomes relevant in two dimensions when $\Delta_N<2$, or $K>N^2/(8\pi)$. At large stiffness the angle therefore locks to one of $N$ values.
+
+The second perturbation is a vortex, around which $\theta$ winds by $2\pi$. Its energy grows as $\pi K\log(L/a)$, while the entropy for locating it grows as $2\log(L/a)$. Vortices proliferate when $\pi K<2$. Equivalently, their scaling dimension is $\pi K$.
+
+Both perturbations are irrelevant in the interval
+
+$$
+\frac2\pi<K<\frac{N^2}{8\pi}.
+$$ {#eq-critical-clock-window}
+
+This interval exists only for $N>4$. There the discrete model forgets its anisotropy on long scales and behaves as an emergent U(1) theory with algebraic order. The two boundaries are BKT transitions rather than ordinary isolated critical points.
+
+This clean derivation explains *why* $N>4$ is a natural dividing point. It does not supply exact critical stiffnesses for a quenched disordered Nishimori model. Disorder, replica constraints, and the observable under consideration modify the continuum analysis. In the decohered code, the intermediate region is established through the exact information mapping together with the disordered-model analysis and numerical evidence in @vijay2026information; inserting the clean values into a noisy-code threshold would be unjustified.
+
+## Scale-free information without ordinary critical correlations
+
+Let $A$ be an interior disk, $B$ a surrounding annulus, and $C$ the exterior. The conditional mutual information measures what the exterior reveals about $A$ after $B$ is known. A finite Markov length means that this residual information falls exponentially as the annulus thickens. An information-critical phase has scale-free, nonconstant dependence on the geometry even while ordinary correlations have a finite correlation length. This algebraic behavior must be distinguished from the constant CMI offset of an exact global constraint, such as the parity ensemble in @sec-phases-recovery. A nonzero constant alone does not establish a critical phase. The finite-system geometry and treatment of global or topological constraints belong to the diagnostic's definition.
+
+In the code mapping, reduced density matrices retain boundary and enclosed-charge constraints. Their entropies become Shannon entropies of syndrome distributions with different boundary conditions. The CMI is therefore sensitive to whether charge information remains inferable across arbitrarily large annuli. In the critical clock regime the cost of a long-wavelength twist is scale invariant, producing nonexponential information correlations.
+
+One can see why partial winding uncertainty survives from the Gaussian action. A square torus with total twist $\Theta$ across one direction has minimum-energy profile $\theta(x)=\Theta x/L$. Substituting into @eq-critical-spinwave gives
+
+$$
+S_{\mathrm{twist}}=\frac K2\Theta^2,
+$$ {#eq-critical-twist-cost}
+
+independent of $L$. Twisted sectors can therefore retain finite relative weights as the system grows. In an illustrative clean compact theory,
+$w_h\propto\sum_{m\in\mathbb Z}\exp[-K(2\pi m+2\pi h/N)^2/2]$.
+These normalized weights have neither zero entropy nor necessarily the uniform entropy. The actual noisy-code posterior also contains disorder and its averaging, but the size-independent twist cost explains the mechanism for persistent intermediate logical uncertainty.
+
+Ungauging the code replaces the topological charge constraint with a global symmetry. The information-critical regime is then described by algebraic order in an off-diagonal, or relative-copy, symmetry with an emergent continuous angle. This makes it a critical relative of SW-SSB. It should not be described as a conventional physical superfluid with a nonzero $\langle b_i^\dagger b_j\rangle$ in the original density matrix. Its phase coherence belongs to the appropriate purified or enlarged description, and ordinary local correlators can remain short ranged.
+
+The decomposition into Coulombic pure states found in the code construction provides another interpretation: individual components have gapless gauge-like fluctuations even though the mixture's ordinary correlation length need not diverge. As elsewhere, a convex decomposition is not unique. The invariant content is established by the information diagnostics and channel/recovery structure, not by assigning a unique hidden wavefunction to every experimental run.
+
+## Charge-informed decoding: a different BKT problem
+
+If anyons carry U(1) charge and the apparatus resolves their integer charges, the syndrome contains more information than an uncharged anyon position. A phenomenological model takes integer error currents $k_e\in\mathbb Z$ with
+$P(k)\propto\exp[-\sum_ek_e^2/(2\alpha)]$. The measured charge is their divergence. Given one representative error $k$, compatible errors are $k+J$ with $\partial J=0$:
+
+$$
+Z_k\propto\sum_{\partial J=0}\exp\left[-\frac1{2\alpha}\sum_e(k_e+J_e)^2\right].
+$$ {#eq-critical-integer-loop}
+
+This is a disordered integer-loop model. A correct recovery must choose the winding sector, not merely annihilate the measured charges. The maximum-likelihood sum and a minimum-cost flow optimization are different decoders. @temkin2025charge finds a BKT transition for the optimal matched decoder, with a modified winding-number jump, and numerical evidence for a disorder-dominated loop-glass region for some mismatched decoders. “Confidently incorrect” means that a decoder assigns high posterior confidence under its *assumed* noise model to a winding sector that is wrong under the actual model.
+
+The global U(1) charge, the finite $\mathbb Z_N$ memory, and the relative-copy U(1) of the previous section are distinct symmetries. Their loop and angle descriptions are related tools, but matching notation does not identify their universality classes or thresholds.
+
+## Dephased fermions and an exact counting-statistics mapping
+
+The clock and loop examples started with specially structured memories. A late-September development gives a complementary route from ordinary metallic and insulating parent states [@sarma2026fermions]. The key is an exact Fourier representation that we can derive directly for a diagonal fermionic or hard-core occupation distribution. The transfer has unit-magnitude matrix elements on allowed configurations; ordinary bosonic ladder operators would require additional occupation factors.
+
+Let $p_{\boldsymbol n}$ be occupation probabilities after complete density dephasing. For index $\alpha>0$, define a normalized auxiliary distribution
+
+$$
+q_{\alpha}(\boldsymbol n)=\frac{p_{\boldsymbol n}^{\alpha/2}}{\sum_{\boldsymbol m}p_{\boldsymbol m}^{\alpha/2}},\qquad
+\chi_{\alpha}(\boldsymbol\theta)=\sum_{\boldsymbol n}q_{\alpha}(\boldsymbol n)e^{i\boldsymbol n\cdot\boldsymbol\theta}.
+$$ {#eq-critical-escort}
+
+This auxiliary distribution is sometimes called an escort distribution. It is a mathematical construction, not an extra experimental ensemble. Integrate every angle over $[0,2\pi)$ with normalized measure. Fourier orthogonality gives
+
+$$
+\int D\theta\,|\chi_{\alpha}(\theta)|^2=\sum_{\boldsymbol n}q_{\alpha}(\boldsymbol n)^2.
+$$
+
+Insert $e^{i(\theta_i-\theta_j)}$ into the same integral. It selects pairs of configurations differing by one particle transferred between $i$ and $j$. Dividing by the previous integral gives
+
+$$
+\frac{\int D\theta\,e^{i(\theta_i-\theta_j)}|\chi_{\alpha}(\theta)|^2}
+{\int D\theta\,|\chi_{\alpha}(\theta)|^2}
+=\frac{\sum_{\boldsymbol n}p_{\boldsymbol n}^{\alpha/2}p_{\boldsymbol n'}^{\alpha/2}}
+{\sum_{\boldsymbol n}p_{\boldsymbol n}^{\alpha}}.
+$$ {#eq-critical-exact-xy}
+
+The right side is the diagonal-state Rényi-$\alpha$ transfer correlator. The left side is exactly a spin correlator of compact angles with positive weight $|\chi_{\alpha}|^2$. Thus one may define an effective XY action $S_{\alpha}=-\log|\chi_{\alpha}|^2$. Zeros of the weight are permitted; the action need not be a local nearest-neighbor XY Hamiltonian.
+
+For $\alpha=2$, $q_2=p$: the weight is the squared full-counting-statistics characteristic function of the parent occupation distribution itself. For $\alpha=1$, $q_1\propto\sqrt p$, so substituting the parent's ordinary structure factor without further work would be incorrect. The paper supplies an additional expansion to analyze this case.
+
+The second cumulant of $\log\chi_\alpha$ gives a quadratic angle action determined by the covariance of $q_\alpha$. In a metallic parent the $\alpha=2$ kernel behaves as $S(k)\sim|k|$. A spin-wave estimate therefore involves $\int d^dk(1-\cos kr)/|k|$, logarithmically divergent in one dimension but infrared finite in higher dimensions. This explains the tendency to algebraic order in one dimension and true nonlinear long-range order in $d\geq2$. It does not violate the two-dimensional finite-range XY theorem: a $|k|$ kernel is spatially nonlocal.
+
+An ordinary insulator instead has an analytic kernel starting as $k^2$, yielding the usual logarithmic spin-wave fluctuations in two dimensions. Compact vortices and short-distance couplings then determine whether a quasi-ordered regime survives. Insulating parents can therefore yield either nonlinear order or a trivial phase, depending on microscopic details; “dephased insulator” is not a universal phase label. The work also distinguishes quantum Hall cases. Its finite-dephasing treatment uses even-index replicas and additional regularization assumptions, which should not be promoted to an all-index fidelity theorem. The exact identity @eq-critical-exact-xy itself requires complete dephasing and remains valid independently of those continuum approximations.
+
+## Long-range channels change preparation constraints
+
+For an initially short-range-entangled chain, local finite-time evolution has a bounded information light cone. In familiar finite-depth local dephasing constructions this obstructs a finite-noise SW-SSB transition in one dimension. A channel with pair operations at arbitrarily long separations changes the premise.
+
+For example, apply commuting pair-dephasing channels with probabilities decreasing as a power of distance. Each individual $Z_iZ_j$ operation preserves $\prod_iX_i$, but the entire channel has long spatial tails. In its doubled statistical-mechanical representation, long-range ferromagnetic couplings can support order in one dimension. A domain wall with interactions $J(r)\propto r^{-\alpha}$ crosses of order $r$ bonds at range $r$, so its large-distance cost scales as
+
+$$
+\Delta E\sim\sum_{r\lesssim L}rJ(r)\sim
+\begin{cases}
+L^{2-\alpha},&\alpha<2,\\
+\log L,&\alpha=2,\\
+\text{constant},&\alpha>2.
+\end{cases}
+$$ {#eq-critical-longrange-wall}
+
+This energetic illustration explains how locality restrictions can be evaded; it is not an exact phase diagram for every channel, and nonsummable interactions require care with thermodynamic normalization. @fechisin2026powerlaw implements this strategy for a family of matrix-product states interpolating between trivial and SPT states. Its phase diagram is explicitly formulated using Rényi-2 diagnostics and includes a mixed-SPT regime with logical information and nonlinear string order. The distinction from fidelity/Rényi-1 phase definitions remains essential. The model also permits relatively high-purity regimes useful for the processor experiment discussed next.
+
+## Absorbing states, stationary transitions, and postselection
+
+An absorbing configuration cannot escape once reached. Consider classical defects whose reactions conserve parity, such as pair annihilation and branching by an even number of new defects. An inactive absorbing state can retain local charge information, while an active steady distribution can scramble it. Strong symmetry alone therefore does not guarantee that every stationary state of every local generator has SW-SSB.
+
+@zhang2026local constructs local symmetric dynamics with strong-paramagnetic and active SW-SSB regimes. In one spatial dimension, the observed critical scaling is consistent with parity-conserving branching-annihilating random walks; a two-dimensional pair-flip Toom construction supplies another route. These are dynamical universality questions, different from a single application of an equilibrium-noise channel. Mixing time and the Liouvillian spectral gap must be distinguished, especially for nonnormal generators and special absorbing sectors.
+
+Postselection provides yet another route. An unnormalized operation $\mathcal M$ followed by $\rho\mapsto\mathcal M(\rho)/\operatorname{Tr}\mathcal M(\rho)$ is nonlinear in its input, even when $\mathcal M$ is completely positive. It is not a deterministic CPTP channel. Consequently a theorem about symmetric trace-preserving evolution does not automatically constrain a postselected phase diagram. @ziereis2025steady studies SW-SSB steady ensembles and weak-to-strong postselection transitions in Abelian and non-Abelian examples. The success probability is part of the physical resource cost, rather than an optional technical detail.
+
+## All-to-all fermions and approximate quantum codes
+
+Spatial locality is not the only route to an information transition. The Sachdev–Ye–Kitaev model has random all-to-all interactions among Majorana fermions. With a convention $\chi_i^2=1$, a quartic Hamiltonian is $H=\sum_{i<j<k<l}J_{ijkl}\chi_i\chi_j\chi_k\chi_l$, with disorder variance scaled as $N^{-3}$ to obtain an extensive energy. Its large-$N$, low-temperature entropy motivates an approximate logical subspace whose size is exponential in $N$.
+
+The order of limits is essential. One first takes $N$ large while keeping a low-energy window, then lowers its temperature. Taking zero temperature at a generic finite size can leave a single state rather than an extensive code. Approximate coding also requires a tolerated error criterion; residual entropy alone does not supply an efficient encoder or decoder.
+
+Single-Majorana errors are odd under fermion parity and exchange parity with the bath. Bilinear errors $i\chi_i\chi_j$ are even. A parity-preserving pair-noise family with probability of order $q/N$ per pair has an extensive total effect, because there are order $N^2$ pairs. @kim2026syk studies these two noise classes with a reference-entangled low-energy state and finds a robust threshold structure for the parity-preserving family, connected to strong-to-weak parity order.
+
+The saddle mechanism has a simple general form. In a doubled description, an inter-copy bilinear $B$ is odd under either copy's parity and even under their product. A pair-noise term can supply an attractive interaction proportional to $B^2/N$. The Hubbard–Stratonovich identity
+
+$$
+e^{gB^2/(2N)}=\sqrt{\frac{N}{2\pi g}}\int d\phi\,
+e^{-N\phi^2/(2g)+\phi B}
+$$ {#eq-critical-hubbard}
+
+turns it into an auxiliary field coupled linearly to $B$. After integrating fermions, the extensive saddle free energy has schematic form $f(\phi)=\phi^2/(2g)+f_0(\phi)$. Parity makes it even. If the quadratic coefficient $1/g+f_0''(0)$ changes sign, a nonzero $\phi$ develops: independent parities are reduced to their diagonal action. This explains why a parity-preserving noise can induce effective relative-copy parity order without explicitly exchanging parity with the environment.
+
+The quantitative analysis uses large-$N$ saddle equations, low-temperature extrapolation, and Rényi information diagnostics. A Rényi-2 entropy difference should be labeled as such rather than substituted silently for operational von Neumann coherent information. The thresholds, approximate-code tolerances, and nonlocal interactions belong to the specified SYK families; they are not thresholds for geometrically local toric memories. The connection to thermofield-double teleportation is a theoretical information-theory link, not a claim that a laboratory wormhole has been observed.
+
+These frontiers share a common question—where and how global charge information survives—but answer it under different operations and limits. A useful research habit is to state, before quoting a transition: the state family, the allowed operations, the information diagnostic, and the thermodynamic and time limits.
+
+CMI can additionally constrain how critical behavior changes under coarse graining. @chen2026rg derives inequalities for crossover functions assuming ultraviolet-finite CMI and specified scaling hypotheses. Such results can restrict candidate renormalization-group flows, and bounds for convex mixtures constrain stability arguments. Their hypotheses matter: CMI is not automatically ultraviolet finite for every continuum geometry, and an unrestricted monotonicity rule for every nonequilibrium phase does not follow. This offers a promising way to test proposed mixed-state field theories without first solving every microscopic model.
+
+## Worked exercises
+
+### Why five is different from four
+
+Using @eq-critical-clock-window, find the clean spin-wave interval for $N=4$ and $N=5$. Does this predict a noisy-code threshold?
+
+::: {.callout-note collapse="true" title="Solution"}
+For $N=4$ both bounds equal $2/\pi$, so no open interval remains. For $N=5$ the interval is $2/\pi<K<25/(8\pi)$, numerically about $0.637<K<0.995$. This is a clean continuum relevance argument. It predicts the possibility of an intermediate regime, not its microscopic temperature or the threshold of a disordered decoder.
+:::
+
+### Sector entropy and memory
+
+Suppose only one Pauli error type occurs in a $\mathbb Z_3$ toric memory. Its posterior over the nine winding sectors is $(1/2,1/2,0,\ldots,0)$ for every syndrome. Find $I_c$ and the maximum-likelihood success probability.
+
+::: {.callout-note collapse="true" title="Solution"}
+The conditional winding entropy is $\log2$. Thus $I_c=2\log3-\log2=\log(9/2)$. Any choice between the two equally likely sectors succeeds with probability $1/2$. Nonmaximal coherent information and a nonzero logical-error probability coexist. Neither value can be replaced by a claim of perfect storage of a particular integer number of qutrits in this single block.
+:::
+
+### Maximum probability versus maximum likelihood
+
+Sector A contains one error of probability $0.3$; sector B contains four errors of probability $0.175$ each. Which sector should an optimal decoder choose?
+
+::: {.callout-note collapse="true" title="Solution"}
+The most probable individual error is in A. But B has total probability $0.7$, so maximum-likelihood decoding chooses B. Ignoring entropy reduces the success probability from $0.7$ to $0.3$ in this example. This is why the partition sum in @eq-critical-posterior cannot generally be replaced by one minimum-energy configuration.
+:::

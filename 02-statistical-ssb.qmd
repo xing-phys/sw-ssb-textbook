@@ -20,10 +20,10 @@ In quantum mechanics, maximizing $S(\rho)=-\operatorname{Tr}(\rho\ln\rho)$ yield
 
 $$
 \rho_\beta=\frac{e^{-\beta H}}Z,\qquad
-F_{\rm th}=-T\ln Z.
+F_{\mathrm{th}}=-T\ln Z.
 $$ {#eq-gibbs}
 
-Here $F_{\rm th}$ denotes thermodynamic free energy, not the root fidelity $F$ used later. Differentiation gives
+Here $F_{\mathrm{th}}$ denotes thermodynamic free energy, not the root fidelity $F$ used later. Differentiation gives
 
 $$
 \langle H\rangle=-\partial_\beta\ln Z,\qquad
@@ -44,8 +44,8 @@ $$ {#eq-canonical-charge}
 The grand-canonical ensemble is
 
 $$
-\rho_{\beta,\mu}=\frac{e^{-\beta(H-\mu Q)}}{Z_{\rm gc}}
-=\sum_q\frac{e^{\beta\mu q}Z_q}{Z_{\rm gc}}\rho_{\beta,q}.
+\rho_{\beta,\mu}=\frac{e^{-\beta(H-\mu Q)}}{Z_{\mathrm{gc}}}
+=\sum_q\frac{e^{\beta\mu q}Z_q}{Z_{\mathrm{gc}}}\rho_{\beta,q}.
 $$ {#eq-grand-canonical}
 
 The distinction is physical: an environment may exchange energy while preserving charge, or may exchange both. Both states commute with $Q$. Only the first has support in one charge sector. This is the seed of strong versus weak symmetry.
@@ -112,7 +112,7 @@ A field of order $1/N$ can select a branch. The approximation neglects domain wa
 In the symmetric mixture of the two branches,
 
 $$
-\rho_{\rm coin}=\tfrac12\ket{0\cdots0}\bra{0\cdots0}
+\rho_{\mathrm{coin}}=\tfrac12\ket{0\cdots0}\bra{0\cdots0}
 +\tfrac12\ket{1\cdots1}\bra{1\cdots1},
 $$
 
@@ -163,7 +163,7 @@ Landau theory assumes a local analytic functional in a suitable order parameter 
 
 ### Continuous symmetry and the infrared
 
-For a continuous order parameter with phase $\theta(\mathbf x)$, the low-energy energy cost is approximately $\frac\rho_s2\int d^dx\,(\nabla\theta)^2$. Thermal fluctuations give
+For a continuous order parameter with phase $\theta(\mathbf x)$, the low-energy energy cost is approximately $\frac{\rho_s}{2}\int d^dx\,(\nabla\theta)^2$. Thermal fluctuations give
 
 $$
 \langle[\theta(\mathbf r)-\theta(0)]^2\rangle
@@ -228,5 +228,5 @@ The low-temperature estimate gives $\xi\simeq e^6/2\simeq202$. At separation 30,
 Show that $\rho_{\beta,q}$ and $\rho_{\beta,\mu}$ can agree locally while a measurement of $P_q$ distinguishes them with probability approaching one.
 
 ::: {.callout-note collapse="true" title="Solution"}
-The fixed-sector state returns outcome $q$ with probability one. In the grand-canonical state it returns $w_q=e^{\beta\mu q}Z_q/Z_{\rm gc}$. When a central-limit distribution spans $O(\sqrt N)$ sectors, an individual typical sector has weight $O(N^{-1/2})$. Thus the two-outcome test $\{P_q,I-P_q\}$ distinguishes them increasingly well even when every bounded local observable agrees. Local ensemble equivalence is not a statement of global trace-norm convergence.
+The fixed-sector state returns outcome $q$ with probability one. In the grand-canonical state it returns $w_q=e^{\beta\mu q}Z_q/Z_{\mathrm{gc}}$. When a central-limit distribution spans $O(\sqrt N)$ sectors, an individual typical sector has weight $O(N^{-1/2})$. Thus the two-outcome test $\{P_q,I-P_q\}$ distinguishes them increasingly well even when every bounded local observable agrees. Local ensemble equivalence is not a statement of global trace-norm convergence.
 :::

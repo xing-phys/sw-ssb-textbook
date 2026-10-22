@@ -1,0 +1,173 @@
+# A conceptual source atlas {#sec-literature-map}
+
+SW-SSB emerged where several research programs met: symmetry sectors of dissipative generators, doubled descriptions of thermalization, decoherence and decoding thresholds, average-symmetry topology, and information-theoretic recovery. Their convergence explains both the framework's reach and the disagreements about its boundaries. This atlas organizes the sources by physical questions and links them to the textbook's derivations.
+
+The cutoff is **22 October 2026**, rather than the unelapsed remainder of that month. Research began with Chong Wang's review, first posted on 1 June and revised on 8 June 2026; its primary references and subsequent submissions were then checked independently [@wangreview2026]. At the cutoff it is a review submitted to *Annual Review of Condensed Matter Physics*.
+
+Dates below identify a verified publication year, first preprint submission, or explicitly named revision. **Derivation** means that the book reconstructs a representative result and its mechanism. **Framework** means that the definition, assumptions, and consequences are explained with examples. **Frontier** identifies a specialized extension whose evidential status and connection to the main theory are explained; it does not imply that an unresolved classification has become a theorem. These labels describe the textbook's treatment, not scientific importance.
+
+## From open-system symmetry to spontaneous order
+
+Strong and weak symmetry first organized dissipative generators and invariant subspaces. The later state-based question is different: can a density matrix have an exact finite-size charge while becoming insensitive to distant charge transfers? Thermalization and decoherence supplied routes to that question before the fidelity phase theory was formulated.
+
+| Physical question and primary source | Verified record | Role in this book |
+|---|---|---|
+| Completely positive continuous-time dynamics: Gorini–Kossakowski–Sudarshan and Lindblad [@gks1976; @lindblad1976] | Generator theorems, 1976 | Master equation and assumptions in @sec-open-systems |
+| Sector preservation versus covariance: Buča–Prosen; Albert–Jiang [@buca2012; @albert2014] | New Journal of Physics 2012; PRA 2014 | Algebraic derivation in @sec-symmetry |
+| [Many-body delocalisation as symmetry breaking](https://arxiv.org/abs/2012.11580), Garratt–Chalker [@garratt2021] | First 21 December 2020; PRL 2021 | Historical precursor: doubled-history/transfer-matrix order in Floquet dynamics |
+| [Quantum criticality under decoherence or weak measurement](https://arxiv.org/abs/2301.05238), Lee–Jian–Xu [@lee2023] | January 2023 preprint; PRX Quantum 2023 | Nonlinear decoherence transition and solvable model in @sec-decoherence |
+| [Symmetry-enforced many-body separability transitions](https://arxiv.org/abs/2310.07286), Chen–Grover [@chen2024separability] | 2023 preprint; PRX Quantum 2024 | Ensemble structure and separability in @sec-purification |
+| [Purification perspective](https://arxiv.org/abs/2405.02402), Sala–Gopalakrishnan–Oshikawa–You [@sala2024purification] | PRB 2024 | System order and a specified environment, @sec-purification and @sec-mixed-spt |
+| [SW-SSB in mixed quantum states](https://arxiv.org/abs/2405.03639), Lessa–Ma–Zhang–Bi–Cheng–Wang [@lessa2025] | 2024 preprint; PRX Quantum 2025 | Fidelity definition, stability, CMI and exact noise models in @sec-diagnostics through @sec-decoherence |
+
+Garratt–Chalker's transfer-matrix symmetry is a precursor, not a reason to identify every localization transition with the later density-matrix definition. Similarly, an algebraic symmetry of a Lindbladian does not prove that every steady state exhibits SW-SSB. The textbook separates generator algebra, positive-matrix support, and thermodynamic order before relating them.
+
+The main fidelity paper brings together mixed-state symmetry, topology, and quantum information. Its ideas enter the textbook where needed: the support theorem in @sec-symmetry, distinguishability in @sec-diagnostics, and finite-depth locality in @sec-phases-recovery. The reader can follow that conceptual chain without first learning the authors' research histories.
+
+## Which diagnostic and which phase relation?
+
+Canonical purification uses $\sqrt\rho$ and has marginal $\rho$. Normalized Choi vectorization uses $\rho$ and has marginal $\rho^2/\operatorname{Tr}\rho^2$. Their order parameters can become singular at different noise strengths. A second fork concerns whether one compares complete finite-system families, intrinsic local thermodynamic states, or states connected by particular channel classes.
+
+| Primary route | Record and status | Coverage |
+|---|---|---|
+| Rényi-1/canonical purification, Weinstein [@weinstein2025] | [2410.23512](https://arxiv.org/abs/2410.23512); PRL 2025 | Affinity/fidelity bounds and conditional preparation resource |
+| Wightman/thermofield diagnostic, Liu–Chen–Zhang–Zhou–Zhang [@liu2025wightman] | [2410.09327](https://arxiv.org/abs/2410.09327); Communications Physics 2025 | Equivalent stable order diagnostic and thermal examples |
+| Susceptibility/information geometry, Zhang–Xu–Xu [@zhang2024fdt] | [2409.18944](https://arxiv.org/abs/2409.18944), 27 September 2024 | Nonanalytic response metrics and correlator bounds; response convention must be specified |
+| Approximate recovery, Fawzi–Renner [@fawzi2015] | 2014 preprint; mathematical theorem, 2015 | Fidelity/CMI relation in @sec-information |
+| Fast dissipative reachability, Coser–Pérez-García [@coser2019phases] | [1810.05092](https://arxiv.org/abs/1810.05092); Quantum 3, 174 (2019) | Equivalence and partial order with stated polylogarithmic time/locality resources |
+| Correlation-preserving RG and decoding, Sang–Zou–Hsieh [@sang2024rg] | [2310.08639](https://arxiv.org/abs/2310.08639); PRX 2024; v2 26 February 2026 | Constructive two-way channels; thermal versus dephased toric-code families |
+| Dynamical uniformity, Rakovszky–Gopalakrishnan–von Keyserlingk [@rakovszky2024stable] | PRX 14, 041031 (2024) | Stability in a neighborhood of generators; generic gap/relaxation links remain conjectural |
+| Finite Markov length, Sang–Hsieh [@sang2025markov] | PRL 2025 | Recovery along dissipative paths in @sec-phases-recovery |
+| Local reversibility, Sang–Lessa–Mong–Grover–Wang–Hsieh [@sang2025reversibility] | [2507.02292](https://arxiv.org/abs/2507.02292), v2 25 July 2025 | Framework preserving locally recoverable quantum and classical information |
+| Local fidelity, Divi–Lessa–Wang [@divi2026local] | [2605.28967](https://arxiv.org/abs/2605.28967), 27 May 2026 | Local/global comparison and accessible region-size scaling |
+| Marginal fidelity and dynamics, Carolyn Zhang [@zhang2026local] | [2605.29113](https://arxiv.org/abs/2605.29113), 27 May 2026 | Conditional local/global bounds and absorbing-state examples |
+| Infinite-volume strong symmetry, Liu–Yi–Else [@liu2026local] | [2605.28925v3](https://arxiv.org/abs/2605.28925v3), 12 August 2026 revision | Operator-algebraic framework and competing thermodynamic interpretation |
+| CMI constraints on RG, Chen–Grover [@chen2026rg] | [2602.04961v2](https://arxiv.org/abs/2602.04961v2), 2 August 2026 revision | Frontier inequalities assuming UV-finiteness and scaling hypotheses |
+
+These formulations retain different information:
+
+| Criterion | Operational question |
+|---|---|
+| Global finite-family fidelity | How does the complete state respond to distant charged insertions, including its global sector constraint? |
+| Intrinsic local thermodynamic state | Which properties survive in all fixed-region expectation values and consistent extensions? |
+| Two-way shallow channel connectivity | Can each complete state be produced from the other? |
+| Locally reversible channel circuits | Can restricted local deformations also be reversed nearby? |
+| Stochastic local-channel entanglement frameworks | Which quantum long-range structures survive after specified classical correlations are discounted? |
+| Choi/Rényi-2 construction | What order exists in the purity-reweighted doubled state? |
+
+For example, fixed-parity and unconstrained maximally mixed families have identical proper local marginals, while complete-system fidelity diagnostics distinguish them. An intrinsic local limit cannot distinguish a bit that disappears from every fixed region. This is a substantive difference in the object and access being classified. @sec-phases-recovery presents both perspectives rather than asserting their universal equivalence. Positive finite-region fidelity also bounds a limiting local order parameter from above; it does not certify a nonzero limit without a convergence argument.
+
+## Noise, inference, and quantum memory
+
+The statistical-mechanical bridge asks which global error class occurred after a syndrome is observed. Nishimori matching ties the disorder distribution to the actual error probabilities. Gauging turns charge transfer into a logical/topological process; keeping or forgetting measurement records changes the inference task.
+
+| Source and connection | Verified record | Coverage and qualification |
+|---|---|---|
+| Nishimori: matched disordered Ising statistics [@nishimori1980] | 1980; exact statistical identities | Matching derived in @sec-decoherence |
+| Dennis–Kitaev–Landahl–Preskill: [topological quantum memory](https://arxiv.org/abs/quant-ph/0110143) [@dennis2002] | 2001 preprint; J. Math. Phys. 2002 | Error chains, homology and posterior sums in @sec-error-correction |
+| Wang–Harrington–Preskill: [faulty-syndrome mapping](https://arxiv.org/abs/quant-ph/0207088) [@wang2003memory] | 2002 preprint; Ann. Phys. 2003 | Distinguishes one-shot errors from spacetime decoding |
+| Lee–Ji–Bi–Fisher: [measurement-prepared phases](https://arxiv.org/abs/2208.11699) [@lee2022decoding] | v2 6 September 2022 | Records, decoding and Ising/gauge connections |
+| Fan–Bao–Altman–Vishwanath: [mixed topological diagnostics](https://arxiv.org/abs/2301.05689) [@fan2024diagnostics] | 2023 preprint; PRX Quantum 2024 | Coherent information, relative entropy and negativity for specified Pauli noise |
+| Chen–Grover: [topological separability transitions](https://arxiv.org/abs/2309.11879) [@chen2024toposeparability] | 2023 preprint; PRL 132, 170602 (2024) | Convex mixtures of short-range-entangled states, distinct from full on-site separability |
+| Bao–Fan–Vishwanath–Altman: [errorfield double](https://arxiv.org/abs/2301.05687) [@bao2026errorfield] | v2 1 May 2026; PRL 2026 | Doubled topological sectors and temporal decoherence defects |
+| Kim–Altman–Lee: [SYK code threshold](https://arxiv.org/abs/2410.24225) [@kim2026syk] | First 31 October 2024; PRB 2026 | Approximate-code/large-$N$ saddle mechanism, @sec-critical-frontiers |
+| Temkin–Weinstein–Fan–Podolsky–Altman: [charge-informed correction](https://arxiv.org/abs/2512.22119) [@temkin2025charge] | 26 December 2025 preprint | Integer loops, optimal BKT decoding theory and loop-glass numerical evidence |
+| Vijay–Lee: [information-critical phases](https://arxiv.org/abs/2512.22121v2) [@vijay2026information] | First 26 December 2025; v2 10 August 2026 | Clock posterior/coherent-information derivation and partial-memory mechanism |
+
+An optimal threshold belongs to a code/noise/information task; a practical decoder's threshold is algorithm dependent. Maximum likelihood sums histories in a class, whereas minimum weight selects one representative. Topological negativity can persist after useful quantum memory is lost. Nonmaximal coherent information does not mean that a particular integer number of logical qudits is perfectly protected in one finite block. These distinctions connect the stabilizer calculations of @sec-error-correction with the critical-angle physics of @sec-critical-frontiers.
+
+## Average symmetry and protected mixed-state structure
+
+SPT order supplies symmetry actions on defects and boundaries without intrinsic bulk topological degeneracy. Forgetting a disorder or measurement record is a physical operation, so an average-symmetry ensemble and its density matrix must be compared carefully.
+
+| Primary sources | Verified record | Coverage and limitation |
+|---|---|---|
+| Ma–Wang, [average SPT](https://arxiv.org/abs/2209.02723) [@ma2023average] | PRX 2023 | Decorated disorder defects and average anomalies |
+| Ma–Zhang–Bi–Cheng–Wang, [decohered, disordered and intrinsic](https://arxiv.org/abs/2305.16399) [@ma2025topological] | PRX 2025 | Different admissibility conditions for disorder and decoherence |
+| Lee–You–Xu, [SPT under decoherence](https://arxiv.org/abs/2210.16323) [@lee2025spt] | Quantum 2025 | Type-I/type-II strange diagnostics and doubled response |
+| Ma–Turzillo; Xue–Lee–Bao [@ma2025doubled; @xue2024tensor] | [2403.13280](https://arxiv.org/abs/2403.13280), PRX Quantum 2025; [2403.17069](https://arxiv.org/abs/2403.17069), 2024 preprint | Doubled/tensor classifications with positivity, Hermiticity and injectivity/locality hypotheses |
+| Guo–Zhang–Zhang–Yang–Bi [@guo2025lpdo] | [2403.16978](https://arxiv.org/abs/2403.16978), v3 24 April 2025; PRX 2025 | Locally purified density operators and the role of a specified local purification |
+| Zhang–Qi–Bi, [fidelity strange correlators](https://arxiv.org/abs/2210.17485) [@zhang2026fsc] | 2022 preprint; Science Bulletin 2026 | Fidelity-based ASPT diagnostic; publication year is not submission year |
+| Guo–Yang; Shah et al. [@guo2025double; @shah2025instability] | [2410.13734](https://arxiv.org/abs/2410.13734), PRB 2025; [2410.12900](https://arxiv.org/abs/2410.12900), Quantum 2025 | Double-ASPT mechanism versus instability of particular parent-Lindbladian steady states |
+| Lu–Silveira–You, [topological response](https://arxiv.org/abs/2602.23484) [@lu2026response] | 26 February 2026 preprint | Defect-decoration/dephasing mechanism and extensions |
+| Kuno–Orito [@kuno2026hierarchy; @kuno2026fate] | [2606.22507](https://arxiv.org/abs/2606.22507), 21 June; [2609.27530](https://arxiv.org/abs/2609.27530), 23 September 2026 | Rényi-2 subsystem hierarchy and filtering/postselection; retain those qualifiers |
+
+@sec-mixed-spt reconstructs cluster stabilizers, edge algebra, string attenuation, and strong/weak protection. Specialized classifications extend those mechanisms. A Choi-state cohomology result is not presented as a completed classification under every channel equivalence, and state-phase stability is distinguished from robustness as the stationary state of a perturbed generator.
+
+## Generalized symmetry and non-Abelian information
+
+Higher-form symmetry moves the charged object from a point to a loop or surface. Non-Abelian charge adds fusion multiplicities. Both reveal information absent from a list of local densities.
+
+| Primary route | Record and status | Coverage |
+|---|---|---|
+| Wang–Wu–Wang; Sohal–Prem; Ellison–Cheng [@wang2025intrinsic; @sohal2025noisy; @ellison2025classification] | [2307.13758](https://arxiv.org/abs/2307.13758), [2403.13879](https://arxiv.org/abs/2403.13879), [2405.02390](https://arxiv.org/abs/2405.02390); PRX Quantum 2025 | Intrinsically mixed orders, anyon proliferation, partial/proposed classifications |
+| Zhang–Xu–Zhang–Xu–Bi–Luo [@zhang2025oneform] | [2409.17530](https://arxiv.org/abs/2409.17530); PRB 2025; v3 19 February 2026 | One-form SW breaking and revised Rényi-2 Markov-length assumptions |
+| Lessa–Cheng–Wang; Lessa et al. [@lessa2025anomaly; @lessa2025higher] | PRX 2025; [2503.12792](https://arxiv.org/abs/2503.12792) | Anomaly/entanglement obstructions with theorem-specific dimensions |
+| Hsin–Kobayashi–Prem [@hsin2025higher] | [2504.10569](https://arxiv.org/abs/2504.10569), v2 5 November 2025 | Higher-form obstruction and mixed order without complete remote detectability |
+| Yang–Shi–Lee [@yang2026bootstrap] | [2506.04221](https://arxiv.org/abs/2506.04221), v3 5 October 2026; PRX 2026 | Axiomatic mixed topological phases under recoverability/uniformity premises |
+| Song–Zhang [@song2025quantumdouble] | [2509.24179](https://arxiv.org/abs/2509.24179), v3 20 September 2026 | Noninvertible higher-form symmetry in noisy quantum doubles |
+| Schafer-Nameki et al.; Qi et al. [@schafer2025symtft; @qi2025taco] | [2507.05350](https://arxiv.org/abs/2507.05350), [2507.05335](https://arxiv.org/abs/2507.05335) | SymTFT/folded-bilayer frameworks with stated short-range Choi premises |
+| Moharramipour–Lessa–Wang–Hsieh–Sahu; Li–Pollmann–Read–Sala [@moharramipour2024entanglement; @li2025stationary] | [2406.08542](https://arxiv.org/abs/2406.08542), PRX Quantum 2024; PRX 2025 | Symmetry-enforced entanglement in singlet-sector maximal mixtures and stationary states |
+| Sala–Temkin–Xu–Podolsky–Altman [@sala2026fusion] | [2610.06692](https://arxiv.org/abs/2610.06692), 5 October 2026 | Center ordering and nested fusion-decoder hierarchy |
+
+The classical loop ensemble, crossing-string algebra, and four-spin singlet example in @sec-generalized-symmetry make the distinction between classical constraints and quantum entanglement explicit. Non-Abelian singlet ensembles add entanglement even at maximal mixing within a symmetry sector. The center-order work is a major post-review development; its finite-hierarchy statements are not a solution of unrestricted optimal non-Abelian decoding. Premodular and categorical proposals remain proposals where no completeness theorem has been established.
+
+Another bridge uses channel-state duality to turn repeated $d$-dimensional channels into boundary states of a $(d+1)$-dimensional sequential circuit. In the construction of Lu–Liu–Gopalakrishnan–You, boundary SW-SSB and its CMI inherit bulk topological structure [@lu2026holography] ([2511.19597v2](https://arxiv.org/abs/2511.19597v2), 1 September 2026 revision). This is a concrete tensor-network duality, rather than an assertion that all mixed states have one universal holographic dual. Vijay–Lee similarly relates symmetric circuits to a dynamically generated noisy surface code, connecting charge sharpening with bulk logical information and a confinement description [@vijay2026holographic] ([2511.21685v2](https://arxiv.org/abs/2511.21685v2), 8 May 2026 revision). Its $N>4$ intermediate regime ties the circuit's inference times to the critical-memory mechanisms of @sec-critical-frontiers.
+
+## Hydrodynamics, charge scrambling, and learning
+
+The shared theme is a globally fixed charge that is locally indefinite. Whether that indefiniteness implies a slow mode, nonlinear order, or failed inference depends on additional conditions.
+
+| Primary sources | Verified record | Coverage |
+|---|---|---|
+| Ogunnaike–Feldmeier–Lee; Moudgalya–Motrunich [@ogunnaike2023hydrodynamics; @moudgalya2024superoperators] | [2304.13028](https://arxiv.org/abs/2304.13028), PRL 2023; [2309.15167](https://arxiv.org/abs/2309.15167), PRX Quantum 2024 | Microscopic superoperator/single-mode hydrodynamic constructions |
+| Huang–Qi–Zhang–Lucas [@huang2025hydrodynamics] | [2407.08760](https://arxiv.org/abs/2407.08760), v2 20 March 2025; PRB 2025 | Response-field diffusion EFT in @sec-hydrodynamics |
+| Gu–Wang–Wang; Watanabe–Katsura–Lee [@gu2025symmetry; @watanabe2024critical] | PRB 2025; PRL 2024 | Liouvillian models and frustration-free low-dimensional qualifications |
+| Ziereis–Moudgalya–Knap [@ziereis2025steady] | [2509.09669](https://arxiv.org/abs/2509.09669), 11 September 2025 | Steady-state SW order and weak-postselection transitions; distinguish conditioned operations from CPTP channels |
+| Hauser–Su–Ha–Lloyd–Kiely–Vasseur–Gopalakrishnan–Xu–Fisher [@hauser2026discrete] | [2602.16045](https://arxiv.org/abs/2602.16045), 17 February 2026 | Discrete/continuum distinction, ballistic information length, 2D BKT-like evidence |
+| Lee [@lee2026scrambling] | [2605.05288](https://arxiv.org/abs/2605.05288), 6 May 2026 | Fluctuation bound, skew information and both directions of counterexample |
+| Sarma [@sarma2026fermions] | [2609.37965](https://arxiv.org/abs/2609.37965), 29 September 2026 | Exact all-index infinite-dephasing XY/FCS mapping; finite-dephasing even-index analysis |
+| Agrawal et al.; Singh et al. [@agrawal2022sharpening; @singh2026learnability] | PRX 2022; [2503.10308](https://arxiv.org/abs/2503.10308), PRB 2026 | Charge sharpening, entanglement and noisy mixed-state inference |
+| Zerba–Gopalakrishnan–Knap; Kumar et al. [@zerba2025dipole; @kumar2026unlearnable] | [2512.14830](https://arxiv.org/abs/2512.14830), 16 December 2025; [2602.11262v2](https://arxiv.org/abs/2602.11262v2), 18 March 2026 revision | Dipole-learning hierarchy and restricted-query hardness |
+
+The exclusion-process and Gaussian calculations in @sec-hydrodynamics derive the transport/information separation before using a Keldysh field theory. @sec-charge-scrambling shows why a summable nonlinear tail can force extensive variance, and why neither direction of an unconditional variance/order equivalence holds. @sec-critical-frontiers derives the counting-statistics identity and its Rényi-index dependence. These bridges connect Lucas's effective theory, Lee's static qualifications, Fisher and Gopalakrishnan's microscopic/inference perspective, and the experimental estimators.
+
+The relevant time limits must be stated. One-dimensional information lengths can grow without finite-time long-range order; an infinite-time fixed-sector stationary ensemble can nevertheless order. Two-dimensional algebraic order is different from a nonzero long-distance constant. A conserved density and SW-SSB do not alone determine a diffusion coefficient, and an equal-time structure factor is not automatically a response susceptibility outside equilibrium.
+
+## Detection and the experimental timeline
+
+| Access or observation | Verified date/status | Interpretation |
+|---|---|---|
+| Canonical-purification route; randomized measurements [@weinstein2025; @sun2025randomized] | PRL 2025 | Conditional resources and an implementable Rényi-2 protocol |
+| Feng–Cheng–Ippoliti hardness [@feng2025hardness] | First 16 April 2025; PRL 2025 | State-agnostic obstruction, consistent with structured protocols |
+| Liu–Zou certification [@liu2026certification] | 19 January 2026 preprint | MPDO representation and variational fidelity certificates |
+| Wang et al., dephased Fermi gas [@wang2026fermi] | [2604.16137](https://arxiv.org/abs/2604.16137), 17 April 2026 | Snapshots plus learned Gaussian reference; finite-temperature/subsystem qualifications |
+| Cao–Bi–Murch, superconducting array [@cao2026mixed] | [2608.24993](https://arxiv.org/abs/2608.24993), 25 August 2026 | Five-qubit cluster, discarded records, finite-size fidelity signatures |
+| Fechisin et al., long-range-channel theory [@fechisin2026powerlaw] | [2610.00480](https://arxiv.org/abs/2610.00480), first 30 September 2026 | Rényi-2 MPS phase diagram and high-purity route to hardware |
+| Wei et al., quantum processor [@wei2026processor] | [2610.26229](https://arxiv.org/abs/2610.26229), first **19 October 2026** | Known-channel reconstruction, finite-size crossings and collapse |
+
+The processor paper is included because its primary submission history explicitly precedes the cutoff, despite the high sequence number in its identifier. @sec-experiments derives its characteristic-kernel/Gram estimator and the cold-gas probability-ratio estimator. Measurement settings, classical processing, and shot complexity are different resources. Few settings alone do not establish efficient precision for arbitrary highly mixed states. Finite-size evidence is described as such rather than represented as a literal measurement of an infinite-volume singularity.
+
+## Established core and open boundaries
+
+The established core developed here includes finite-system support definitions, fidelity/Rényi-1 bounds under stated operator assumptions, finite-depth stability, solvable examples, and recoverability consequences with specified limits. Numerical thresholds, BKT evidence, large-$N$ saddle transitions, and decoder comparisons remain results for their model families. Universal mixed-state classifications, unrestricted non-Abelian optimal decoding, and a general equivalence of SW-SSB and hydrodynamics remain open.
+
+Review references described only as “to appear” were treated as research leads rather than turned into invented papers. Revisions are included only when available by the cutoff. The explicit source maps make the scope inspectable and extendable; essential arguments along the book's pedagogical path have been reconstructed in the preceding chapters. Specialized extensions are connected to those arguments with their assumptions and unresolved questions retained.
+
+## Exercises in interpreting a frontier claim
+
+### A correlator, a threshold, and a slow mode
+
+An abstract reports nonlinear order, an error threshold, and diffusion. What must be checked before calling these one transition?
+
+::: {.callout-note collapse="true" title="Solution"}
+Specify the correlator and normalization; finite-system family versus local limit; code, noise and decoder or optimal-recovery task; large-size and time limits; and the generator, structure factor and constitutive assumptions behind diffusion. Then verify a theorem or mapping connecting those particular objects. Shared terminology alone supplies none of those links.
+:::
+
+### A revised phase criterion
+
+A later revision adds a finite Rényi-2 Markov-length assumption to a phase statement. How should the result be quoted?
+
+::: {.callout-note collapse="true" title="Solution"}
+Name the version and the operational equivalence accompanying the claim. Explain the changed assumption when it affects the interpretation. Combining conclusions from different versions into a stronger theorem would misrepresent both. This is especially consequential when comparing Choi-space order with locally reversible fidelity-based phases.
+:::

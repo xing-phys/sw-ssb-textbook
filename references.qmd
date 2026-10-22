@@ -1,0 +1,6 @@
+# References {.unnumbered}
+
+Primary sources are cited at the point where their results enter the discussion. The [literature map](19-literature-map.qmd) groups them by concept and distinguishes original arguments, numerical evidence, experimental reports, and unsettled extensions. Preprints are identified as such when a journal publication was not verified within the cutoff.
+
+::: {#refs}
+:::

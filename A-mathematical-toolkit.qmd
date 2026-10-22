@@ -1,0 +1,180 @@
+# Mathematical toolkit {#sec-toolkit}
+
+## Spectra, singular values, and matrix functions
+
+A Hermitian matrix has an orthonormal eigenbasis, $H=V\operatorname{diag}(h_a)V^\dagger$. A positive matrix has $h_a\geq0$. For any real function defined on its spectrum,
+
+$$
+f(H)=V\operatorname{diag}(f(h_a))V^\dagger.
+$$
+
+The square root in fidelity is the positive square root. The logarithm in entropy is applied only to positive eigenvalues, with zero contributions understood by continuity. An inverse such as $\rho^{-1/2}$ in a recovery map is restricted to the support unless a full-rank assumption is made.
+
+For an arbitrary matrix $M$, its singular-value decomposition is $M=V\Sigma W^\dagger$, with nonnegative diagonal entries $s_a$ in $\Sigma$. Its singular values are the square roots of the eigenvalues of $M^\dagger M$. The polar decomposition is $M=U|M|$, with $|M|=\sqrt{M^\dagger M}$ and a partial isometry $U$ that can be extended to a unitary when the spaces permit.
+
+For numerical work, do not diagonalize a non-Hermitian matrix and assume its eigenvalues are singular values. A trace norm is a sum of singular values, not the sum of absolute eigenvalues except in appropriate normal cases.
+
+## Three norms and their roles
+
+The operator norm is $\|M\|_\infty=\max_a s_a$. It bounds the largest amplification of a vector. The Hilbert-Schmidt norm is $\|M\|_2=(\operatorname{Tr}M^\dagger M)^{1/2}$. The trace norm is $\|M\|_1=\sum_as_a$.
+
+If the rank is $r$,
+
+$$
+\|M\|_\infty\leq\|M\|_2\leq\|M\|_1
+\leq\sqrt r\,\|M\|_2.
+$$
+
+The last factor can grow exponentially with volume. A finite-dimensional norm equivalence therefore need not establish a thermodynamically uniform relation between order parameters.
+
+The trace pairing obeys Hölder's inequality,
+
+$$
+|\operatorname{Tr}(M^\dagger N)|\leq\|M\|_1\|N\|_\infty,
+$$
+
+and Hilbert-Schmidt Cauchy-Schwarz,
+
+$$
+|\operatorname{Tr}(M^\dagger N)|^2
+\leq\operatorname{Tr}(M^\dagger M)\operatorname{Tr}(N^\dagger N).
+$$
+
+The latter follows from positivity of $\|M-zN\|_2^2$ and minimization over complex $z$. It is the same geometry as the vector Cauchy-Schwarz inequality, applied to matrices as a vector space.
+
+The variational formula
+
+$$
+\|M\|_1=\max_{V\ {
+m unitary}}|\operatorname{Tr}(VM)|
+$$
+
+follows immediately from polar decomposition. For Hermitian $M$, another form is $\|M\|_1=\max_{\|O\|_\infty\leq1}\operatorname{Tr}(OM)$. These identities turn a norm into an optimized overlap or measurement, and are repeatedly used in stability and irrecoverability proofs.
+
+## Vectorization without ambiguity
+
+Fix a basis and define
+
+$$
+|M\rangle\!\rangle=\sum_{ij}M_{ij}|i\rangle_L|j\rangle_R.
+$$
+
+Then
+
+$$
+\langle\!\langle M|N\rangle\!\rangle=\operatorname{Tr}(M^\dagger N),\qquad
+(A\otimes B^T)|M\rangle\!\rangle=|AMB\rangle\!\rangle.
+$$ {#eq-toolkit-vectorization}
+
+The transpose appears because of index placement. In particular $(U\otimes U^*)|M\rangle\!\rangle=|UMU^\dagger\rangle\!\rangle$. Thus weak symmetry becomes a diagonal doubled action.
+
+The canonical purification $|\sqrt\rho\rangle\!\rangle$ has norm one, and its left reduced state is $\rho$. The raw vector $|\rho\rangle\!\rangle$ has norm squared $\operatorname{Tr}\rho^2$. Once normalized, its left reduced state is $\rho^2/\operatorname{Tr}\rho^2$. The two constructions have different eigenvalue weights and can have different phases in their doubled descriptions.
+
+For any matrices $A,B$,
+
+$$
+\langle\!\langle M|A\otimes B^T|M\rangle\!\rangle
+=\operatorname{Tr}(M^\dagger AMB).
+$$
+
+Setting $M=\sqrt\rho$ and $B=A^\dagger$ gives the canonical overlap correlator. Setting $M=\rho$ and dividing by purity gives its Rényi-2 counterpart. This single index identity is safer than memorizing several copy-space formulas with inconsistent conjugations.
+
+## Cumulants and small twists
+
+For a Hermitian charge $Q_A$, let $Z_A(\theta)=\langle e^{i\theta Q_A}\rangle$. Near zero, provided the required moments exist,
+
+$$
+\ln Z_A(\theta)=\sum_{n\geq1}\frac{(i\theta)^n}{n!}\kappa_n,
+$$
+
+where $\kappa_1=\langle Q_A\rangle$ and $\kappa_2=\operatorname{Var}(Q_A)$. Hence $\ln|Z_A(\theta)|=-\theta^2\operatorname{Var}(Q_A)/2+O(\theta^4)$. Higher cumulants matter if the small-angle expansion is used outside its uniform range as the region grows. A Gaussian central-limit approximation does not follow from the variance alone.
+
+For a classical mixture labeled by $a$, the law of total variance is
+
+$$
+\operatorname{Var}(Q)=\sum_ap_a\operatorname{Var}(Q|a)
++\sum_ap_a\bigl(\langle Q\rangle_a-\langle Q\rangle\bigr)^2.
+$$
+
+It follows by adding and subtracting $\sum_ap_a\langle Q\rangle_a^2$. It is useful when passing from a symmetry-selected ensemble to a symmetric mixture. For noncommuting observables, the expression still holds for the ordinary variance of one Hermitian operator in a convex mixture; it should not be interpreted as a joint classical distribution for incompatible observables.
+
+## Fourier transforms and zero modes
+
+On a periodic chain of $N$ sites with unit spacing,
+
+$$
+n_k=\frac1{\sqrt N}\sum_xe^{-ikx}n_x,\qquad
+n_x=\frac1{\sqrt N}\sum_ke^{ikx}n_k,
+\qquad k=\frac{2\pi m}{N}.
+$$
+
+Orthogonality is $\sum_xe^{i(k-k')x}=N\delta_{kk'}$. The discrete Laplacian has eigenvalue $e^{ik}+e^{-ik}-2=-4\sin^2(k/2)$, approaching $-k^2$ at small $k$. In a fixed-charge sector the fluctuating zero mode is absent: $\delta n_{k=0}=0$ exactly.
+
+For translation-invariant covariance $C(x-y)=\langle\delta n_x\delta n_y\rangle$, define $S(k)=\langle\delta n_k\delta n_{-k}\rangle$. A block sum has
+
+$$
+\operatorname{Var}(Q_A)=\frac1N\sum_kS(k)
+\left|\sum_{x\in A}e^{ikx}\right|^2.
+$$
+
+This formula makes the order of $k\to0$ and $N\to\infty$ explicit. A function can satisfy $S(0)=0$ at every finite $N$ yet have positive $S(k\to0^+)$ after the thermodynamic limit. There is no inconsistency with a fixed total charge.
+
+## Errors, loops, and boundaries over binary arithmetic
+
+For $\mathbb Z_2$ noise on a graph, an edge configuration is a list $e_\ell\in\{0,1\}$. Its boundary at vertex $v$ is the parity of incident occupied edges:
+
+$$
+(\partial e)_v=\bigoplus_{\ell\ni v}e_\ell.
+$$
+
+Two edge configurations give the same syndrome precisely when their difference has no boundary: $\partial(e\oplus e')=0$. Such a difference is a cycle. On a simply connected region, contractible cycles can be built from plaquette boundaries. On a torus, noncontractible cycles carry homology labels and can act as logical operators.
+
+For general $\mathbb Z_N$, replace exclusive-or by addition modulo $N$ and assign orientations. Charge conservation is the statement that the boundary of a boundary vanishes. This elementary algebra explains why decoding naturally sums over loop configurations and why different topological sectors can share the same local syndrome.
+
+## Turning a posterior into a Boltzmann weight
+
+For independent binary errors,
+
+$$
+P(e)=\prod_\ell p^{e_\ell}(1-p)^{1-e_\ell}.
+$$
+
+Set $\tau_\ell=(-1)^{e_\ell}$ and $K=\frac12\ln[(1-p)/p]$. Then
+
+$$
+P(e)=[p(1-p)]^{|E|/2}\exp\left(K\sum_\ell\tau_\ell\right).
+$$
+
+Conditioning on a syndrome restricts the sum to compatible errors. Parameterizing compatible differences by loops or dual spins introduces a classical partition function. The equality $e^{-2K}=p/(1-p)$ is the Nishimori relation for this noise model. A different prior, correlated noise, measurement error, or replica weight gives a different effective statistical model. A clean Ising critical point cannot be inserted into a disordered inference problem merely because both contain spins.
+
+## Scaling statements and their quantifiers
+
+An exact statement holds at every specified finite size. A thermodynamic statement concerns a sequence as $N\to\infty$. A long-distance statement requires separation tending to infinity while staying within a controlled geometry. A hydrodynamic limit also scales time and wavelength. “Finite depth” normally means independent of $N$; “polylogarithmic depth” does not.
+
+A numerical critical exponent requires a scaling window and corrections to scaling. A finite plateau can be preasymptotic. A proof using an inequality with a prefactor growing as $N$ must keep that prefactor when limits are taken. If the last step of an argument discards the only factor carrying system-size dependence, it may have discarded the physical question.
+
+## Exercises and worked solutions
+
+### 1. Rank-dependent norm bounds
+
+Take $M=I_d/d$. Compute its three norms and identify the size-dependent relation.
+
+::: {.callout-note collapse="true" title="Solution"}
+All $d$ singular values equal $1/d$. Thus $\|M\|_\infty=1/d$, $\|M\|_2=1/\sqrt d$, and $\|M\|_1=1$. The bound $\|M\|_1\leq\sqrt d\|M\|_2$ is saturated. A Hilbert-Schmidt quantity vanishing exponentially in volume can coexist with a trace norm of order one.
+:::
+
+### 2. Vectorizing a commutator
+
+Write $|[H,\rho]\rangle\!\rangle$ as an operator acting on $|\rho\rangle\!\rangle$.
+
+::: {.callout-note collapse="true" title="Solution"}
+The first term is $(H\otimes I)|\rho\rangle\!\rangle$ and the second is $(I\otimes H^T)|\rho\rangle\!\rangle$. Therefore the commutator is generated by $H_L-H_R^T$. A missing transpose changes the formula for Hamiltonians with complex matrix elements.
+:::
+
+### 3. Why a loop changes no syndrome
+
+Toggle every edge around one square plaquette. What happens to its four vertex boundary parities?
+
+::: {.callout-note collapse="true" title="Solution"}
+Each vertex touches exactly two toggled edges. Adding two modulo two gives zero, so every vertex syndrome is unchanged. On a torus a noncontractible closed path also has no endpoints but may change a logical winding label. Local syndrome agreement therefore does not imply logical equivalence.
+:::

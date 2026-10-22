@@ -1,0 +1,370 @@
+# Nonlinear order parameters {#sec-diagnostics}
+
+The even-parity state in @sec-symmetry has no ordinary $Z$ correlations, yet it is unchanged when $Z_iZ_j$ transports charge between arbitrarily distant sites. An order parameter should detect that insensitivity. For pure states, expectation values already measure overlap with an altered state. For mixed states, expectation and overlap separate, and there are several inequivalent ways to generalize them.
+
+This chapter develops the distinctions before introducing statistical-mechanical mappings. All fidelities use the **root convention**
+
+$$
+F(\rho,\sigma)=\operatorname{Tr}\sqrt{\sqrt\rho\,\sigma\sqrt\rho}.
+$$ {#eq-root-fidelity-core}
+
+Some papers call $F^2$ the fidelity. Squaring a nonnegative correlator changes a critical exponent by a factor of two, although it does not change whether its thermodynamic limit vanishes. Checking conventions is therefore essential when comparing numerical work.
+
+## Charge transfer as a state-comparison experiment
+
+Let $O_x$ have nonzero symmetry charge. The product $A_{xy}=O_xO_y^\dagger$ is neutral and transfers charge from one neighborhood to another. Initially take $O_x$ and $O_y$ to be unitary, so $\sigma_{xy}=A_{xy}\rho A_{xy}^\dagger$ is normalized. Define
+
+$$
+C_O(x,y)=\operatorname{Tr}(\rho A_{xy}),\qquad
+F_O(x,y)=F(\rho,\sigma_{xy}).
+$$ {#eq-linear-fidelity-correlators}
+
+The first number asks for a coherent expectation value. The second asks how distinguishable the original state is from the state after charge transfer. They agree in magnitude for a pure state:
+
+$$
+F_O(x,y)=|\langle\psi|A_{xy}|\psi\rangle|
+\quad\text{if }\rho=|\psi\rangle\langle\psi|.
+$$
+
+For a general state, put $X=\sqrt\rho A_{xy}\sqrt\rho$. Then $XX^\dagger=\sqrt\rho\sigma_{xy}\sqrt\rho$, so
+
+$$
+F_O(x,y)=\|\sqrt\rho A_{xy}\sqrt\rho\|_1
+\geq|\operatorname{Tr}(\rho A_{xy})|.
+$$ {#eq-fidelity-trace-norm}
+
+The inequality is $|\operatorname{Tr}X|\leq\|X\|_1$. Long-range ordinary order necessarily gives long-range fidelity order, but the converse fails.
+
+For a single charged unitary $O_x$, strong symmetry implies
+
+$$
+F(\rho,O_x\rho O_x^\dagger)=0.
+$$
+
+Indeed, $O_x$ moves the support into a different charge sector, orthogonal to the original one. Two separated insertions can have nonzero fidelity because their total charge is zero. This is directly analogous to a vanishing one-point function and nonvanishing two-point function in a symmetric finite-volume magnet, with fidelity replacing expectation.
+
+::: {.callout-note title="Global SW-SSB: the convention in this book"}
+A thermodynamic family with strong symmetry has global SW-SSB if some bounded, fixed-support charged operators have $F_O(x,y)\to c>0$ at long distance, while ordinary correlations of all charged local order parameters decay. The thermodynamic limit and the subsequent long-distance limit must be specified; supports do not grow with separation. This is the fidelity-based definition of @lessa2025. The local definition introduced in 2026 is discussed in @sec-phases-recovery and is broader.
+:::
+
+For $\rho_+=(I+\prod_iX_i)/2^N$, $F_Z(i,j)=1$ whereas $C_Z(i,j)=0$ for distinct sites. For the paramagnet, both vanish. For a GHZ state, both have unit magnitude. A pure state cannot satisfy this *global* definition of SW-SSB, because its fidelity and ordinary correlators coincide in magnitude.
+
+## Rényi-1: a diagnostic equivalent to fidelity
+
+For unitary $A=A_{xy}$ define
+
+$$
+R_1(A)=\operatorname{Tr}(\sqrt\rho\,A\sqrt\rho\,A^\dagger).
+$$ {#eq-renyi-one}
+
+This nonnegative quantity is sometimes called a Wightman correlator or quantum affinity. Since $\sqrt{A\rho A^\dagger}=A\sqrt\rho A^\dagger$, it is $\operatorname{Tr}(\sqrt\rho\sqrt\sigma)$ for $\sigma=A\rho A^\dagger$. It is experimentally useful when the canonical purification of $\rho$ is preparable [@weinstein2025]. Independent work develops its relation to fidelity and dynamical diagnostics [@liu2025wightman].
+
+The decisive inequalities are
+
+$$
+F(\rho,\sigma)^2\leq\operatorname{Tr}(\sqrt\rho\sqrt\sigma)
+\leq F(\rho,\sigma).
+$$ {#eq-affinity-bounds}
+
+Thus
+
+$$
+R_1(A)\leq F(A)\leq\sqrt{R_1(A)}.
+$$ {#eq-r1-f-equivalence}
+
+These are volume-independent bounds. Fidelity long-range order exists exactly when Rényi-1 long-range order does. They need not have identical amplitudes or identical critical exponents in a noncommuting model.
+
+### Derivation of the bounds
+
+The upper bound follows from
+
+$$
+\operatorname{Tr}(\sqrt\rho\sqrt\sigma)
+\leq\|\sqrt\rho\sqrt\sigma\|_1=F(\rho,\sigma).
+$$
+
+For the other direction choose a unitary $V$ from the polar decomposition such that $F=|\operatorname{Tr}(V\sqrt\rho\sqrt\sigma)|$. Write this trace as $\operatorname{Tr}(BC)$, with
+
+$$
+B=\sigma^{1/4}V\rho^{1/4},\qquad
+C=\rho^{1/4}\sigma^{1/4}.
+$$
+
+The Hilbert-Schmidt Cauchy-Schwarz inequality gives
+
+$$
+F^2\leq\operatorname{Tr}(B^\dagger B)
+\operatorname{Tr}(C^\dagger C).
+$$
+
+The second factor is $\operatorname{Tr}(\sqrt\rho\sqrt\sigma)$. The first is $\operatorname{Tr}(\sqrt\rho V^\dagger\sqrt\sigma V)\leq\sqrt{\operatorname{Tr}\rho\operatorname{Tr}\sigma}=1$, again by Cauchy-Schwarz. This proves @eq-affinity-bounds without a replica limit or a thermodynamic assumption.
+
+### Commuting and pure limits
+
+If $\rho$ and $\sigma$ commute with eigenvalues $p_a,q_a$ in the same basis, then
+
+$$
+F=R_1=\sum_a\sqrt{p_aq_a}.
+$$ {#eq-classical-affinity}
+
+This is the classical Bhattacharyya overlap. Many exactly solvable Pauli-noise models have this property. At the other extreme, for pure $\rho$, $R_1(A)=|\langle A\rangle|^2=F(A)^2$. Both bounds can therefore be saturated.
+
+## Rényi-2 and spectral reweighting
+
+A more easily expressed polynomial diagnostic is
+
+$$
+R_2(A)=\frac{\operatorname{Tr}(\rho A\rho A^\dagger)}
+{\operatorname{Tr}\rho^2}.
+$$ {#eq-renyi-two}
+
+It equals a two-point function after vectorizing $\rho$ in a doubled Hilbert space [@lee2023; @lessa2025]. For unitary $A$, $0\leq R_2(A)\leq1$: positivity follows from $\operatorname{Tr}(\rho\sigma)\geq0$, while the upper bound is Hilbert-Schmidt Cauchy-Schwarz and $\operatorname{Tr}\sigma^2=\operatorname{Tr}\rho^2$.
+
+There is no analogue of @eq-r1-f-equivalence with bounds uniform in system size. The denominator is often exponentially small. Normalizing by it changes the relative importance of different parts of the spectrum. If $\rho=\sum_ap_a|a\rangle\langle a|$, then
+
+$$
+R_1(A)=\sum_{a,b}\sqrt{p_ap_b}|A_{ab}|^2,
+\qquad
+R_2(A)=\frac{\sum_{a,b}p_ap_b|A_{ab}|^2}{\sum_ap_a^2}.
+$$ {#eq-spectral-r1-r2}
+
+Rényi-2 favors the largest eigenvalues more strongly. It is an informative observable with its own statistical-mechanical transitions; it is not a universally interchangeable substitute for fidelity.
+
+### Exact counterexample: fidelity order without Rényi-2 order
+
+Let $d=2^{N-1}$ be the dimension of the even-parity sector and set
+
+$$
+\rho=w|+\cdots+\rangle\langle+\cdots+|+(1-w)\frac{P_+}{d},
+\qquad0<w<1.
+$$ {#eq-r2-counterexample-one}
+
+For $A=Z_iZ_j$, the state and its conjugate commute. In the $X$ basis, $A$ swaps the distinguished all-plus vector with the vector carrying minus signs at $i,j$. All remaining vectors have common weight $t=(1-w)/d$. Consequently,
+
+$$
+F=R_1=(d-2)t+2\sqrt{t(w+t)}\longrightarrow1-w,
+$$
+
+but
+
+$$
+R_2=\frac{1-w^2}{dw^2+1-w^2}\longrightarrow0.
+$$ {#eq-r2-counterexample-one-result}
+
+The purity is dominated by the single large eigenvalue $w$, whose eigenvector has no charged long-range order. The broad parity ensemble has finite total probability but contributes vanishing relative purity. Ordinary $Z_iZ_j$ expectation values are zero throughout. This is a genuine distinction between nonlinear order criteria, not a matter of squaring a correlator [@lessa2025].
+
+### Exact counterexample in the opposite direction
+
+The reverse discrepancy can be constructed by giving an increasingly rare component disproportionately large purity. This construction is deliberately artificial, which helps isolate the mechanism.
+
+Attach three neutral flag qubits to each of $N$ system qubits. Let $|f_0\rangle$ be the all-zero flag vector and $\tau_F$ the maximally mixed state on its orthogonal complement, of rank $D=2^{3N}-1$. Define
+
+$$
+\rho_N=\epsilon_N|f_0\rangle\langle f_0|\otimes\frac{P_+}{d}
++(1-\epsilon_N)\tau_F\otimes|+\cdots+\rangle\langle+\cdots+|,
+\quad \epsilon_N=2^{-N/4}.
+$$ {#eq-r2-counterexample-two}
+
+The symmetry acts only on system qubits, and both blocks have strong even parity. For $A=Z_iZ_j$ on those qubits, orthogonality of the flags gives
+
+$$
+F=\epsilon_N\longrightarrow0,
+\qquad
+R_2=\frac{\epsilon_N^2/d}{\epsilon_N^2/d+(1-\epsilon_N)^2/D}
+\longrightarrow1.
+$$
+
+The second limit follows because $\epsilon_N^2/d$ scales as $2^{-3N/2}$, while $1/D$ scales as $2^{-3N}$. The rare parity block wins the purity competition while its actual probability vanishes. In trace distance the state approaches $\tau_F\otimes|+\cdots+\rangle\langle+\cdots+|$. This limiting family has zero fidelity between charge-transfer states for separated bounded-support charged operators, because the system factor is a symmetric product state. Continuity of fidelity excludes hidden global fidelity order in the vanishing-weight admixture. Related spectral counterexamples are given in @lessa2025; this flag construction makes the reweighting transparent.
+
+Neither example proves that Rényi-2 is unhelpful in physical models. The important physical example is the decohered square-lattice paramagnet: its fidelity transition occurs near $p=0.109$, whereas its Rényi-2 transition occurs near $p=0.178$. Both are meaningful singularities of their stated quantities. Only the first diagnoses the intrinsic fidelity order and associated recoverability boundary in that model.
+
+## Generalized Rényi correlators
+
+A useful family organizing the doubled-state picture is
+
+$$
+R_\alpha(A)=\frac{\operatorname{Tr}(\rho^{\alpha/2}A\rho^{\alpha/2}A^\dagger)}
+{\operatorname{Tr}\rho^\alpha},\qquad\alpha>0.
+$$ {#eq-generalized-renyi}
+
+At $\alpha=1$ this is @eq-renyi-one; at $\alpha=2$ it is @eq-renyi-two. It is a correlator in the normalized vector $|\rho^{\alpha/2}\rangle\rangle$. Changing $\alpha$ changes the effective statistical ensemble. A transition in that family need not occur at the same channel parameter for every $\alpha$. Analytic continuation from integer replicas can be powerful, but it assumes control over the continuation and the order of replica, volume, and distance limits. Integer-replica calculations alone do not prove a result at $\alpha=1$.
+
+For a Gibbs state, $\rho^\alpha/\operatorname{Tr}\rho^\alpha$ corresponds to inverse temperature $\alpha\beta$, with the same projector if a charge sector is fixed. Rényi reweighting can therefore move a state across an ordinary thermal transition. This is a concrete reason to be cautious about interpreting a Rényi singularity as a phase transition of the original probability weights.
+
+## Nonunitary operators and normalization
+
+For a local annihilation operator or spin ladder operator, $A\rho A^\dagger$ need not have unit trace. Define the success probability $s_A=\operatorname{Tr}(\rho A^\dagger A)$ and, for $s_A>0$, the conditioned state $\widehat\sigma_A=A\rho A^\dagger/s_A$. The homogeneous fidelity expression obeys
+
+$$
+\|\sqrt\rho A\sqrt\rho\|_1
+=\sqrt{s_A}\,F(\rho,\widehat\sigma_A).
+$$ {#eq-nonunitary-fidelity-normalization}
+
+Thus an unnormalized insertion combines an overlap with a postselection amplitude. Scaling $A\mapsto cA$ rescales it by $|c|$. In contrast, the polynomial expressions $\operatorname{Tr}(\sqrt\rho A\sqrt\rho A^\dagger)$ and $\operatorname{Tr}(\rho A\rho A^\dagger)$ scale by $|c|^2$. Moreover, $\sqrt{A\rho A^\dagger}=A\sqrt\rho A^\dagger$ is generally false. The unitary proof of @eq-affinity-bounds therefore cannot simply be reused by substituting a ladder operator. A theorem stated for more general insertions must specify its norm and normalization factors. In applications, keep local norms bounded independently of volume and report whether insertions are normalized or conditioned.
+
+## Distinguishability and measurement cost
+
+For trace distance $T(\rho,\sigma)=\frac12\|\rho-\sigma\|_1$, the Fuchs-van de Graaf inequalities give
+
+$$
+1-F\leq T\leq\sqrt{1-F^2}.
+$$
+
+Hence vanishing fidelity means asymptotically perfect distinguishability, while fidelity bounded below prevents perfect discrimination. Fidelity near one is a stronger statement than merely nonzero long-range fidelity. SW-SSB requires the latter.
+
+It is tempting to declare that all information-theoretic measures must detect the same boundary. This needs qualification. Relative entropy can diverge because of support zeros even when fidelity is nonzero; a trace-distance criterion must specify whether it tests convergence to one or to a smaller value. One should compare precise order definitions, rather than the names of distance measures.
+
+Another distinction is between an algebraically simple expression and a statistically efficient experiment. A two-copy SWAP measurement can access $\operatorname{Tr}\rho^2$, but if this purity is exponentially small, estimating a normalized ratio to fixed accuracy can require exponentially many repetitions. Randomized measurement protocols help in structured families and finite systems; their existence does not establish universal polynomial complexity. @feng2025hardness proves an information-theoretic obstruction to detecting generic global SW-SSB from polynomially many copies without suitable prior structure. Canonical purification, Gaussianity, known noise channels, and local formulations supply different ways to change the available resources or the precise question.
+
+## Channel response and fidelity susceptibility
+
+Conventional susceptibility relates a magnet's response to an applied field to its equilibrium fluctuations. SW-SSB has an analogous relation, but the perturbation is a channel and the responding quantity is nonlinear. The fidelity convention is crucial: @zhang2024fdt uses the **squared** Uhlmann fidelity. Translating its formulas into the root convention of this book requires squaring the one-point response, rather than differentiating root fidelity directly.
+
+We derive the result for an Ising symmetry, where every charged probe $Z_i$ is a Hermitian unitary. This avoids the normalization and finite-spectrum issues of a nonunitary particle-creation operator. Let the initial $\rho$ have fixed global parity and apply weak independent single-site dephasing,
+
+$$
+\rho_p=\mathcal D_p(\rho),\qquad
+\mathcal D_p=\prod_j\big[(1-p)\,\mathrm{id}+p\,\operatorname{Ad}_{Z_j}\big].
+$$ {#eq-response-dephasing}
+
+This channel explicitly breaks strong symmetry while preserving weak covariance. Define the squared-fidelity magnetization and its response by
+
+$$
+M_2(p)=\frac1N\sum_iF(\rho_p,Z_i\rho_pZ_i)^2,
+\qquad
+\chi_N=\lim_{p\to0^+}\frac{M_2(p)-M_2(0)}p.
+$$ {#eq-response-squared-susceptibility}
+
+Here the subscript in $M_2$ denotes squaring root fidelity; this is not the Rényi-2 correlator $R_2$. Strong symmetry gives $M_2(0)=0$. The limit is taken at fixed finite $N$ before studying its size dependence; the perturbative regime requires $Np\ll1$.
+
+### Deriving the response from charge-sector blocks
+
+Set $S=\sum_jZ_j\rho Z_j$. To first order,
+
+$$
+\rho_p=(1-Np)\rho+pS+O(p^2).
+$$
+
+The support of $S$ has parity opposite to that of $\rho$. Meanwhile
+
+$$
+Z_i\rho_pZ_i=(1-Np)Z_i\rho Z_i+pZ_iSZ_i+O(p^2).
+$$
+
+Root fidelity adds over orthogonal blocks. Its homogeneity is $F(a\rho,b\sigma)=\sqrt{ab}\,F(\rho,\sigma)$ for positive scalars. The two parity blocks therefore contribute, to leading order,
+
+$$
+F(\rho_p,Z_i\rho_pZ_i)
+=\sqrt p\left[F(\rho,Z_iSZ_i)+F(S,Z_i\rho Z_i)\right]+o(\sqrt p).
+$$
+
+By symmetry of fidelity and conjugation by $Z_i$, the two bracketed terms are equal. Define the normalized mixture
+
+$$
+\overline\sigma_i=\frac1N\sum_jZ_iZ_j\rho Z_jZ_i.
+$$
+
+Since $Z_iSZ_i=N\overline\sigma_i$, this gives
+
+$$
+F(\rho_p,Z_i\rho_pZ_i)
+=2\sqrt{Np}\,F(\rho,\overline\sigma_i)+o(\sqrt p).
+$$ {#eq-response-root-expansion}
+
+For a translation-invariant family the coefficient is independent of $i$, so
+
+$$
+\frac{\chi_N}{4}=N F(\rho,\overline\sigma_i)^2.
+$$ {#eq-response-susceptibility-identity}
+
+The factor four comes from adding the two opposite-parity block overlaps *before* squaring. For other charge groups and oriented charge-insertion channels, the number of matching blocks can differ. We do not import that factor into unrelated $U(1)$ protocols. The identity in @eq-response-susceptibility-identity describes the explicitly specified Ising response.
+
+### Bounding susceptibility by the spatial fidelity correlator
+
+Write $f_{ij}=F(\rho,Z_iZ_j\rho Z_jZ_i)$, including $f_{ii}=1$. Separate concavity of squared fidelity gives
+
+$$
+F(\rho,\overline\sigma_i)^2\geq\frac1N\sum_jf_{ij}^2.
+$$
+
+One can see this directly from Uhlmann's theorem. For each $j$, choose purifications with overlap $f_{ij}$, and attach an orthogonal flag $j$. A purification of the mixture uses flag amplitudes $1/\sqrt N$. A purification of the unchanged $\rho$ may use any normalized flag amplitudes $\sqrt{q_j}$, since every flagged branch reduces to $\rho$. Optimizing their overlap $\sum_j\sqrt{q_j/N}f_{ij}$ over $q_j$ gives $\sqrt{\sum_jf_{ij}^2/N}$.
+
+For the upper bound set $X_j=\sqrt\rho Z_iZ_j\sqrt\rho$. Then
+
+$$
+\sqrt N F(\rho,\overline\sigma_i)
+=\operatorname{Tr}\sqrt{\sum_jX_jX_j^\dagger}
+\leq\sum_j\|X_j\|_1=\sum_jf_{ij}.
+$$
+
+The inequality is the trace-norm triangle inequality applied to the block row $[X_1\;X_2\;\cdots\;X_N]$, decomposed into rows with one nonzero block each. Combining these two inequalities with normalized fidelity at most one yields
+
+$$
+\sum_jf_{ij}^2\leq\frac{\chi_N}{4}
+\leq\min\left\{N,\left(\sum_jf_{ij}\right)^2\right\}.
+$$ {#eq-response-fluctuation-bounds}
+
+These are the fidelity fluctuation-response bounds, with every root/squared conversion and the Ising prefactor explicit. For an inhomogeneous system, average the corresponding row bounds over $i$ rather than invoking translation invariance.
+
+If $f_{ij}$ approaches a nonzero constant at large separation, the lower bound is proportional to $N$, while the normalized-fidelity bound caps the response by $4N$. Thus $\chi_N=\Theta(N)$ for fidelity long-range order. If $f_{ij}$ decays exponentially with a size-independent length on a fixed-dimensional lattice, both spatial sums remain finite and $\chi_N=O(1)$. This includes conventional strong-to-none order as well as SW-SSB; the ordinary correlator is still needed to distinguish them.
+
+At a critical point with root fidelity $f(r)\sim r^{-\eta}$ in $d$ dimensions, the lower sum scales as $L^{d-2\eta}$, $\log L$, or a constant according as $2\eta<d$, $2\eta=d$, or $2\eta>d$. The upper bound is the smaller of $L^d$ and the square of the sum of $r^{-\eta}$. These bounds do not generally determine a unique critical response exponent. In particular, for a sufficiently slow critical tail they alone do not exclude an extensive response.
+
+### Two exact checks and a convention trap
+
+For the product paramagnet, each dephased qubit has $X$-basis probabilities $(1-p,p)$. Its root one-point fidelity is $2\sqrt{p(1-p)}$, so $M_2(p)=4p(1-p)$ and $\chi_N=4$, independently of size. Its initial spatial correlator is $f_{ij}=\delta_{ij}$, and both sides of @eq-response-fluctuation-bounds equal one.
+
+For the even-parity ensemble, the dephased state is $[I+(1-2p)^N U]/2^N$. Its two parity weights give
+
+$$
+M_2(p)=1-(1-2p)^{2N},\qquad \chi_N=4N.
+$$ {#eq-response-parity-check}
+
+All initial $f_{ij}=1$, so the lower bound and the normalization cap are saturated. Taking the thermodynamic limit first instead gives $M_2(p)\to1$ at every fixed $p>0$: the linear-response window shrinks with size, as expected for spontaneous order.
+
+If we had differentiated the **root** one-point fidelity with respect to $p$, even the unordered product paramagnet would have a divergent derivative, proportional to $p^{-1/2}$. That singularity reflects entering a previously empty charge sector, not long-range order. A legitimate alternative is to parameterize noise by an amplitude $p=\sin^2\theta$; then root fidelity has a finite one-sided linear response in $|\theta|$. Either convention can be useful, but they define different susceptibilities. The volume dependence in @eq-response-fluctuation-bounds belongs to the squared-fidelity definition @eq-response-squared-susceptibility.
+
+### Information geometry of the perturbation
+
+The amplitude variables also clarify the Bures geometry analyzed in @zhang2024fdt. Let $p_j=\sin^2\theta_j$, take small nonnegative $\theta_j$, and write $\rho_{\boldsymbol\theta}=\mathcal D_{\boldsymbol\theta}(\rho)$. The squared Bures distance is $D_B^2(\rho,\sigma)=2-2F(\rho,\sigma)$. To second order,
+
+$$
+D_B^2(\rho_{\boldsymbol\theta},\rho)
+=\sum_j\theta_j^2+o(\|\boldsymbol\theta\|^2),
+$$
+
+because every one-error state is orthogonal to the initial charge sector. Distance from the unperturbed state alone therefore misses spatial ordering. Compare two perturbed states instead through the polarization $\frac12[D_B^2(\rho_{\boldsymbol\theta},\rho)+D_B^2(\rho,\rho_{\boldsymbol\phi})-D_B^2(\rho_{\boldsymbol\theta},\rho_{\boldsymbol\phi})]$. Its leading term is
+
+$$
+g(\boldsymbol\theta,\boldsymbol\phi)
+=F\left(\sum_j\theta_j^2Z_j\rho Z_j,
+\sum_j\phi_j^2Z_j\rho Z_j\right).
+$$ {#eq-response-bures-overlap}
+
+For the pure paramagnet, the single-error states are mutually orthogonal, giving $g=\sum_j\theta_j\phi_j$ in the nonnegative orthant. For the parity ensemble they are all the same opposite-parity state, giving $g=\|\boldsymbol\theta\|\|\boldsymbol\phi\|$. The second expression is not bilinear: many distinct spatial perturbations become indistinguishable once only the total charge change matters. At the rank-changing boundary this construction need not be a smooth Riemannian metric. This is a geometric manifestation of the same charge delocalization diagnosed by the fidelity correlator, rather than an equilibrium thermodynamic fluctuation-dissipation theorem assumed for arbitrary open dynamics.
+
+## Exercises and worked solutions
+
+### Exercise: a qubit overlap
+
+Let $\rho=(I+rZ)/2$, $|r|<1$, and $A=X$. Compute $F$, $R_1$, and $R_2$.
+
+::: {.callout-tip collapse="true" title="Solution"}
+The conjugate state has eigenvalues interchanged. With $p_\pm=(1\pm r)/2$, $F=R_1=2\sqrt{p_+p_-}=\sqrt{1-r^2}$. The numerator of $R_2$ is $2p_+p_-=(1-r^2)/2$, while the purity is $(1+r^2)/2$. Thus $R_2=(1-r^2)/(1+r^2)$. All vanish as $|r|\to1$ and become one at $r=0$, but their quantitative responses differ.
+:::
+
+### Exercise: exponent bounds
+
+At a critical point, suppose $F(r)\sim r^{-\eta_F}$ and $R_1(r)\sim r^{-\eta_1}$ with positive nonzero prefactors. What follows from @eq-affinity-bounds?
+
+::: {.callout-tip collapse="true" title="Solution"}
+The inequality $F^2\leq R_1$ forbids $\eta_1>2\eta_F$, while $R_1\leq F$ forbids $\eta_1<\eta_F$. Thus $\eta_F\leq\eta_1\leq2\eta_F$. If the altered and original states commute, $F=R_1$ and $\eta_1=\eta_F$. The mere equivalence of ordered phases does not fix the critical exponents in the general case.
+:::
+
+### Exercise: purity bias
+
+In @eq-r2-counterexample-one, take $w=1/2$. Find the limiting fidelity and the leading size dependence of $R_2$.
+
+::: {.callout-tip collapse="true" title="Solution"}
+The fidelity approaches $1/2$. The exact ratio becomes $R_2=3/(d+3)$, with $d=2^{N-1}$, so $R_2\sim3\,2^{1-N}$. Finite probability in the parity sector does not prevent its purity contribution from becoming exponentially subdominant.
+:::

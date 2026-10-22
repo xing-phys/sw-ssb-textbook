@@ -118,7 +118,7 @@ For $\ket{\Phi^+}=(\ket{00}+\ket{11})/\sqrt2$, write the projector as four outer
 The classical state
 
 $$
-\rho_{\rm coin}=\frac12\ket{00}\bra{00}
+\rho_{\mathrm{coin}}=\frac12\ket{00}\bra{00}
 +\frac12\ket{11}\bra{11}
 $$
 

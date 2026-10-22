@@ -1,0 +1,302 @@
+# Purification and doubled-space order {#sec-purification}
+
+A mixed state can be understood as part of a larger pure state. This elementary fact becomes especially useful for SW-SSB: a nonlinear mixed-state correlator becomes an ordinary expectation value in a suitable doubled system. The qualification “suitable” matters. An arbitrary environmental purification, the canonical purification, and the vectorized density matrix encode different objects.
+
+We will derive the relevant identities directly. Besides clarifying the symmetry-breaking pattern, they explain both the promise and the resource requirements of purification-based experiments [@weinstein2025].
+
+## Vectorization with an explicit convention
+
+Choose a basis $\{|a\rangle\}$ and write a matrix $M=\sum_{ab}M_{ab}|a\rangle\langle b|$. Introduce a conjugate copy of the Hilbert space and define
+
+$$
+|M\rangle\rangle=\sum_{ab}M_{ab}|a\rangle_L|\bar b\rangle_R.
+$$ {#eq-vectorization}
+
+The bar indicates the conjugate representation. It keeps track of complex conjugation under a basis change. Once this convention is fixed,
+
+$$
+\langle\langle M|N\rangle\rangle=\operatorname{Tr}(M^\dagger N),
+\qquad
+(A\otimes B^*)|M\rangle\rangle=|AMB^\dagger\rangle\rangle.
+$$ {#eq-vectorization-identities}
+
+Check the second identity by multiplying matrix elements: the coefficient of $|a\rangle_L|\bar b\rangle_R$ is $\sum_{cd}A_{ac}M_{cd}B_{bd}^*=(AMB^\dagger)_{ab}$. This prevents a common transpose error. The right-copy operator is $B^*$ in this notation, not an unqualified $B$ for a complex matrix.
+
+The partial trace is equally useful:
+
+$$
+\operatorname{Tr}_R|M\rangle\rangle\langle\langle M|=MM^\dagger.
+$$ {#eq-vectorized-partial-trace}
+
+Indeed, tracing over $b$ leaves $\sum_{ab c}M_{ab}M_{cb}^*|a\rangle\langle c|$. All later distinctions follow from this identity.
+
+## Canonical purification
+
+The **canonical purification** is
+
+$$
+|\sqrt\rho\rangle\rangle.
+$$ {#eq-canonical-purification}
+
+It has norm one because $\langle\langle\sqrt\rho|\sqrt\rho\rangle\rangle=\operatorname{Tr}\rho=1$, and its left marginal is $\rho$. In the eigenbasis of $\rho$,
+
+$$
+|\sqrt\rho\rangle\rangle=
+\sum_a\sqrt{p_a}|a\rangle_L|\bar a\rangle_R.
+$$
+
+The Schmidt coefficients are $\sqrt{p_a}$, exactly those needed to reproduce the original probabilities. This is a particular purification selected by positivity of the matrix square root and the pairing between the two copies. An arbitrary purification has the form $(I\otimes V)|\sqrt\rho\rangle\rangle$ with an isometry on an adequately large auxiliary space. That isometry need not be local.
+
+For any unitary insertion $A$, @eq-vectorization-identities gives
+
+$$
+\langle\langle\sqrt\rho|A\otimes A^*|\sqrt\rho\rangle\rangle
+=\operatorname{Tr}(\sqrt\rho A\sqrt\rho A^\dagger)=R_1(A).
+$$ {#eq-r1-canonical}
+
+If $A=O_xO_y^\dagger$, define a local doubled operator
+
+$$
+B_x=O_x\otimes O_x^*.
+$$
+
+Then $R_1(x,y)=\langle B_xB_y^\dagger\rangle_{\mathrm{CP}}$. A nonlinear correlation in a mixed state has become a conventional two-point correlation in a pure state.
+
+The locality assignment is part of the construction: the left and right degrees of freedom associated with site $x$ are treated as occupying the same doubled site. Without it, “local doubled operator” would have no fixed spatial meaning.
+
+## Why the doubled symmetry breaks to the diagonal subgroup
+
+Suppose $U_g\rho=\chi_\rho(g)\rho$. The support theorem implies the same relation for $\sqrt\rho$. Hence
+
+$$
+(U_g\otimes I)|\sqrt\rho\rangle\rangle
+=\chi_\rho(g)|\sqrt\rho\rangle\rangle,
+$$
+
+and similarly $(I\otimes U_g^*)|\sqrt\rho\rangle\rangle=\chi_\rho(g)^*|\sqrt\rho\rangle\rangle$. The canonical state has separate left and right symmetries, denoted $G_L\times G_R$ for the Abelian examples of interest.
+
+For a weakly symmetric $\rho$, its square root commutes with $U_g$, giving only
+
+$$
+(U_g\otimes U_g^*)|\sqrt\rho\rangle\rangle
+=|\sqrt\rho\rangle\rangle.
+$$ {#eq-diagonal-doubled-symmetry}
+
+This is the diagonal subgroup. If $O_x$ carries character $\chi_O$, then $B_x$ carries charge $\chi_O$ under left transformations and the conjugate charge under right transformations. It is neutral under their diagonal combination. Long-range $\langle B_xB_y^\dagger\rangle$ therefore signals the breaking pattern
+
+$$
+G_L\times G_R\longrightarrow G_{\mathrm{diag}}.
+$$ {#eq-doubled-breaking-pattern}
+
+At finite volume, separate symmetries remain exact and $\langle B_x\rangle=0$ for a charged $B_x$; the long-range two-point function carries the spontaneous-breaking information. This is a faithful ordinary-SSB interpretation because Rényi-1 and fidelity order are equivalent by volume-independent inequalities. The same drawing applied to a different doubled vector need not diagnose the same mixed-state phase.
+
+```{mermaid}
+%%| label: fig-purification-routes
+%%| fig-cap: "The square-root and density-matrix doubles use different spectral weights."
+%%| fig-width: 6.2
+%%| out-width: "95%"
+flowchart TB
+  A["Mixed state ρ"] -->|"positive square root + vectorization"| B["Canonical purification |√ρ⟩⟩"]
+  B --> C["Marginal = ρ"]
+  B --> D["Ordinary doubled correlator = R₁"]
+  A -->|"vectorization + normalization"| E["Choi double |ρ⟩⟩ / √Tr ρ²"]
+  E --> F["Marginal = ρ² / Tr ρ²"]
+  E --> G["Ordinary doubled correlator = R₂"]
+```
+
+## Worked example: a cat state of local Bell pairs
+
+For the parity state $\rho_+=P_+/2^{N-1}$, positivity and $P_+^2=P_+$ give
+
+$$
+\sqrt{\rho_+}=\frac{I+U}{2^{(N+1)/2}}.
+$$
+
+Let $|\Phi^+\rangle=(|00\rangle+|11\rangle)/\sqrt2$ and $|\Psi^+\rangle=(|01\rangle+|10\rangle)/\sqrt2$ on each left-right pair. Since $|I\rangle\rangle=2^{N/2}|\Phi^+\rangle^{\otimes N}$ and $|U\rangle\rangle=2^{N/2}|\Psi^+\rangle^{\otimes N}$,
+
+$$
+|\sqrt{\rho_+}\rangle\rangle=
+\frac{|\Phi^+\rangle^{\otimes N}+|\Psi^+\rangle^{\otimes N}}{\sqrt2}.
+$$ {#eq-bell-cat-cp}
+
+The local doubled operator $B_i=Z_{i,L}Z_{i,R}$ has eigenvalue $+1$ on $|\Phi^+\rangle$ and $-1$ on $|\Psi^+\rangle$. Its one-point expectation in the cat vanishes, but $\langle B_iB_j\rangle=1$. This is precisely the mixed-state value $R_1(Z_iZ_j)=1$.
+
+The original $\rho_+$ is separable: in the $X$ basis it is the classical uniform distribution over configurations with even parity. Its canonical purification has long-range entanglement of a cat type. Canonical-purification entanglement is therefore not, by itself, entanglement between physical sites in the original mixed state. It is an auxiliary diagnostic carrying both classical and quantum correlations in a useful pure-state representation.
+
+This example also exposes a complexity issue. The mixed state can be prepared by parallel local pair-dephasing channels applied to $|+\rangle^{\otimes N}$. Its canonical cat purification cannot be created from uncorrelated doubled sites by a bounded-depth geometrically local unitary circuit: such a circuit has disjoint causal cones at sufficiently large separation and cannot establish the displayed long-range connected correlations. A short-depth *mixed-state preparation* does not guarantee a short-depth canonical-purification preparation.
+
+## The Choi double is a different state
+
+The normalized vectorized density matrix is
+
+$$
+|\rho\rangle\rangle_{\mathrm{norm}}
+=\frac{|\rho\rangle\rangle}{\sqrt{\operatorname{Tr}\rho^2}}.
+$$ {#eq-choi-double}
+
+Its left marginal is
+
+$$
+\rho_L^{\mathrm{Choi}}=\frac{\rho^2}{\operatorname{Tr}\rho^2},
+$$ {#eq-choi-marginal}
+
+not $\rho$ in general. Its ordinary doubled correlator is $R_2(A)$, obtained by putting $M=\rho$ in @eq-vectorization-identities. It is often called a Choi state or Choi double in the mixed-state literature. This use of vectorization should not be confused with the Choi matrix of a channel, although both constructions use the same matrix-to-vector technology.
+
+The two doubles coincide for a state with a flat nonzero spectrum, because then $\rho$ is proportional to a projector and $\rho/\sqrt{\operatorname{Tr}\rho^2}=\sqrt\rho$. They also coincide for pure states. For a generic thermal or noisy state they differ, sometimes enough to put their correlation functions in different phases.
+
+The practical advantage of the Choi double is linear evolution. Vectorizing a Lindblad equation gives
+
+$$
+\partial_t|\rho\rangle\rangle=\mathbb L|\rho\rangle\rangle,
+$$
+
+where
+
+$$
+\mathbb L=-i(H\otimes I-I\otimes H^T)
++\sum_a\left[L_a\otimes L_a^*
+-\frac12L_a^\dagger L_a\otimes I
+-\frac12I\otimes(L_a^\dagger L_a)^T\right].
+$$ {#eq-vectorized-lindbladian}
+
+The generator is generally non-Hermitian. This representation allows tensor-network, transfer-matrix, and field-theory methods to work directly with the density operator. No comparably simple linear equation holds for $\sqrt\rho$. A tractable evolution in doubled space consequently does not automatically compute the fidelity or Rényi-1 correlator.
+
+## Uhlmann optimization and the role of the environment
+
+For normalized states, Uhlmann's theorem says
+
+$$
+F(\rho,\sigma)=\max_V
+\left|\langle\langle\sqrt\rho|(I\otimes V)|\sqrt\sigma\rangle\rangle\right|.
+$$ {#eq-uhlmann-canonical}
+
+The maximization is over auxiliary unitaries, with isometric extensions if needed. An intuitive derivation uses $\max_V|\operatorname{Tr}(VX)|=\|X\|_1$, proved by choosing the polar unitary of $X$; apply it to $X=\sqrt\rho\sqrt\sigma$. Fidelity chooses the most favorable matching of purifications. It does not depend on an accidentally chosen environmental basis.
+
+If $\sigma=A\rho A^\dagger$ for unitary $A$, then $|\sqrt\sigma\rangle\rangle=(A\otimes A^*)|\sqrt\rho\rangle\rangle$. The Rényi-1 correlator is the overlap for one prescribed canonical matching. Uhlmann optimization can increase it, but @eq-affinity-bounds shows that it cannot change a nonzero thermodynamic order parameter into a vanishing one or vice versa.
+
+A physical bath purification obtained from a noisy preparation may look completely different. Measuring the bath in different bases produces different pure-state ensembles of the same reduced $\rho$. A trajectory-resolved quantity must specify the record and the unraveling; an intrinsic density-matrix diagnostic cannot depend on that choice.
+
+### Hidden Edwards-Anderson order
+
+Write the parity state as an equal mixture of $Z$-basis cats
+
+$$
+|c_s\rangle=\frac{|s\rangle+|\bar s\rangle}{\sqrt2},
+$$
+
+where one representative is chosen from each complementary pair. In each cat, $\langle Z_iZ_j\rangle=s_is_j=\pm1$. The absolute value remains one after averaging, while the signed average vanishes. This resembles an Edwards-Anderson diagnostic of glassy order.
+
+The same $\rho_+$ is a mixture of $X$-basis even-parity product states, each having zero separated $Z$ correlation. Thus the ensemble average $\sum_ap_a|\langle\psi_a|A|\psi_a\rangle|$ is not intrinsic to $\rho$. Joint concavity of fidelity nevertheless gives the useful bound
+
+$$
+\sum_ap_a|\langle\psi_a|A|\psi_a\rangle|
+\leq F(\rho,A\rho A^\dagger)
+$$ {#eq-ensemble-ea-bound}
+
+for any chosen decomposition and unitary $A$. The cat decomposition saturates it here. The connection to decompositions with hidden long-range order is developed in @chen2024separability and discussed in @wangreview2026. The safe physical message is that fidelity detects a property of the ensemble *as a density matrix*, not the ordering of every possible trajectory representation.
+
+## Thermal example with a complete calculation
+
+Consider $H=-h\sum_iX_i$, $h>0$, projected into even parity. At any fixed finite temperature and large $N$, the parity constraint changes finite-site probabilities only by corrections proportional to powers of $\tanh(\beta h)$. The local $X_i=\pm1$ variables therefore have probabilities
+
+$$
+P(x_i)=\frac{e^{\beta h x_i}}{2\cosh(\beta h)}.
+$$
+
+Acting with $A=Z_iZ_j$ flips $x_i,x_j$. The energy change is $\Delta H=2h(x_i+x_j)$. The states commute, and the fidelity is
+
+$$
+F_Z(i,j)=\sum_xP(x)e^{-\beta\Delta H(x)/2}
+\longrightarrow
+\left[\sum_{x_i=\pm1}\frac{e^{\beta h x_i}e^{-\beta h x_i}}{2\cosh(\beta h)}\right]^2
+=\operatorname{sech}^2(\beta h).
+$$ {#eq-thermal-paramagnet-fidelity}
+
+It is positive for every finite $\beta$, independent of separation, although $\langle Z_iZ_j\rangle=0$. At zero temperature it tends to zero and the state becomes the pure paramagnet. This is an exact model illustrating why thermal charge fluctuations can generate SW-SSB without ordinary order.
+
+The Rényi-2 calculation weights configurations at inverse temperature $2\beta$ and gives $R_2\to\operatorname{sech}^2(2\beta h)$. Its amplitude differs, but in this model both criteria are ordered for every nonzero temperature. Interacting systems require control over correlations and imaginary-time locality; this simple result is an example, not a proof for every conceivable Hamiltonian or charge sector.
+
+The canonical thermal purification is the thermofield double
+
+$$
+|\mathrm{TFD}_\beta\rangle=\frac1{\sqrt Z}
+\sum_ne^{-\beta E_n/2}|n\rangle_L|\bar n\rangle_R.
+$$
+
+For the charge-projected ensemble the sum is restricted to that charge. The unprojected grand-canonical sum instead entangles different left-copy charges with corresponding right-copy charges. Preparation by the formal expression $e^{-\beta H/2}$ is imaginary-time filtering; it is not automatically an efficient deterministic unitary protocol.
+
+## A finite-temperature lower bound beyond the solvable example
+
+The thermal paramagnet suggests a much broader principle: a finite-energy charge transfer cannot make a finite-temperature state perfectly distinguishable from itself. Under useful boundedness assumptions this can be proved without solving the Hamiltonian.
+
+Let $H=\sum_Xh_X$ be a finite-range lattice Hamiltonian with uniformly bounded interactions and bounded coordination. It commutes with an Abelian symmetry, and $P_q$ projects onto a fixed charge sector. Assume that each endpoint admits a bounded-support **unitary** charged operator $O_x$, and that $A=O_xO_y^\dagger$ preserves this sector. Discrete on-site Ising symmetry has exactly this property. In the sector,
+
+$$
+\rho=\frac{P_qe^{-\beta H}}{Z_q},\qquad
+\sigma=A\rho A^\dagger
+=\frac{P_qe^{-\beta AHA^\dagger}}{Z_q}.
+$$
+
+The two states have the same support and partition function. Their quantum relative entropy is
+
+$$
+S(\rho\Vert\sigma)
+=\operatorname{Tr}\rho(\ln\rho-\ln\sigma)
+=\beta\operatorname{Tr}[\rho(AHA^\dagger-H)]
+\leq\beta\|AHA^\dagger-H\|_\infty.
+$$ {#eq-thermal-defect-relative-entropy}
+
+Terms in $H$ disjoint from both endpoints commute with $A$ and cancel. The remaining terms occupy a bounded number of neighborhoods of fixed size. Consequently
+
+$$
+\|AHA^\dagger-H\|_\infty
+\leq2\sum_{X:\,X\text{ meets an endpoint support}}\|h_X\|_\infty
+\leq C,
+$$
+
+with $C$ independent of $|x-y|$ and system volume.
+
+For clarity, the needed entropy-overlap inequality can also be derived directly. Diagonalize $\rho=\sum_ip_i|i\rangle\langle i|$ and $\sigma=\sum_jq_j|j'\rangle\langle j'|$ on their common support. The weights $w_{ij}=p_i|\langle i|j'\rangle|^2$ form a probability distribution. Then
+
+$$
+\operatorname{Tr}(\sqrt\rho\sqrt\sigma)
+=\sum_{ij}w_{ij}\exp\left[\frac12\ln\frac{q_j}{p_i}\right]
+\geq\exp[-S(\rho\Vert\sigma)/2]
+$$
+
+by scalar Jensen's inequality. Since $F\geq\operatorname{Tr}(\sqrt\rho\sqrt\sigma)$, we obtain
+
+$$
+F(\rho,A\rho A^\dagger)\geq e^{-\beta C/2}>0
+\qquad(\beta<\infty).
+$$ {#eq-thermal-fidelity-lower-bound}
+
+This lower bound is uniform in separation. It proves fidelity long-range order for this class of fixed-sector thermal states. If ordinary charged correlations also decay, the order is specifically strong-to-weak; if they remain nonzero, strong symmetry is broken further in the conventional sense. The bound can be extremely small at low temperature without being zero, and gives no nonzero guarantee at $\beta=\infty$.
+
+The unitary-insertion assumption is substantive. In a finite-dimensional system with genuine $U(1)$ charge, a nonzero-charge unitary cannot simply raise every charge eigenvalue: a finite spectrum has an upper endpoint. Particle annihilation and creation operators are nonunitary, and a vacuum or completely filled charge sector may lack the necessary fluctuations. Unbounded rotor or bosonic Hilbert spaces introduce norm and domain issues as well. Extending the broad thermal expectation to such cases requires further assumptions about charge density, compressibility, finite-energy insertions, and normalization. The thermal arguments in @lessa2025 and the synthesis in @wangreview2026 should be read with those qualifications, rather than as a theorem that every fixed-charge state at any positive temperature must exhibit every version of SW-SSB.
+
+## Exercises and worked solutions
+
+### Exercise: when is the Choi double a purification?
+
+Determine all $\rho$ satisfying $\rho^2/\operatorname{Tr}\rho^2=\rho$.
+
+::: {.callout-tip collapse="true" title="Solution"}
+For each nonzero eigenvalue $p_a$, $p_a^2=p_a\operatorname{Tr}\rho^2$, so all nonzero eigenvalues are equal. If the rank is $d$, normalization gives $p_a=1/d$ and $\rho=P/d$ for a projector $P$. Conversely, every such state satisfies the relation. The condition includes pure states and maximally mixed sector states, but not a generic Gibbs state.
+:::
+
+### Exercise: trace out a Bell cat
+
+Trace the right copy out of @eq-bell-cat-cp. Why do the cross terms survive?
+
+::: {.callout-tip collapse="true" title="Solution"}
+On one site, $\operatorname{Tr}_R|\Phi^+\rangle\langle\Phi^+|=I/2$ and $\operatorname{Tr}_R|\Psi^+\rangle\langle\Psi^+|=I/2$, while $\operatorname{Tr}_R|\Phi^+\rangle\langle\Psi^+|=X/2$. Tensoring gives diagonal terms $I/2^N$ and cross terms $U/2^N$. Including the cat's factor $1/2$ yields $(I+U)/2^N$. Orthogonal global Bell strings can have a nonzero partial trace of their off-diagonal outer product; orthogonality only guarantees that its full trace vanishes.
+:::
+
+### Exercise: preparation and observation
+
+A device prepares an arbitrary purification of $\rho$. Does measuring the simple doubled operator $A\otimes A^*$ necessarily return $R_1(A)$?
+
+::: {.callout-tip collapse="true" title="Solution"}
+No. If the state is $(I\otimes V)|\sqrt\rho\rangle\rangle$, that measurement returns the canonical expectation with right operator $V^\dagger A^*V$. It equals $R_1$ only if the relevant transformation is accounted for, or if special commutation relations make it irrelevant. A known local $V$ can be compensated in the observable; an unknown or highly nonlocal one defeats the simple two-point protocol. Canonical-purification availability is a physical resource assumption.
+:::

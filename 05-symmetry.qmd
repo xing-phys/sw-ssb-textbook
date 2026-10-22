@@ -1,0 +1,239 @@
+# Symmetry of states and dynamics {#sec-symmetry}
+
+Symmetry can constrain a probability distribution without constraining every sample drawn from it. A fair coin respects interchange of heads and tails; a particular toss does not. The corresponding distinction for a quantum ensemble is the starting point of strong-to-weak spontaneous symmetry breaking. We will first formulate it precisely, then distinguish symmetry of a *state* from symmetry of its *dynamics*. Confusing these two questions is a common source of incorrect conclusions.
+
+The prerequisite is the density-matrix language: a state is a positive operator $\rho$ of unit trace, and its support is the span of eigenvectors with nonzero eigenvalues. A symmetry group $G$ acts through unitaries $U_g$ satisfying $U_gU_h=U_{gh}$. Unless stated otherwise, the symmetry is unitary and internal, and the lattice has finite-dimensional local Hilbert spaces. Antiunitary, spatial, fermionic, and higher-form symmetries need additional care; some appear later.
+
+## Two symmetry conditions
+
+A state has **weak symmetry** when
+
+$$
+U_g\rho U_g^\dagger=\rho \qquad(g\in G).
+$$ {#eq-weak-state}
+
+Equivalently, $[U_g,\rho]=0$. All expectation values transform as those of a symmetric statistical ensemble. In particular, if $O$ has nontrivial charge, meaning
+
+$$
+U_gOU_g^\dagger=\chi_O(g)O,
+$$ {#eq-operator-charge}
+
+where $\chi_O(g)$ is a one-dimensional character and differs from one for some $g$, then $\operatorname{Tr}(\rho O)=0$. To see this, insert @eq-weak-state in the trace and cycle $U_g$ through it. The expectation equals $\chi_O(g)^{-1}$ times itself.
+
+A stronger condition is
+
+$$
+U_g\rho=\chi_\rho(g)\rho \qquad(g\in G),
+$$ {#eq-strong-state}
+
+where $\chi_\rho(g)$ is a phase. This is **strong symmetry** of the state. Taking the adjoint gives $\rho U_g^\dagger=\chi_\rho(g)^*\rho$, so strong symmetry implies weak symmetry. In an Abelian charge basis, strong symmetry fixes a single total charge; weak symmetry allows statistical weight in several charge sectors. This terminology extends earlier work on symmetries of Lindblad generators [@buca2012; @albert2014] and underlies the modern mixed-state theory [@lessa2025; @wangreview2026].
+
+The phase in @eq-strong-state is not arbitrary. Applying $U_gU_h$ to a nonzero $\rho$ gives
+
+$$
+\chi_\rho(gh)=\chi_\rho(g)\chi_\rho(h).
+$$
+
+Thus it is a character of the group. For $U(1)$ with $U_\theta=e^{i\theta Q}$, this condition reads $Q\rho=q\rho$. For an Ising symmetry $U=\prod_iX_i$, it reads $U\rho=\pm\rho$.
+
+## The support theorem
+
+Statements about “every state in the ensemble” must be independent of how we choose a convex decomposition. The following elementary result ensures that they are.
+
+::: {.callout-note title="Support theorem"}
+For a positive density operator, $U\rho=\lambda\rho$ if and only if $U$ equals $\lambda I$ on the support of $\rho$. Consequently, every vector occurring with nonzero weight in *any* convex decomposition of $\rho$ is a $U$ eigenvector with the same eigenvalue $\lambda$.
+:::
+
+Write the spectral decomposition as $\rho=\sum_{a:p_a>0}p_a|a\rangle\langle a|$. Acting with $U\rho=\lambda\rho$ on $|a\rangle$ gives $p_aU|a\rangle=\lambda p_a|a\rangle$. Therefore $U|a\rangle=\lambda|a\rangle$ throughout the support. The converse follows by substituting the spectral decomposition.
+
+Now let $\rho=\sum_bp_b|\psi_b\rangle\langle\psi_b|$ be an arbitrary decomposition. If $|v\rangle$ belongs to the kernel, then
+
+$$
+0=\langle v|\rho|v\rangle
+=\sum_bp_b|\langle v|\psi_b\rangle|^2.
+$$
+
+Every summand is nonnegative, so each nonzero-weight $|\psi_b\rangle$ is orthogonal to the kernel. It lies in the support and consequently has eigenvalue $\lambda$. The words “every convex decomposition” follow from positivity, not from a preferred preparation history.
+
+Weak symmetry has a different implication. Commuting normal operators can be simultaneously diagonalized, so for an Abelian symmetry one *can* choose an ensemble of definite-charge states. Their charges need not agree. Another allowed decomposition may consist entirely of states without definite charge. For example,
+
+$$
+\frac{I}{2}=\frac{|0\rangle\langle0|+|1\rangle\langle1|}{2}
+=\frac{|+\rangle\langle+|+|-\rangle\langle-|}{2}.
+$$
+
+For the symmetry $X$, the first ensemble has nonsymmetric constituents, while the second has charges $+1$ and $-1$. Neither representation makes $I/2$ strongly symmetric.
+
+## A three-state laboratory
+
+Take $N>2$ qubits and $U=\prod_iX_i$. Three states will recur throughout the book.
+
+The paramagnet
+
+$$
+\rho_{\mathrm{pm}}=|+\rangle\langle+|^{\otimes N}
+$$
+
+has strong symmetry with charge $+1$. Its charged $Z$ correlations vanish between distinct sites. The pure cat state
+
+$$
+|\mathrm{GHZ}\rangle=\frac{|0\cdots0\rangle+|1\cdots1\rangle}{\sqrt2}
+$$
+
+has the same strong charge but $\langle Z_iZ_j\rangle=1$. The state is symmetric at finite $N$; its long-range correlations diagnose conventional SSB in the thermodynamic sequence. Finally,
+
+$$
+\rho_+=\frac{I+U}{2^N}=\frac{P_+}{2^{N-1}},
+\qquad P_+=\frac{I+U}{2},
+$$ {#eq-parity-state}
+
+is maximally mixed within the even-parity sector. It also has strong charge $+1$, but $\langle Z_iZ_j\rangle=0$ for distinct sites. Nevertheless, $Z_iZ_j\rho_+Z_iZ_j=\rho_+$. Transferring a pair of charges leaves the state unchanged. This last property will become nonlinear long-range order.
+
+The classical ferromagnetic mixture
+
+$$
+\rho_{\mathrm{fm}}=\frac{|0\cdots0\rangle\langle0\cdots0|
++|1\cdots1\rangle\langle1\cdots1|}{2}
+$$
+
+has only weak $U$ symmetry. Its support contains both even and odd cat states. Its ordinary correlations are long-ranged. These examples separate two axes: the exact algebraic symmetry of a finite state, and the long-distance order of a thermodynamic family. SSB never requires us to falsely assert that a symmetric finite-volume density matrix violates its own defining equation.
+
+## Canonical and grand-canonical ensembles
+
+Let $[H,Q]=0$. The fixed-charge thermal state is
+
+$$
+\rho_{\beta,q}=\frac{P_qe^{-\beta H}}{Z_q},\qquad
+Z_q=\operatorname{Tr}(P_qe^{-\beta H}).
+$$ {#eq-fixed-charge-gibbs}
+
+It is strongly $U(1)$ symmetric because $Q\rho_{\beta,q}=q\rho_{\beta,q}$. The grand-canonical state
+
+$$
+\rho_{\beta,\mu}=\frac{e^{-\beta(H-\mu Q)}}{Z(\beta,\mu)}
+$$
+
+is generally only weakly symmetric: it includes several charges. In suitable thermodynamic regimes, the two ensembles have the same reduced states on small regions after matching charge density. They retain different *global* charge statistics. Ensemble equivalence therefore means local operational equivalence, not equality in global trace norm.
+
+This observation gives physical intuition for SW-SSB. A state can have an exact global charge while local regions behave as though they exchange charge with an effective reservoir formed by the rest of the system. Information about total charge then resides in a constraint shared by the whole sample. Whether this intuition produces a particular nonlinear order parameter requires assumptions about the state; ensemble equivalence alone is not a general proof of every proposed SW-SSB criterion.
+
+## Symmetry of a quantum channel
+
+A channel $\mathcal E$ is **weakly symmetric**, or covariant, if
+
+$$
+\mathcal E(U_g\rho U_g^\dagger)
+=U_g\mathcal E(\rho)U_g^\dagger
+$$ {#eq-channel-covariance}
+
+for every input $\rho$. This property preserves weak symmetry of inputs. It does not require a fixed charge to remain fixed.
+
+A charge-preserving **strongly symmetric channel**, in the convention used here, has Kraus operators satisfying
+
+$$
+\mathcal E(\rho)=\sum_aK_a\rho K_a^\dagger,
+\qquad [K_a,U_g]=0 \quad\hbox{for every }a,g.
+$$ {#eq-strong-channel}
+
+Then $U_g\mathcal E(\rho)=\chi_\rho(g)\mathcal E(\rho)$ whenever the input has charge $\chi_\rho$. It preserves each charge sector, not merely the set of symmetric ensembles. The property that the Kraus *span* lies in the commutant is unchanged by isometric mixing of Kraus labels. A different convention sometimes calls Kraus operators with a common nontrivial character “strong”; such channels can shift charge deterministically. We use the sector-preserving version because it is the one in the stability theorem below.
+
+In a Stinespring dilation, the distinction has a simple meaning. If $V$ is the system-environment unitary, strong symmetry requires
+
+$$
+[V,U_g\otimes I_E]=0.
+$$
+
+The environment cannot absorb the system's symmetry charge. Conservation only of a *combined* charge, $[V,U_g\otimes U_{g,E}]=0$, permits exchange between system and bath and generally leads to weak covariance instead. “The universe conserves charge” is therefore insufficient to establish strong symmetry of an open subsystem.
+
+### Worked example: single-site and pair dephasing
+
+For $U=\prod_iX_i$, single-site dephasing
+
+$$
+\mathcal D_i(\rho)=(1-p)\rho+pZ_i\rho Z_i
+$$
+
+is covariant because conjugation by $U$ changes the sign of $Z_i$ twice. Its Kraus operator $Z_i$ anticommutes with $U$, so it is not strongly symmetric. For @eq-parity-state,
+
+$$
+\mathcal D_i(\rho_+)=\frac{I+(1-2p)U}{2^N}.
+$$
+
+For $0<p<1$, both parity sectors acquire weight. By contrast,
+
+$$
+\mathcal D_{ij}(\rho)=(1-p)\rho+pZ_iZ_j\rho Z_jZ_i
+$$
+
+is strongly symmetric. Each error creates or transports charges in pairs and leaves total parity unchanged. Applying such channels on a connected lattice drives the paramagnet toward @eq-parity-state at maximal dephasing. Strong symmetry of a channel consequently does not imply absence of SW-SSB in its output.
+
+## Lindblad generators and conserved sectors
+
+For
+
+$$
+\mathcal L(\rho)=-i[H,\rho]+
+\sum_a\left(L_a\rho L_a^\dagger-
+\frac12\{L_a^\dagger L_a,\rho\}\right),
+$$
+
+the sufficient strong-symmetry conditions are $[H,U_g]=[L_a,U_g]=0$. Every finite-time channel $e^{t\mathcal L}$ then preserves charge sectors. Its adjoint annihilates their projectors: $\mathcal L^\dagger(P_q)=0$. Thus sector weights are constants of motion. At least one stationary density matrix exists within each invariant finite-dimensional sector, although it need not be unique there. Strong symmetry therefore produces a stationary-state structure richer than a single globally mixing fixed point.
+
+Weak symmetry of a generator means that $\mathcal L$ commutes with conjugation by $U_g$. The jumps can mix under that conjugation; individual commutators need not vanish. Also, Lindblad representations are not unique: unitary mixing of jumps and certain shifts accompanied by Hamiltonian changes leave the generator unchanged. Whenever a claim is made directly about the jumps, specify the representation or formulate the intrinsic statement using invariant sectors or the superoperator [@buca2012; @albert2014].
+
+These observations do not prove that every strongly symmetric steady state has SW-SSB. Ergodicity within sectors, extra conserved quantities, dark states, and the order of long-time and thermodynamic limits matter. Later chapters examine conditions under which the connection to equilibration and diffusion becomes sharp.
+
+## Non-Abelian caution
+
+For a non-Abelian group, a multiplet with definite total spin is not automatically a strongly symmetric state. The condition $U_g\rho=\chi_\rho(g)\rho$ for *every* $g$ restricts the support to copies of a one-dimensional representation. For $SU(2)$ this is the singlet representation. A rotationally invariant mixed state supported on a spin-$j>0$ multiplet satisfies $[U_g,\rho]=0$ but generally not the strong condition.
+
+Weak invariance has block form
+
+$$
+\mathcal H=\bigoplus_\lambda V_\lambda\otimes M_\lambda,
+\qquad
+\rho=\bigoplus_\lambda I_{V_\lambda}\otimes r_\lambda,
+$$
+
+with positive multiplicity-space operators $r_\lambda$ and normalization $\sum_\lambda\dim(V_\lambda)\operatorname{Tr}r_\lambda=1$. This is Schur's lemma. A strong singlet state can still be highly mixed in its multiplicity space and highly entangled in real space. The simplicity of parity ensembles must not be assumed for non-Abelian charge constraints.
+
+## Historical precursor: relative time translations
+
+The idea of using a doubled symmetry to organize equilibration predates the present fixed-charge density-matrix formulation. @garratt2021 studies random Floquet spin chains through the disorder-averaged spectral form factor
+
+$$
+K(t)=\mathbb E\left[\operatorname{Tr}(U_F^t)
+\operatorname{Tr}(U_F^{\dagger t})\right].
+$$
+
+The two traces generate forward and backward histories. Each history has a cyclic choice of its time origin, giving independent discrete time-shift symmetries in the doubled description. A pairing between the two histories selects a relative time offset. Simultaneously shifting both histories preserves that pairing; shifting one alone changes it. This is a relative-to-diagonal symmetry-breaking structure closely related to the later strong-to-weak language.
+
+The authors express $K(t)$ through a transfer matrix acting along the spatial direction. In their localized regime its dominant eigenvalue is unique. In the late-time ergodic regime the leading eigenvalues become asymptotically degenerate, and the associated order correlations become long-ranged. The symmetry-breaking interpretation organizes the emergence of ergodic spectral behavior. In suitable random-matrix regimes, different relative cyclic offsets also explain the familiar multiplicity behind a spectral ramp.
+
+This is a conceptual precursor, not an assertion that every thermalizing pure state has global mixed-state fidelity order. The object being averaged is a spectral quantity with doubled histories; the symmetry acts on those histories. The fixed-charge state definition in this chapter concerns the support of a density matrix. Comparing the two viewpoints is fruitful precisely because their mathematical objects and limits are specified. Later hydrodynamic formulations similarly use two copies, but for density evolution and fluctuations rather than a spectral form factor.
+
+## Exercises and worked solutions
+
+### Exercise: a symmetry witness
+
+Let $\rho$ be any density matrix and $U$ unitary. Show that $|\operatorname{Tr}(\rho U)|=1$ if and only if $\rho$ has strong symmetry under $U$.
+
+::: {.callout-tip collapse="true" title="Solution"}
+Diagonalize $\rho=\sum_ap_a|a\rangle\langle a|$. The bound $|\sum_ap_a\langle a|U|a\rangle|\leq\sum_ap_a|\langle a|U|a\rangle|\leq1$ saturates only if each nonzero-weight expectation has modulus one and the same phase. Equality in Cauchy-Schwarz then forces $U|a\rangle=e^{i\alpha}|a\rangle$. The support theorem gives $U\rho=e^{i\alpha}\rho$. The reverse direction follows immediately by taking the trace. For $U=e^{i\theta Q}$, one angle can have accidental degeneracies; strong symmetry of the whole $U(1)$ requires the condition for all angles.
+:::
+
+### Exercise: covariance permits charge exchange
+
+For a qubit with charge $Q=|1\rangle\langle1|$, analyze amplitude damping with $K_0=|0\rangle\langle0|+\sqrt{1-\gamma}|1\rangle\langle1|$ and $K_1=\sqrt\gamma|0\rangle\langle1|$.
+
+::: {.callout-tip collapse="true" title="Solution"}
+Under $U_\theta=e^{i\theta Q}$, $K_0$ is unchanged and $K_1$ acquires phase $e^{-i\theta}$. The phases cancel between $K_1$ and $K_1^\dagger$ in the channel, so it is covariant. It is not strongly symmetric because $[Q,K_1]=-K_1$. The input $|1\rangle\langle1|$ becomes $(1-\gamma)|1\rangle\langle1|+\gamma|0\rangle\langle0|$. It is weakly symmetric but has no fixed charge for $0<\gamma<1$.
+:::
+
+### Exercise: singlets and multiplets
+
+Two spin-$1/2$ particles have singlet projector $P_0$ and triplet projector $P_1$. Classify $P_0$, $P_1/3$, and $I/4$ under collective $SU(2)$.
+
+::: {.callout-tip collapse="true" title="Solution"}
+All three commute with collective rotations and are weakly symmetric. The singlet is invariant under left multiplication by every rotation, hence strongly symmetric with trivial character. The triplet density matrix is proportional to identity *within a nontrivial three-dimensional representation*, so left multiplication rotates its support and does not equal a scalar times the density matrix. It is only weakly symmetric, as is $I/4$.
+:::

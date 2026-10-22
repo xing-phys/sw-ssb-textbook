@@ -6,7 +6,11 @@ _site/
 *.out
 *.toc
 research/cache/
+research/sources/
 research/wang-review.html
 research/wang-review.txt
 __pycache__/
 .DS_Store
+
+/.quarto/
+**/*.quarto_ipynb

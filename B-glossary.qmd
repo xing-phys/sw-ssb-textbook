@@ -1,0 +1,83 @@
+# Glossary and notation {#sec-glossary}
+
+## States and limits
+
+| Term or symbol | Meaning in this book |
+|:--|:--|
+| $\mathcal H$, $\rho$ | Hilbert space and positive trace-one density matrix. |
+| $P_\rho$ | Projector onto the support of $\rho$, the span of positive-eigenvalue eigenvectors. |
+| Pure state | Rank-one density matrix; $\operatorname{Tr}\rho^2=1$. |
+| Convex decomposition | A representation $\rho=\sum_ap_a|\psi_a\rangle\langle\psi_a|$; generally not unique. |
+| Trajectory | A state conditioned on a particular measurement or environment record. |
+| Separability | Expressibility as a convex mixture of product states for a specified partition. |
+| Purification | A pure enlarged-system state reducing to $\rho$ after an auxiliary system is discarded. |
+| Canonical purification | $|\sqrt\rho\rangle\!\rangle$ in a fixed vectorization convention. |
+| Choi double of a state | In this context, the normalized vectorization $|\rho\rangle\!\rangle/\sqrt{\operatorname{Tr}\rho^2}$; distinct from a channel's Choi matrix. |
+| Thermodynamic family | A specified sequence of finite systems, including boundary conditions and charge constraints. |
+| Local infinite-volume state | Compatible expectation values or density matrices on every finite region; may forget global finite-size constraints. |
+| Local operator | Supported in a bounded region as system size and separation grow. |
+| Long-range order | A specified correlator has a nonzero asymptotic limit. Algebraic quasi-order is stated separately. |
+
+## Symmetry and operations
+
+| Term or symbol | Meaning in this book |
+|:--|:--|
+| $U_g$ | Unitary representation of a symmetry element. |
+| Strong state symmetry | Finite-volume condition $U_g\rho=\chi(g)\rho$: the support has one common charge character. |
+| Weak state symmetry | $U_g\rho U_g^\dagger=\rho$: the ensemble is invariant under conjugation. |
+| Charged operator | $U_gOU_g^\dagger=\chi_O(g)O$ for a nontrivial character, or an explicitly stated higher-dimensional multiplet. |
+| Strongly symmetric channel | A channel with charge-preserving Kraus operators, or an equivalent charge-preserving dilation in the convention used here. |
+| Covariant channel | $\mathcal E(U_g\rho U_g^\dagger)=U_g\mathcal E(\rho)U_g^\dagger$; can exchange charge sectors. |
+| CPTP | Completely positive and trace preserving. |
+| Kraus operators | Matrices $K_a$ representing a channel through $\sum_aK_a\rho K_a^\dagger$, with $\sum_aK_a^\dagger K_a=I$. |
+| Stinespring dilation | A unitary or isometric enlarged-system realization of a channel. |
+| Instrument | Outcome-resolved completely positive maps whose sum is a channel. |
+| Lindbladian $\mathcal L$ | Generator of a Markovian quantum dynamical semigroup. |
+| Jump operator $L_a$ | A dissipative transition in a Lindblad representation. |
+| Unital channel | $\mathcal E(I)=I$; different from trace preservation. |
+| Finite-depth circuit | A bounded number of bounded-range local gate layers independent of system size. |
+| Two-way connectivity | Existence of shallow channels between two selected states in both directions. |
+| Local reversibility | Recovery of local pieces of a deformation in slightly enlarged regions, with controlled error; stronger than two-way connectivity. |
+
+## Diagnostics and information
+
+| Term or symbol | Meaning in this book |
+|:--|:--|
+| $C_O(x,y)$ | Ordinary charged-pair correlator $\operatorname{Tr}(\rho O_xO_y^\dagger)$. |
+| $F(\rho,\sigma)$ | Root fidelity $\operatorname{Tr}\sqrt{\sqrt\rho\sigma\sqrt\rho}$. |
+| $F_O(x,y)$ | Fidelity with the state altered by a neutral charged pair. |
+| $R_1(A)$ | Canonical affinity $\operatorname{Tr}(\sqrt\rho A\sqrt\rho A^\dagger)$; unitary convention unless stated otherwise. |
+| $R_2(A)$ | Purity-normalized overlap $\operatorname{Tr}(\rho A\rho A^\dagger)/\operatorname{Tr}\rho^2$. |
+| Global SW-SSB | Strongly symmetric finite-volume family with nonlinear fidelity long-range order and no ordinary charged long-range order. |
+| Local SW diagnostic | Limiting fidelity of growing reduced states with a local charged insertion; broader than global two-point SW order. |
+| $S(\rho)$ | Von Neumann entropy, using natural logarithms. |
+| $D(\rho\|\sigma)$ | Quantum relative entropy; unlike trace distance, not a metric. |
+| $T(\rho,\sigma)$ | Trace distance $\frac12\|\rho-\sigma\|_1$, distinguished from relative entropy $D(\rho\|\sigma)$. |
+| MI | Mutual information $S_A+S_C-S_{AC}$. |
+| CMI | Conditional mutual information $S_{AB}+S_{BC}-S_B-S_{ABC}$ in a stated geometry and limit. |
+| Markov length $\xi_M$ | A decay scale of buffered CMI, when such exponential decay holds uniformly. |
+| Petz recovery | A state-dependent recovery construction using reference density matrices and inverse square roots on their supports. |
+| Skew information | $I_{\mathrm{WY}}(\rho,Q)=-\frac12\operatorname{Tr}[\sqrt\rho,Q]^2$, a measure of charge coherence. |
+| Edwards-Anderson order | Order within a specified ensemble of samples or trajectories; ensemble dependence must be distinguished from intrinsic mixed-state quantities. |
+
+## Topology, dynamics, and evidence
+
+| Term | Meaning in this book |
+|:--|:--|
+| Stabilizer | A commuting operator fixing a code or state; generators define a common eigenspace. |
+| Syndrome | The measured local constraint violations produced by an error. |
+| Logical operator | An operator acting on encoded information while preserving the syndrome. |
+| Decoder | A rule inferring an error class or logical correction from available records. |
+| Nishimori relation | The equality between a noise prior and a disordered statistical model's coupling, such as $e^{-2K}=p/(1-p)$. |
+| Coherent information | $S(B)-S(RB)$ for a channel output $B$ and reference $R$ in the specified encoded-state experiment. |
+| SPT phase | Symmetry-protected topological phase; trivialization is obstructed within a specified symmetry-preserving class of operations. |
+| Average SPT | Mixed-state SPT structure involving a weak ensemble symmetry together with strong protection, with the precise framework stated. |
+| Higher-form symmetry | Symmetry acting on extended charged objects and represented by operators on corresponding closed supports. |
+| Anomaly | An obstruction to realizing a symmetry structure in a specified strictly local setting; not simply any unusual correlation. |
+| Fusion channel | An allowed way non-Abelian charges combine; may contain information beyond a total irrep or center charge. |
+| Diffusion | Relaxation with long-wavelength rate $Dk^2$ under the required constitutive assumptions. |
+| Charge scrambling | Delocalization of charge information; a nonlinear static diagnostic, a fluctuation footprint, and a dynamical spreading process must be distinguished. |
+| Information-critical phase | A model-defined phase with critical information or decoding structure, potentially retaining fractional logical information. |
+| Established result | An exact derivation or theorem within stated assumptions. |
+| Numerical evidence | A finite-size or controlled numerical finding with a stated extrapolation and model. |
+| Conjecture | A proposed general statement whose proof or sufficient evidence is not supplied by the cited work. |

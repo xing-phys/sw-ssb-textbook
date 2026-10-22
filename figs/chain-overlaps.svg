@@ -1,0 +1,34 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='1000' height='560' viewBox='0 0 1000 560'><rect width='1000' height='560' rx='12' fill='#faf8f3'/><g font-family='DejaVu Sans, sans-serif'>
+<text x='60' y='44' font-size='25' fill='#223640' text-anchor='start' font-weight='bold'>Exact one-dimensional pair-error channel</text>
+<path d='M 100.0 430.0 H 950.0' stroke='#dce2df' stroke-width='1'/>
+<text x='86.0' y='436.0' font-size='17' fill='#223640' text-anchor='end' font-weight='normal'>0</text>
+<path d='M 100.0 345.0 H 950.0' stroke='#dce2df' stroke-width='1'/>
+<text x='86.0' y='351.0' font-size='17' fill='#223640' text-anchor='end' font-weight='normal'>0.25</text>
+<path d='M 100.0 260.0 H 950.0' stroke='#dce2df' stroke-width='1'/>
+<text x='86.0' y='266.0' font-size='17' fill='#223640' text-anchor='end' font-weight='normal'>0.5</text>
+<path d='M 100.0 175.0 H 950.0' stroke='#dce2df' stroke-width='1'/>
+<text x='86.0' y='181.0' font-size='17' fill='#223640' text-anchor='end' font-weight='normal'>0.75</text>
+<path d='M 100.0 90.0 H 950.0' stroke='#dce2df' stroke-width='1'/>
+<text x='86.0' y='96.0' font-size='17' fill='#223640' text-anchor='end' font-weight='normal'>1</text>
+<text x='100.0' y='458.0' font-size='17' fill='#223640' text-anchor='middle' font-weight='normal'>0</text>
+<text x='312.5' y='458.0' font-size='17' fill='#223640' text-anchor='middle' font-weight='normal'>5</text>
+<text x='525.0' y='458.0' font-size='17' fill='#223640' text-anchor='middle' font-weight='normal'>10</text>
+<text x='737.5' y='458.0' font-size='17' fill='#223640' text-anchor='middle' font-weight='normal'>15</text>
+<text x='950.0' y='458.0' font-size='17' fill='#223640' text-anchor='middle' font-weight='normal'>20</text>
+<path d='M 100.0 90.0 V 430.0 H 950.0' fill='none' stroke='#52646b' stroke-width='2'/>
+<polyline points='100.000,90.000 142.500,226.000 185.000,307.600 227.500,356.560 270.000,385.936 312.500,403.562 355.000,414.137 397.500,420.482 440.000,424.289 482.500,426.574 525.000,427.944 567.500,428.766 610.000,429.260 652.500,429.556 695.000,429.734 737.500,429.840 780.000,429.904 822.500,429.942 865.000,429.965 907.500,429.979 950.000,429.988' fill='none' stroke='#007f86' stroke-width='3'/>
+<path d='M 110 500 h 28' stroke='#007f86' stroke-width='4'/>
+<text x='148' y='506' font-size='17' fill='#223640' text-anchor='start' font-weight='normal'>p = 0.1</text>
+<polyline points='100.000,90.000 142.500,135.551 185.000,175.000 227.500,209.164 270.000,238.750 312.500,264.373 355.000,286.563 397.500,305.779 440.000,322.422 482.500,336.835 525.000,349.316 567.500,360.126 610.000,369.487 652.500,377.594 695.000,384.615 737.500,390.696 780.000,395.962 822.500,400.522 865.000,404.471 907.500,407.891 950.000,410.853' fill='none' stroke='#d17637' stroke-width='3'/>
+<path d='M 325 500 h 28' stroke='#d17637' stroke-width='4'/>
+<text x='363' y='506' font-size='17' fill='#223640' text-anchor='start' font-weight='normal'>p = 0.25</text>
+<polyline points='100.000,90.000 142.500,96.869 185.000,103.600 227.500,110.195 270.000,116.656 312.500,122.987 355.000,129.190 397.500,135.267 440.000,141.222 482.500,147.057 525.000,152.773 567.500,158.374 610.000,163.862 652.500,169.239 695.000,174.508 737.500,179.670 780.000,184.728 822.500,189.683 865.000,194.538 907.500,199.296 950.000,203.957' fill='none' stroke='#5863a6' stroke-width='3'/>
+<path d='M 540 500 h 28' stroke='#5863a6' stroke-width='4'/>
+<text x='578' y='506' font-size='17' fill='#223640' text-anchor='start' font-weight='normal'>p = 0.4</text>
+<polyline points='100.000,90.000 142.500,90.000 185.000,90.000 227.500,90.000 270.000,90.000 312.500,90.000 355.000,90.000 397.500,90.000 440.000,90.000 482.500,90.000 525.000,90.000 567.500,90.000 610.000,90.000 652.500,90.000 695.000,90.000 737.500,90.000 780.000,90.000 822.500,90.000 865.000,90.000 907.500,90.000 950.000,90.000' fill='none' stroke='#ba5262' stroke-width='3'/>
+<path d='M 755 500 h 28' stroke='#ba5262' stroke-width='4'/>
+<text x='793' y='506' font-size='17' fill='#223640' text-anchor='start' font-weight='normal'>p = 0.5</text>
+<text x='525.0' y='478' font-size='19' fill='#223640' text-anchor='middle' font-weight='normal'>Separation r</text>
+<text x='96' y='76' font-size='17' fill='#223640' text-anchor='start' font-weight='normal'>Root fidelity F = R1</text>
+<text x='60' y='545' font-size='15' fill='#60717a' text-anchor='start' font-weight='normal'>Analytic transfer result; finite-chain enumeration agrees to &lt; 10^-12.</text>
+</g></svg>

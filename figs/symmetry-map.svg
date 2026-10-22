@@ -1,0 +1,19 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='1000' height='560' viewBox='0 0 1000 560'><rect width='1000' height='560' rx='12' fill='#faf8f3'/><g font-family='DejaVu Sans, sans-serif'>
+<text x='45' y='45' font-size='27' fill='#223640' text-anchor='start' font-weight='bold'>A symmetry has two meanings for a mixed state</text>
+<rect x='45' y='90' width='420' height='200' rx='14' fill='#dceeed' stroke='#a8b8b8'/>
+<text x='65' y='124' font-size='23' fill='#223640' text-anchor='start' font-weight='bold'>Strong symmetry</text>
+<text x='65' y='178' font-size='18' fill='#223640' text-anchor='start' font-weight='normal'>U rho = exp(i alpha) rho</text>
+<text x='65' y='204' font-size='18' fill='#223640' text-anchor='start' font-weight='normal'>One global charge sector</text>
+<text x='65' y='230' font-size='18' fill='#223640' text-anchor='start' font-weight='normal'>Every ensemble vector shares charge</text>
+<rect x='525' y='90' width='430' height='200' rx='14' fill='#eee5d3' stroke='#a8b8b8'/>
+<text x='545' y='124' font-size='23' fill='#223640' text-anchor='start' font-weight='bold'>Weak symmetry</text>
+<text x='545' y='178' font-size='18' fill='#223640' text-anchor='start' font-weight='normal'>U rho U* = rho  (* = adjoint)</text>
+<text x='545' y='204' font-size='18' fill='#223640' text-anchor='start' font-weight='normal'>The ensemble is invariant</text>
+<text x='545' y='230' font-size='18' fill='#223640' text-anchor='start' font-weight='normal'>Different charge sectors may mix</text>
+<text x='495' y='200' font-size='17' fill='#223640' text-anchor='middle' font-weight='normal'>implies</text>
+<rect x='130' y='340' width='740' height='145' rx='14' fill='#e1e5f2' stroke='#a8b8b8'/>
+<text x='150' y='374' font-size='23' fill='#223640' text-anchor='start' font-weight='bold'>Strong-to-weak spontaneous order</text>
+<text x='150' y='428' font-size='18' fill='#223640' text-anchor='start' font-weight='normal'>Exact strong symmetry at finite size; long-range nonlinear overlap.</text>
+<text x='150' y='454' font-size='18' fill='#223640' text-anchor='start' font-weight='normal'>Ordinary charged two-point correlations decay.</text>
+<text x='50' y='535' font-size='18' fill='#223640' text-anchor='start' font-weight='normal'>Spontaneous order does not mean the finite-size density matrix loses its exact symmetry.</text>
+</g></svg>

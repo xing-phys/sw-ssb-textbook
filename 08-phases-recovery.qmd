@@ -1,0 +1,238 @@
+# Stability, locality, and recoverability {#sec-phases-recovery}
+
+An order parameter is more useful when it distinguishes a phase rather than an isolated algebraic curiosity. Fidelity order has two fundamental properties: strongly symmetric shallow local channels cannot remove it, and some local symmetry-breaking noise cannot be repaired locally. These statements involve different operations and different quantifiers. Neither follows from a slogan that noise always increases fidelity.
+
+We first prove the stability mechanism, then connect it to conditional mutual information. Finally, we examine a major 2026 development: the difference between global finite-volume definitions and intrinsic infinite-volume local definitions. Keeping that distinction explicit is necessary for understanding current disagreements about what should count as a mixed-state phase.
+
+## What locality and depth mean
+
+Consider a lattice of bounded-degree geometry with finite-dimensional on-site Hilbert spaces. A depth-$D$ local circuit has $D$ layers of gates of bounded spatial range. Its light-cone radius is $O(D)$. A local channel circuit is represented by adding product-state ancillas, applying a local unitary circuit $W$, and tracing out those ancillas. For strong symmetry, every gate of $W$ commutes with the physical symmetry while the ancillas transform trivially. No charge leaks into a discarded bath.
+
+For **finite depth**, $D$ is bounded independently of total system size $L$. For **polylogarithmic depth**, $D$ may grow as a power of $\log L$. These cases must not be silently identified: the support and number of terms in a dressed operator are constant in the first case and grow in the second.
+
+## Stability theorem and its proof
+
+Under the preceding assumptions, fidelity long-range order survives a strongly symmetric finite-depth local channel, possibly with a different charged order parameter of somewhat larger but still bounded support [@lessa2025]. If ordinary charged correlations were short-ranged initially, they remain without long-range order. Thus global SW-SSB is preserved.
+
+Here is the proof architecture with the step involving discarded ancillas made explicit. Suppose
+
+$$
+F(\rho,O_xO_y^\dagger\rho O_yO_x^\dagger)\geq c>0
+$$
+
+at large separation, and let $|\Psi\rangle$ purify $\rho$ on a reference $R$. The trace-norm variational principle gives an auxiliary unitary $V_R$ such that
+
+$$
+\left|\langle\Psi|O_xO_y^\dagger\otimes V_R|\Psi\rangle\right|\geq c.
+$$
+
+Apply $W$ to the system and fresh local ancillas, obtaining a purification $|\Phi\rangle$ of $\sigma=\mathcal E(\rho)$. Define the dressed operators
+
+$$
+\widetilde O_x=W(O_x\otimes I_E)W^\dagger,
+\qquad
+\widetilde O_y=W(O_y\otimes I_E)W^\dagger.
+$$
+
+Then
+
+$$
+\left|\langle\Phi|\widetilde O_x\widetilde O_y^\dagger
+\otimes V_R|\Phi\rangle\right|\geq c.
+$$ {#eq-stability-dressed-overlap}
+
+Finite depth keeps the two supports disjoint at large separation. Expand each dressed operator in a physical-ancilla operator basis on its finite light cone:
+
+$$
+\widetilde O_x=\sum_{\mu=1}^{M_x}A_{x,\mu}\otimes B_{x,\mu},
+\qquad
+\widetilde O_y=\sum_{\nu=1}^{M_y}A_{y,\nu}\otimes B_{y,\nu}.
+$$ {#eq-stability-local-expansion}
+
+There are finitely many terms, with $M_x,M_y$ and all local operator norms bounded independently of $L$ and $|x-y|$. Since the ancillas are symmetry neutral and $W$ is strongly symmetric, each physical coefficient $A_{x,\mu}$ can be chosen with the same charge as $O_x$. The corresponding statement holds at $y$.
+
+Expanding @eq-stability-dressed-overlap, the triangle inequality implies that at least one pair of physical coefficients has an overlap bounded below by a positive constant, up to these fixed expansion factors. To turn that statement into a fidelity correlator, use
+
+$$
+\left|\langle\Phi|A\otimes B|\Phi\rangle\right|
+\leq\|B\|_\infty\|\sqrt\sigma A\sqrt\sigma\|_1.
+$$ {#eq-purification-contraction-bound}
+
+For completeness, this follows by writing $|\Phi\rangle$ in its Schmidt basis. The left side is a trace pairing of $\sqrt\sigma A\sqrt\sigma$ with a transpose of an auxiliary contraction. Hölder's inequality bounds that pairing by the trace norm times $\|B\|_\infty$. The reference and discarded ancillas together constitute the auxiliary system; no locality of $B$ is required at this last step.
+
+Therefore some charged local physical insertions have
+
+$$
+F(\sigma,A_{x,\mu}A_{y,\nu}^\dagger\sigma
+A_{y,\nu}A_{x,\mu}^\dagger)\geq c'>0,
+$$
+
+where $c'$ is independent of separation and size. More invariantly, a finite matrix of correlators of charged local operators retains a nonzero long-distance norm. In a homogeneous system one can select fixed operator types; in an inhomogeneous system the local basis may vary with position. This is why the theorem asserts existence of order after the channel, not preservation of the original microscopic $O_x$.
+
+To complete the SW-SSB claim, ordinary order must remain absent. In the adjoint channel, a charged local observable is mapped to a charged observable on its bounded backward cone. At sufficiently large separation the backward cones do not meet, and the product-state ancillas imply factorization of their pullbacks. Long-range ordinary charged correlations at the output would then imply such correlations for bounded-support charged observables at the input, contradicting the assumption. This finishes the finite-depth argument.
+
+### What the theorem does and does not say
+
+Monotonicity alone would only control $F(\mathcal E\rho,\mathcal E\sigma)$. In general $\mathcal E(A\rho A^\dagger)$ is not $A\mathcal E(\rho)A^\dagger$. The dressing and finite ancilla expansion bridge that gap.
+
+The result is one-way. Strong local channels can create fidelity order from an unordered state: the pair-dephasing model in the next chapter does exactly this. They cannot take an ordered state back to a state with exponentially decaying fidelity correlations. Consequently, preparation by one strongly symmetric shallow channel does not establish phase equivalence; one must examine an inverse process.
+
+For growing depth, the number of terms in @eq-stability-local-expansion grows exponentially in the light-cone volume. The quantitative extension yields a bound of the form $F\gtrsim\exp[-\operatorname{poly}(D)]$ for appropriately dressed operators [@lessa2025]. For polylogarithmic $D$, that can vanish as $L\to\infty$. It still prevents certain exponentially small behaviors on system-size separations, but is not automatically a nonzero-order theorem for fixed-support operators. Definitions of phase equivalence using polylogarithmic circuits must include their allowed errors and localization scales.
+
+## A complete irrecoverability example
+
+For the parity state $\rho_+=(I+U)/2^N$, dephase one site $i$ completely:
+
+$$
+\mathcal T_i(\rho)=\tfrac12(\rho+Z_i\rho Z_i),
+\qquad \mathcal T_i(\rho_+)=I/2^N.
+$$ {#eq-parity-erasure}
+
+Let a recovery channel act on a region $R$ that does not cover the entire system. Its output from the maximally mixed input is $\omega_R\otimes I_{\bar R}/2^{|\bar R|}$. Since $\bar R$ contains at least one site, the output has $\langle U\rangle=0$, whereas $\rho_+$ has $\langle U\rangle=1$. Measuring global parity therefore gives
+
+$$
+T\bigl(\rho_+,\mathcal R_R\mathcal T_i(\rho_+)\bigr)\geq\frac12.
+$$ {#eq-parity-recovery-obstruction}
+
+The bound is tight: doing nothing leaves $I/2^N$, whose trace distance from $\rho_+$ is exactly $1/2$. Repair requires access to the global parity constraint. Resetting or manipulating a bounded neighborhood cannot reestablish it.
+
+This is why the breaking is called spontaneous even though the original finite-volume state remains strongly symmetric. Arbitrarily weak strong-symmetry-breaking noise distributed through a large sample destroys the constraint, and its effect cannot be undone near a single damaged region. For independent single-site dephasing of strength $p$,
+
+$$
+\mathcal D_p^{\otimes N}(\rho_+)
+=\frac{I+(1-2p)^NU}{2^N}.
+$$
+
+For every fixed $p>0$, the large-$N$ state approaches the unrestricted maximally mixed state. Taking $N\to\infty$ before $p\to0$ differs from reversing those limits, as in conventional spontaneous ordering.
+
+## General local irrecoverability
+
+The parity example is representative. For a simple quantitative derivation assume the charged order operators are Hermitian unitaries, such as Pauli $Z$, and $F_{ij}\geq c$. Apply $\mathcal T_i$ and attempt any recovery $\mathcal R$ whose support excludes a distant site $j$. Put $\sigma=\mathcal R\mathcal T_i(\rho)$. Joint concavity and data processing of fidelity give the conservative lower bound
+
+$$
+F(\sigma,Z_j\sigma Z_j)\geq c/2.
+$$ {#eq-general-recovery-fidelity}
+
+To verify it, expand both states as equal mixtures of the recovered original and locally flipped states, pair an original branch with the branch carrying $Z_iZ_j$, and use that $\mathcal R$ commutes with conjugation at $j$. The paired fidelity is at least $F_{ij}$ by data processing; discarding the other nonnegative term gives @eq-general-recovery-fidelity.
+
+Strong symmetry of the target implies $T(\rho,Z_j\rho Z_j)=1$, using the trace distance $T=\tfrac12\|\rho-\sigma\|_1$ from Chapter 4. By the triangle inequality and unitary invariance,
+
+$$
+1\leq2T(\rho,\sigma)+T(\sigma,Z_j\sigma Z_j)
+\leq2T(\rho,\sigma)+\sqrt{1-c^2/4}.
+$$
+
+Thus every such local recovery has
+
+$$
+T(\rho,\sigma)\geq
+\frac{1-\sqrt{1-c^2/4}}2>0.
+$$ {#eq-general-local-obstruction}
+
+The full theorem allows bounded nonunitary charged operators with appropriate Kraus completions and norm factors [@lessa2025]. The unitary proof already displays all the physics: a local attempted repair cannot eliminate a residual one-point fidelity at a remote site, whereas the strongly symmetric target requires that fidelity to vanish exactly.
+
+## Conditional mutual information
+
+Partition a *finite complete system* into $A$, a buffer $B$, and the remaining region $C$. Use natural logarithms and
+
+$$
+I(A:C|B)=S_{AB}+S_{BC}-S_B-S_{ABC}.
+$$
+
+For the parity state, every proper subsystem is maximally mixed, but $S_{ABC}=(N-1)\ln2$. If $A,B,C$ are all nonempty,
+
+$$
+I(A:C)=0,\qquad I(A:C|B)=\ln2.
+$$ {#eq-core-parity-cmi}
+
+Knowing the buffer does not remove the global parity relation between the two remaining regions. The classical ferromagnetic mixture instead has $I(A:C)=\ln2$ and $I(A:C|B)=0$: once the buffer reveals which magnetization branch occurred, no additional correlation remains. A GHZ pure state has both quantities equal to $\ln2$ in this geometry.
+
+The recovery theorem states that a suitable channel $\mathcal R_{B\to BC}$ achieves
+
+$$
+F\bigl(\rho_{ABC},\mathcal R_{B\to BC}(\rho_{AB})\bigr)
+\geq e^{-I(A:C|B)/2}.
+$$ {#eq-core-fawzi-renner}
+
+The channel can be chosen using rotated or averaged Petz recovery constructions; the plain unrotated Petz map does not satisfy every general strengthened bound automatically [@fawzi2015]. Small CMI guarantees a good recovery. Conversely, a proof that *all* such local recoveries have nonzero error forces CMI to remain nonzero. Large CMI by itself should not be used as the reverse of a one-sided fidelity bound.
+
+To apply this to local noise in $A$, interchange $A$ and $C$ in the recovery theorem. Small CMI then supplies a map $B\to AB$ recovering the erased region $A$ from $\rho_{BC}$. After any channel supported in $A$, discard $A$ entirely: the marginal on $BC$ is still $\rho_{BC}$ by no-signaling. The same recovery map would consequently repair that local channel using only $AB$. This contradicts a uniform lower bound such as @eq-general-local-obstruction. The local irrecoverability theorem therefore implies long-range CMI for strongly symmetric finite-volume SW-SSB families in this complete-system geometry. The conclusion concerns a uniform large-system limit retaining the global charge constraint. It is not a theorem about every possible infinite-volume CMI construction.
+
+## What is a mixed-state phase?
+
+For pure ground states, a gapped path and a quasi-local unitary often provide equivalent pictures of phase connectivity. General channels discard information, so the analogous mixed-state classification is not unique.
+
+**Two-way channel connectivity** asks for shallow local channels $\mathcal E$ and $\mathcal F$ such that $\mathcal E(\rho)\approx\sigma$ and $\mathcal F(\sigma)\approx\rho$. Symmetry restrictions may be imposed. This is a state-dependent notion; $\mathcal F\mathcal E$ need not equal identity on arbitrary inputs. Without symmetry it can identify states with different global conditional information.
+
+For example, the parity state and unrestricted maximally mixed state are two-way connected if symmetry restrictions are removed. One-site dephasing gives the forward direction. For the reverse, reset every site to $|+\rangle$ and apply complete pair dephasing on a connected nearest-neighbor graph. Edge coloring implements this in bounded depth. It prepares the parity ensemble anew. This preparation does not repair the lost global constraint locally; it discards and rebuilds the state.
+
+**Local reversibility** adds a stronger condition: restricting an evolution to a finite region must admit a recovery in a slightly enlarged region, with controlled tails and errors. The recovery must follow the local deformation, rather than merely prepare an equivalent final state from scratch. @sang2025reversibility develops this refinement and shows that it preserves more mixed-state topological data than unrestricted two-way connectivity.
+
+**Finite Markov length** is a useful path criterion. If CMI decays exponentially with buffer width, its decay scale is a Markov length. Under locality and uniformity assumptions, maintaining a finite such scale along local Lindblad evolution permits quasi-local recovery of the evolution using Petz constructions [@sang2025markov]. A diverging Markov length obstructs this argument. When discussing a “phase transition,” specify the equivalence relation, the path, whether symmetry is imposed, and which finite-size or infinite-volume information is retained. None of these choices is supplied just by writing $\rho(p)$.
+
+### Reachability, coarse graining, and stability of dynamics
+
+The distinction between reachability and reversibility has an earlier operational formulation. Fast dissipative reachability compares states using a time-independent local Lindbladian, locality-preserving ancillas, and a global approximation error vanishing with size. In @coser2019phases, “fast” permits polylogarithmic time and suitable polylogarithmic locality scales. Mutual reachability defines equivalence classes, while one-way reachability orders their dissipative complexity. These are broader asymptotic resources than the strictly bounded-depth, bounded-range circuits in the stability proof above. A conclusion in one resource class should therefore not be transferred to the other without controlling its growing scales and errors.
+
+Real-space renormalization makes two-way connectivity constructive. A coarse-graining channel can discard microscopic variables while preserving their relevant correlations with the complementary region; when those correlations are preserved exactly, recovery reverses its action on the state. Iterating suitably controlled steps can then supply both directions of phase connectivity. This approach maps the two-dimensional thermal toric code at nonzero temperature toward infinite temperature, while decoder-based local channels establish a nontrivial regime for a toric-code state subjected to sufficiently weak local dephasing [@sang2024rg]. Thermal noise and a specified finite-depth dephasing preparation are consequently different state families, even when both create anyons. This construction uses its stated circuit ranges and convergence bounds; it does not make a practical decoder's threshold universally identical to every phase boundary.
+
+A third question concerns the dynamics itself: does a small local perturbation of a generator leave its stationary behavior in a stable phase? The **uniformity** criterion asks, roughly, for nearby perturbed and unperturbed steady states to be related by controlled finite-time dissipative evolution [@rakovszky2024stable]. It addresses a neighborhood of generators rather than only two endpoint density matrices. It supplies stability consequences beyond an isolated spectral-gap assertion; proposed generic relations between the gap and relaxation within uniform phases retain conjectural components. Thus endpoint connectivity, correlation-preserving coarse graining, locally reversible paths, and dynamical uniformity organize related but different questions. None is established as a universal replacement for all the others.
+
+## The 2026 local formulation
+
+Global fidelity depends on the entire density matrix. For a finite region $R$ containing $x$, define instead
+
+$$
+f_R(x)=F(\rho_R,O_x\rho_RO_x^\dagger).
+$$ {#eq-local-fidelity}
+
+For unitary $O_x$, data processing under partial trace implies $f_R(x)\geq f_{R'}(x)$ whenever $R\subset R'$. The values are bounded below by zero, so they have a limit as nested regions exhaust the lattice. Local SW-SSB, or local charge incoherence, is diagnosed by a positive limit [@divi2026local; @zhang2026local; @liu2026local]. On a large finite sample, the region should grow while remaining small compared with the whole system.
+
+Global fidelity order implies this local order. Place $y$ outside $R$. Tracing out its complement gives
+
+$$
+F(\rho,O_xO_y^\dagger\rho O_yO_x^\dagger)
+\leq F(\rho_R,O_x\rho_RO_x^\dagger),
+$$
+
+so a positive global lower bound survives. The converse fails. A highly excited thermalizing pure eigenstate may have thermal reduced states on every sufficiently small region. Their local charged fidelity is positive at finite temperature, while the *global* pure-state fidelity correlator equals the decaying ordinary correlator. ETH is an assumption about these eigenstates, not a theorem for all Hamiltonians; under that assumption it provides a clear distinction between local and global definitions.
+
+Local tomography costs exponentially in $|R|$ rather than total volume. With polynomial resources in system size, one can in principle inspect regions with $|R|=O(\log N)$. Extrapolating their fidelity to an infinite-region limit still requires control over convergence. A finite positive $f_R$ alone is only an upper bound on the limit and does not prove order.
+
+## Infinite-volume states and a genuine interpretive disagreement
+
+An infinite spin-system state is specified by a compatible family of finite-region density matrices, or equivalently by expectation values of all local observables. The sequence $\rho_+=(I+U)/2^N$ and the sequence $I/2^N$ have exactly the same reduced state on every fixed proper region once the volume is large enough. They therefore define the same infinite-volume local state. Yet one finite-volume sequence has fixed total parity and global SW-SSB, while the other has no strong finite-volume symmetry at all.
+
+This is a change in which information is retained, not a contradiction. The global definition characterizes a sequence together with its total-charge constraint. An intrinsic infinite-volume definition cannot distinguish two sequences with identical limiting local data.
+
+@liu2026local defines strong symmetry of an infinite state by requiring that the symmetry act trivially on that subsystem in *every extension* of the state to an auxiliary system. In finite dimensions the canonical purification shows that this agrees with $U\rho\propto\rho$. They prove, for compact symmetry groups in their operator-algebraic framework, that strong symmetry is equivalent to zero fidelity with every state obtained by a charged local insertion. In their terminology a positive limiting local fidelity is absence of infinite-volume strong symmetry. They argue that some globally distinct finite-size families should be regarded as the same infinite-volume phase, and explicitly question conclusions drawn solely from their global distinguishability. This is a substantive conceptual perspective, not a proof that global charge diagnostics are experimentally meaningless.
+
+The same caution applies to CMI. For the infinite maximally mixed product state, ordinary CMI of finite regions is zero. The $\ln2$ in @eq-core-parity-cmi survives only when the finite-volume complete-system constraint is retained. @divi2026local states this distinction explicitly and obtains an infinite-volume counterpart using **symmetry-averaged CMI**: first resolve the charge of a large region, compute CMI within each charge sector, then average. Its long-range lower bound requires an additional local-indistinguishability assumption on those charge sectors. It is not ordinary CMI of the unconstrained state. @liu2026local further shows that for fixed bounded $A$ and an exhausting buffer, intrinsic infinite-volume CMI must eventually vanish, without asserting any universal decay rate.
+
+These developments refine the conceptual target of SW-SSB. Questions about a quantum memory with known total charge naturally retain global data. Questions about an infinite stationary local state may prefer the extension-based definition. A careful calculation states which question it answers; a comprehensive theory has to explain how the answers connect.
+
+## Exercises and worked solutions
+
+### Exercise: CMI of three representative states
+
+Compute $I(A:C)$ and $I(A:C|B)$ for a GHZ state, the classical ferromagnetic mixture, and $\rho_+$, with nonempty $A,B,C$ covering all sites.
+
+::: {.callout-tip collapse="true" title="Solution"}
+Every nonempty proper reduction of GHZ has entropy $\ln2$, while the full state has entropy zero. Thus MI and CMI are both $\ln2$. Every nonempty reduction of the classical mixture, including the full state, has entropy $\ln2$, giving MI $\ln2$ and CMI zero. For $\rho_+$, every proper reduction has entropy equal to its number of sites times $\ln2$, while the full entropy is $(N-1)\ln2$. The MI cancels to zero and the CMI leaves $\ln2$.
+:::
+
+### Exercise: why covariance is insufficient
+
+Apply single-site complete $Z$ dephasing to $\rho_+$. Does this contradict the stability theorem?
+
+::: {.callout-tip collapse="true" title="Solution"}
+The output is $I/2^N$, which is not strongly symmetric under $U$. The channel is weakly covariant but its $Z_i$ Kraus operator anticommutes with $U$. It violates the theorem's strong channel assumption, so there is no contradiction. Symmetry of averaged probabilities is insufficient to protect a fixed charge sector.
+:::
+
+### Exercise: local evidence and extrapolation
+
+Suppose numerical data show $f_R\approx0.3$ for regions of linear sizes $4,6,8$. What can be concluded without further assumptions?
+
+::: {.callout-tip collapse="true" title="Solution"}
+Monotonicity gives an upper bound of approximately $0.3$ on the infinite-region local order parameter, not a lower bound. A later crossover could still lead to zero. To establish positive limiting order one needs a rigorous lower bound, a controlled saturation estimate, or finite-size scaling with a justified model. This is particularly relevant near critical points, where the convergence scale can be much larger than accessible regions.
+:::

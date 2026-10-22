@@ -1,0 +1,116 @@
+# Synthesis and research problems {#sec-research-problems}
+
+## A connected picture
+
+The simplest SW-SSB state carries a sharp global charge without ordinary long-range order. A local charge insertion changes its sector and produces an orthogonal state; a distant neutral pair insertion can have finite overlap. The charge is therefore globally constrained and locally mobile in the information-theoretic sense. This picture connects the major themes of the book.
+
+Density matrices separate ensemble invariance from support in a charge sector. Purification turns nonlinear mixed-state overlaps into linear correlations in an enlarged space. Stability explains why strongly symmetric shallow dynamics can enter an ordered regime but cannot freely leave it. Recovery translates the order into a restriction on repairing local damage. Gauging converts charge-transfer inference into topological error correction. Hydrodynamics connects delocalized continuous charge to slow density modes, provided the required static and dynamical assumptions hold.
+
+None of these connections erases the distinctions developed along the way. A laboratory records particular observables with particular resources. A theorem quantifies over a specified class of states and maps. A phase equivalence retains a specified kind of information. Scientific progress comes from making those choices explicit enough that two apparently competing statements can be compared.
+
+## A ledger of what has been established
+
+| Statement | Status and conditions |
+|:--|:--|
+| Strong state symmetry restricts support to one charge sector. | Exact finite-dimensional linear algebra; for non-Abelian groups a common eigenvalue for every group element is a one-dimensional representation. |
+| $R_1\leq F\leq\sqrt{R_1}$. | Exact for normalized states with unitary insertions in the conventions of Chapter 6. Nonunitary operators require the stated homogeneous or conditioned normalization. |
+| Rényi-2 order is interchangeable with fidelity order. | False in general. Explicit spectral counterexamples and different transitions in the square-lattice decoherence model demonstrate the failure. |
+| Strongly symmetric bounded-depth local channels preserve global fidelity order. | Theorem with bounded local Hilbert spaces, local gates, and appropriately dressed bounded-support charged operators; growing depth requires quantitative care. |
+| SW-SSB produces a local recovery obstruction. | Established in the global fixed-sector setting with the relevant charged diagnostics. The retained charge constraint and allowed recovery region matter. |
+| Long-range ordinary CMI characterizes every local infinite-volume SW state. | False without qualification. The complete-system finite-volume CMI and infinite-volume local CMI are different limits; symmetry-resolved constructions add assumptions. |
+| The two-dimensional independent pair-error model has one intrinsic fidelity/recovery threshold near $p=0.109$. | Established mapping with numerical Nishimori critical input; the distinct clean Rényi-2 threshold near $0.178203$ is analytic from the clean Ising critical coupling. |
+| Every state with extensive subsystem charge variance has SW-SSB. | False. Sparse fixed-charge distributions provide counterexamples. |
+| Rényi-1 order forces extensive charge variance. | Conditional theorem; sufficiently rapid approach to long-distance order is essential. Dephased superfluids show why. |
+| Conservation implies diffusion. | False. Diffusion follows with additional constitutive and equilibration assumptions; exact models and suitable effective theories realize it. |
+| Information-critical topological phases can preserve a fraction of logical information. | Demonstrated in specified decohered $\mathbb Z_N$ models through mappings, continuum arguments, and numerical evidence; not a universal claim about every code or noise channel. |
+| Small quantum processors establish an infinite-system singularity. | No. The experiments provide finite-size signatures and scaling evidence, with channel and inference assumptions described in Chapter 16. |
+
+This ledger is a guide to inference rather than a hierarchy of value. An exact counterexample can be as illuminating as a universal theorem. A controlled experiment can reveal a phenomenon before its full classification exists.
+
+## How to formulate a precise project
+
+A proposal involving SW-SSB should specify six pieces of data: the family of states; the symmetry and its representation; the diagnostic and normalization; the order of limits; the allowed operations or measurement access; and the criterion for deciding the question. Without them, a statement such as “noise destroys the phase” can refer to several inequivalent calculations.
+
+A useful first project has a controlled limiting case. Start from an exactly solvable parity or fixed-number ensemble, a stabilizer state, or a classical diagonal channel. Verify the limit before introducing interactions, correlated noise, disorder, or non-Abelian fusion. Distinguish finite-size deviations from the failure of the proposed principle.
+
+## Project 1: local versus global information
+
+**Question.** Which operational resources preserve the distinction between a fixed-parity sequence and the unrestricted maximally mixed sequence when their finite-region limits coincide?
+
+**Starting calculation.** Reproduce their full and reduced one-point fidelities, full-system CMI, and exact parity discrimination probabilities. Then impose a measurement architecture: local measurements with a global classical parity computation, contiguous local tomography, or circuits of bounded depth with bounded classical communication.
+
+**Deliverable.** A resource-dependent distinguishability statement. A nonlocal classical computation of all local $X_i$ outcomes accesses global parity, even though no single bounded region does. This is different from implementing a bounded-support channel.
+
+**Open direction.** Compare noisy parity readout, finite sampling, and scaling of accessible regions with the extension-based infinite-volume symmetry framework. A precise result should say whether it concerns a finite-volume encoding, a local state, or an observer's inference task. The conceptual disagreement in Chapter 8 supplies the motivation, not a predetermined answer.
+
+## Project 2: when a nonlinear transition is intrinsic
+
+**Question.** Which modifications of a noise model move a replica transition without changing the fidelity/recovery phase boundary?
+
+**Starting calculation.** Use the spectral counterexamples of Chapter 6 and the exact chain of Chapter 9. Add a neutral local flag or a second eigenvalue scale. Track $F,R_1,R_2$, purity, and trace distance together.
+
+**Deliverable.** An explicit family showing which singularity is a spectral reweighting effect. If studying a two-dimensional lattice numerically, derive the statistical model for each observable before fitting a crossing.
+
+**Open direction.** Find physically natural, locally prepared families where higher-Rényi quantities supply controlled bounds on intrinsic diagnostics over a useful parameter range. Equality need not hold universally to make a proxy valuable experimentally.
+
+## Project 3: information length versus transport length
+
+**Question.** How does the scale on which charge becomes locally indistinguishable compare with the scale of density transport?
+
+**Starting calculation.** Reproduce the exact exclusion-process density modes, then evaluate overlap diagnostics of its probability distribution for several times and separations. Compare the transport scale $\sqrt{Dt}$ with the nonlinear length predicted by the finite-time analysis in Chapter 13.
+
+**Deliverable.** A scaling plot in which both lengths are defined from explicit observables. State the initial condition, charge sector, discretization, and window before finite-size saturation.
+
+**Open direction.** Introduce dipole conservation, kinetic constraints, or weak integrability breaking. A different transport exponent does not automatically determine the nonlinear information exponent. Deriving their relation is the research question.
+
+## Project 4: what non-Abelian noise leaves behind
+
+**Question.** Which information about a total non-Abelian charge can be decoded from local records, and which requires access to fusion channels?
+
+**Starting calculation.** Work through the fusion-tree example of Chapter 12 for a finite group or a small spin-singlet space. Separate center charge, irrep labels, and multiplicity labels. Construct two ensembles with the same coarse charge statistics but different retained fusion information.
+
+**Deliverable.** A hierarchy of operational tasks and fidelities, with an explicit measurement algebra for each. An irrep label is not the same as a scalar charge, and a multiplicity space may hold information invisible to that label.
+
+**Open direction.** Relate these decoding hierarchies to the entanglement forced by non-Abelian symmetry, and determine which features are stable under the chosen local-channel equivalence. The recent non-Abelian work provides model-based evidence rather than a final classification.
+
+## Project 5: an experimentally controlled estimator
+
+**Question.** How much can a structured estimator certify when the preparation model is only approximately known?
+
+**Starting calculation.** Implement the diagonal probability-overlap estimator or known-channel Gram-kernel calculation in Chapter 16 on the exact distributions supplied with this book. Perturb the reference model while retaining the same measured low-order moments.
+
+**Deliverable.** Bias and variance estimates separated from finite-size extrapolation. Include purity dependence if using $R_2$. Report whether the estimator supplies an upper bound, a lower bound, or a model-dependent point estimate.
+
+**Open direction.** Combine local tomography, certified tensor-network bounds, and physical noise calibration to obtain an error bar on an intrinsic diagnostic. General hardness results explain why a useful protocol must state its access assumptions; they do not preclude efficient measurements in structured families.
+
+## Several questions that remain connected
+
+Theories of mixed-state phases now retain different amounts of local recovery and higher-form symmetry data. A useful classification must explain which experimental or dynamical questions each equivalence relation answers. Non-Abelian symmetry and anomalies can enforce entanglement even when Abelian SW order admits classical representatives. Their relation to hydrodynamics remains less complete than the U(1) picture. Information-critical phases raise the possibility that logical memory and decoding have structures richer than a single threshold. Learning-based detection makes the observer's prior information part of the operational problem.
+
+These are not independent curiosities. They all ask which information is local, which is globally constrained, and what operations can move between those descriptions. The best next calculation is often a small one that isolates a disputed implication.
+
+## Exercises and worked solutions
+
+### 1. A statement with missing hypotheses
+
+Repair the sentence “A finite-depth channel cannot create or destroy SW-SSB.”
+
+::: {.callout-note collapse="true" title="Solution"}
+For global fidelity-based order, a strongly symmetric bounded-depth local channel preserves existing SW-SSB under the assumptions of the stability theorem, allowing a dressed order parameter. Such a channel can create order from an initially unordered state; the pair-error model is an example. A weak-only covariant channel can remove the exact strong-sector condition. Thus neither arbitrary channels nor two-way invariance are justified by the one-way theorem.
+:::
+
+### 2. A proposed fluctuation diagnostic
+
+An experiment measures $\operatorname{Var}(Q_A)\propto|A|$. Is that sufficient to claim SW-SSB?
+
+::: {.callout-note collapse="true" title="Solution"}
+No. Extensive variance does not determine connectivity of the density matrix's support under local charge transfers. Sparse fixed-sector mixtures can reproduce the variance while lacking the relevant Rényi-1 order. The experiment needs a nonlinear diagnostic or additional verified assumptions linking its family to one. It should also distinguish coherent variance from classical mixing if that distinction is part of the claim.
+:::
+
+### 3. Two ways to “undo” erasure
+
+Why does preparing a fresh parity ensemble not contradict its local recovery obstruction?
+
+::: {.callout-note collapse="true" title="Solution"}
+A global preparation can reset every site and build a new constraint. A local recovery must leave a distant region untouched while restoring its correlations with the damaged region. The former task can discard the old information; the latter must preserve it. A reverse channel connecting two selected states need not reverse each local part of the original deformation. That is why local reversibility is a stronger criterion than two-way channel reachability.
+:::

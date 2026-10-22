@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 330" role="img" aria-labelledby="title desc">
+<title id="title">A cluster string survives sublattice dephasing</title>
+<desc id="desc">Alternating A and B sites. A string has X on A and Z endpoints on B. Z noise on B commutes with it.</desc>
+<rect width="960" height="330" rx="16" fill="#f6f8fb"/>
+<g font-family="system-ui,sans-serif" text-anchor="middle" fill="#182d45">
+<text x="480" y="40" font-size="23" font-weight="600">A surviving cluster string</text>
+<path d="M90 145H870" stroke="#8796a9" stroke-width="4"/>
+<path d="M180 145H780" stroke="#c47c25" stroke-width="9" opacity=".35"/>
+<g fill="#126f79" stroke="white" stroke-width="3"><circle cx="90" cy="145" r="23"/><circle cx="270" cy="145" r="23"/><circle cx="450" cy="145" r="23"/><circle cx="630" cy="145" r="23"/><circle cx="870" cy="145" r="23"/></g>
+<g fill="#a44361" stroke="white" stroke-width="3"><circle cx="180" cy="145" r="23"/><circle cx="360" cy="145" r="23"/><circle cx="540" cy="145" r="23"/><circle cx="780" cy="145" r="23"/></g>
+<g stroke="#a44361" stroke-width="2" fill="none" stroke-dasharray="5 5"><circle cx="180" cy="145" r="35"/><circle cx="360" cy="145" r="35"/><circle cx="540" cy="145" r="35"/><circle cx="780" cy="145" r="35"/></g>
+<g fill="white" font-size="18" font-weight="600"><text x="90" y="151">A</text><text x="180" y="151">B</text><text x="270" y="151">A</text><text x="360" y="151">B</text><text x="450" y="151">A</text><text x="540" y="151">B</text><text x="630" y="151">A</text><text x="780" y="151">B</text><text x="870" y="151">A</text></g>
+<g font-size="23" font-weight="600" fill="#805319"><text x="180" y="100">Z</text><text x="270" y="100">X</text><text x="450" y="100">X</text><text x="630" y="100">X</text><text x="780" y="100">Z</text></g>
+<text x="705" y="153" font-size="24">…</text>
+<text x="480" y="225" font-size="19">Z noise on B commutes with every operator in this string.</text>
+<text x="480" y="265" font-size="18" fill="#5b6879">The other string contains X on B and decays as (1 − 2p) to its length.</text>
+</g></svg>

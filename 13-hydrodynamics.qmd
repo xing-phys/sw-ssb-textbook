@@ -1,0 +1,256 @@
+# Hydrodynamics and the broken strong symmetry {#sec-hydrodynamics}
+
+An ink drop spreads through water even though its molecules never stop obeying microscopic mechanics. Hydrodynamics explains this loss of microscopic detail with a few slowly varying densities. SW-SSB asks a complementary question: when does a many-body probability distribution cease to remember where an individual conserved charge came from? The connection is powerful because the first question concerns ordinary response, while the second concerns nonlinear distinguishability. This chapter develops the connection without identifying the two questions by definition.
+
+Our route is concrete. We derive diffusion on a lattice, solve its density modes, identify a stationary SW-SSB state, and then formulate the continuum theory. The final sections explain why finite-time order in a conserved system has different dimensional restrictions from stationary order.
+
+## Conservation does not yet mean diffusion
+
+Let $n_i$ be a particle number at site $i$ and $Q=\sum_i n_i$. Strong conservation by a Lindblad generator means that the Hamiltonian and every jump operator commute with $Q$. Thus $\mathcal L^\dagger(Q)=0$. For local dynamics one can assign currents to bonds so that
+
+$$
+\frac{d}{dt}\langle n_i\rangle=\sum_{j\sim i}\langle j_{j\to i}\rangle.
+$$ {#eq-hydro-lattice-continuity}
+
+This is a continuity equation. It says that particles leave a region through its boundary. It does not determine whether transport is ballistic, diffusive, subdiffusive, or absent. A translation-invariant noninteracting Hamiltonian can move particles ballistically; a constrained stochastic system can relax more slowly than diffusion.
+
+Diffusion requires a constitutive relation. In a locally equilibrated, isotropic system with no persistent drift, the leading gradient term is
+
+$$
+\mathbf j=-D\nabla n,\qquad \partial_t n=D\nabla^2n.
+$$ {#eq-hydro-diffusion}
+
+The positive coefficient $D$ sets the transport timescale. A Fourier component evolves as $n_{\mathbf k}(t)=e^{-Dk^2t}n_{\mathbf k}(0)$. A disturbance with size $\ell$ therefore relaxes in time of order $\ell^2/D$. Conservation supplies the vanishing rate at $k=0$; locality and an ordinary constitutive expansion supply the $k^2$ form.
+
+## An exactly controlled example: the exclusion process
+
+Consider a periodic chain of $L$ sites. Each occupation $n_i$ is either zero or one. A particle jumps across a nearest-neighbor bond at rate $\gamma$ if the destination is empty. This is the symmetric simple exclusion process. It is also the diagonal sector of a strongly number-conserving quantum Lindblad evolution with jumps
+
+$$
+L_{i,+}=\sqrt\gamma\,b_{i+1}^{\dagger}b_i,
+\qquad L_{i,-}=\sqrt\gamma\,b_i^{\dagger}b_{i+1},
+$$ {#eq-hydro-exclusion-jumps}
+
+where $b_i$ are hard-core boson lowering operators. Diagonal initial density matrices remain diagonal. We may therefore calculate with a classical distribution $p(\boldsymbol n,t)$.
+
+The incoming particle current is $\gamma n_{i-1}(1-n_i)$ and the outgoing current is $\gamma n_i(1-n_{i-1})$. Their difference is exactly $\gamma(n_{i-1}-n_i)$: the two-particle terms cancel. Repeating on the other bond gives
+
+$$
+\partial_t\langle n_i\rangle=\gamma\big(\langle n_{i+1}\rangle+\langle n_{i-1}\rangle-2\langle n_i\rangle\big).
+$$ {#eq-hydro-exclusion-mean}
+
+No factorization of correlations was used. Define $n_k=L^{-1/2}\sum_j e^{-ikj}(n_j-\nu)$ with $k=2\pi m/L$ and $\nu=Q/L$. Then
+
+$$
+\mathcal L^\dagger(n_k)=-\lambda(k)n_k,
+\qquad \lambda(k)=2\gamma(1-\cos k)=4\gamma\sin^2(k/2).
+$$ {#eq-hydro-exact-spectrum}
+
+This is an exact density-sector dispersion, not a list of every many-body eigenvalue. Restoring lattice spacing $a$ gives $D=\gamma a^2$ at small wavevector. On a ring, the longest nonuniform density wave has relaxation time
+
+$$
+\tau_{\mathrm{dens}}=\frac{1}{4\gamma\sin^2(\pi/L)}
+\simeq\frac{L^2}{4\pi^2\gamma}.
+$$ {#eq-hydro-ring-time}
+
+For example, at $L=8$, the first density decay rate is $(2-\sqrt2)\gamma$; doubling $L$ approaches a fourfold increase in relaxation time. This exact prediction is a useful numerical check for any implementation of the model.
+
+Detailed balance makes the uniform fixed-$Q$ distribution stationary:
+
+$$
+\rho_Q=\binom LQ^{-1}\sum_{\sum_i n_i=Q}|\boldsymbol n\rangle\langle\boldsymbol n|.
+$$ {#eq-hydro-stationary}
+
+Every allowed hop has a reverse hop of equal rate. On a connected ring, all configurations at fixed $Q$ communicate, so this is the unique stationary diagonal distribution in that sector. The word *sector* matters: the full generator retains one stationary distribution for every $Q$.
+
+For $i\ne j$, take $A_{ij}=b_i^\dagger b_j$. Since $A_{ij}$ preserves total number, $\sqrt{\rho_Q}$ is a constant times the identity on its support. Consequently
+
+$$
+R_1(i,j)=\operatorname{Tr}(\sqrt{\rho_Q}A_{ij}\sqrt{\rho_Q}A_{ij}^\dagger)
+=\frac{\binom{L-2}{Q-1}}{\binom LQ}
+=\frac{Q(L-Q)}{L(L-1)}.
+$$ {#eq-hydro-stationary-order}
+
+The combinatorial factor counts an occupied source and an empty destination. At fixed filling $0<\nu<1$, it tends to $\nu(1-\nu)$ independent of separation. The ordinary off-diagonal correlator vanishes because $\rho_Q$ is diagonal. The homogeneous root-fidelity insertion gives the same number here: $\sqrt{\rho_Q}A_{ij}\sqrt{\rho_Q}=A_{ij}/\binom LQ$ on this sector, and $A_{ij}$ is a partial isometry with $\binom{L-2}{Q-1}$ unit singular values. Thus its trace norm equals @eq-hydro-stationary-order, establishing fidelity-based U(1) order directly rather than invoking unitary-probe inequalities for a nonunitary hop. For a normalized postselected state the fidelity would instead be divided by the square root of the transfer success probability. The retained vacancy/occupancy factor has physical content.
+
+The same counting gives
+
+$$
+\operatorname{Cov}(n_i,n_j)=
+\begin{cases}
+\nu(1-\nu),&i=j,\\
+-\nu(1-\nu)/(L-1),&i\ne j.
+\end{cases}
+$$ {#eq-hydro-fixed-covariance}
+
+The negative, system-wide background makes $\operatorname{Var}(Q)=0$. Nevertheless, every nonzero Fourier mode has structure factor $S(k)=\nu(1-\nu)L/(L-1)$. At stationarity, the regression of density fluctuations is exactly $\langle n_k(t)n_{-k}(0)\rangle=S(k)e^{-\lambda(k)t}$. This example exhibits both nonlinear order and diffusion, and lets us see precisely which static and dynamical ingredients produce each.
+
+## A doubled ferromagnet and a diffusive Goldstone mode
+
+The classical generator has a useful spin representation. Let $P_{i,i+1}$ exchange two occupations. Acting on probability vectors,
+
+$$
+-\mathcal L=H_{\mathrm{st}}=\gamma\sum_i(1-P_{i,i+1})
+=\frac\gamma2\sum_i(1-\boldsymbol\sigma_i\cdot\boldsymbol\sigma_{i+1}).
+$$ {#eq-hydro-ferromagnet}
+
+It is positive and frustration free: each term annihilates a fully symmetric state. The square root of the uniform distribution is the normalized Dicke wavefunction in the fixed-$Q$ sector. Thus a stationary probability distribution is related to a ferromagnetic ground state, and a long-wavelength density disturbance is related to a spin-wave excitation. Its energy is a decay rate rather than a real-time oscillation frequency.
+
+More generally, vectorizing operators maps a Lindbladian to an operator on a doubled Hilbert space. Strong symmetry produces separate left and right actions. A state with SW-SSB has order that locks these actions while retaining the diagonal weak symmetry. Low-energy twists of the relative order can then supply slow modes. The microscopic constructions of @ogunnaike2023hydrodynamics and @moudgalya2024superoperators make this relation explicit for Brownian averaged dynamics, including constrained and long-range variants.
+
+This correspondence also explains a potential trap. The doubled operator is not in general Hermitian. Even when a detailed-balance transformation makes it Hermitian, it is a zero-temperature problem with special frustration-free structure. Applying the finite-temperature Mermin–Wagner theorem to it as though it were an ordinary thermal magnet is unjustified. Quadratic, rather than linear, low-energy dispersion changes the infrared reasoning; frustration-free one-dimensional examples are analyzed in @watanabe2024critical.
+
+## Deriving fluctuating diffusion
+
+A continuum theory should describe fluctuations as well as the average density. Write $n=\bar n+\delta n$, and let $\mu(n)$ be a dimensionless thermodynamic chemical potential, with $k_BT=1$. Suppose the static susceptibility is finite and positive,
+
+$$
+\chi=\left.\frac{\partial n}{\partial\mu}\right|_{\bar n}>0.
+$$
+
+Near equilibrium $\delta\mu=\delta n/\chi$. A dissipative current with mobility $\sigma>0$ is $\mathbf j=-\sigma\nabla\mu+\boldsymbol\xi$. Detailed balance fixes the Gaussian current noise to
+
+$$
+\langle\xi_a(\mathbf x,t)\xi_b(\mathbf x',t')\rangle
+=2\sigma\delta_{ab}\delta^{(d)}(\mathbf x-\mathbf x')\delta(t-t').
+$$ {#eq-hydro-noise}
+
+Combining with continuity gives
+
+$$
+\partial_t\delta n=D\nabla^2\delta n-\nabla\cdot\boldsymbol\xi,
+\qquad D=\frac\sigma\chi.
+$$ {#eq-hydro-einstein}
+
+This is the Einstein relation in our units. In physical units the temperature factors depend on whether $\mu$ means the energy-valued chemical potential or $\mu/(k_BT)$; mixing these conventions produces incorrect dimensions.
+
+For each $k\ne0$, this is an Ornstein–Uhlenbeck process. If the initial coarse-grained density is definite, its variance solves
+
+$$
+\partial_t C(k,t)=-2Dk^2C(k,t)+2\sigma k^2,
+\qquad C(k,t)=\chi(1-e^{-2Dk^2t}).
+$$ {#eq-hydro-growing-covariance}
+
+The stationary variance is $\chi$ and the retarded density response to a chemical-potential source is
+
+$$
+G^R_{nn}(\omega,k)=\frac{\chi Dk^2}{Dk^2-i\omega}.
+$$ {#eq-hydro-response}
+
+The pole at $\omega=-iDk^2$ is the hydrodynamic mode. The numerator ensures a spatially uniform conserved charge cannot change under a source that merely shifts its energy in a closed sector. Taking $\omega\to0$ at nonzero $k$, and then $k\to0$, gives $\chi$; reversing these limits gives a different answer.
+
+## The response field as the broken-symmetry phase
+
+Introduce a real response field $\varphi$ to impose the noisy continuity equation in a path integral. Integrating out the Gaussian noise yields the quadratic action
+
+$$
+S=\int dt\,d^dx\left[-\varphi(\partial_t\delta n-D\nabla^2\delta n)
++i\sigma(\nabla\varphi)^2\right].
+$$ {#eq-hydro-action-quadratic}
+
+The $i\sigma$ term ensures that $e^{iS}$ suppresses fluctuations of the response field with the correct noise weight. A convenient nonlinear completion is
+
+$$
+\mathcal L=n\partial_t\varphi
++i\sigma(n)\nabla\varphi\cdot\nabla\big[\varphi+i\mu(n)\big].
+$$ {#eq-hydro-action}
+
+Varying $\varphi$ and choosing the physical saddle $\varphi=0$ gives
+$\partial_t n=\nabla\cdot[\sigma(n)\nabla\mu(n)]$.
+Expanding around $\bar n$ recovers @eq-hydro-action-quadratic. This is the simplest realization of the SW-SSB hydrodynamic effective theory of @huang2025hydrodynamics; related microscopic Liouvillian constructions appear in @gu2025symmetry. The doubled formalism organizes $\varphi$ as a phase associated with a broken strong symmetry, while the unbroken weak symmetry constrains the action. Hydrodynamic effective theories are developed further in @delacretaz2026lectures.
+
+Calling diffusion a Goldstone mode is an organizing statement with hypotheses. The steady state must carry the appropriate order; the charge fluctuations must support a nontrivial long-wavelength mode; locality and a controlled derivative expansion must apply. Detailed balance additionally ties fluctuations to response. An arbitrary mixed state does not determine a susceptibility or a transport coefficient until a dynamics and a perturbation protocol have been specified. The next chapter examines this limitation in detail.
+
+## A microscopic slow-mode bound and its limits
+
+There is a precise way to isolate the static input. Consider a reversible classical Markov process, or a Lindbladian admitting the appropriate self-adjoint detailed-balance representation. We derive the classical version to avoid hiding the assumptions in notation. For configurations $\eta$, let $\pi_\eta$ be the stationary distribution and $w_{\eta\eta'}$ the transition rate. Detailed balance means $\pi_\eta w_{\eta\eta'}=\pi_{\eta'}w_{\eta'\eta}$. The stationary inner product is $\langle f,g\rangle_\pi=\sum_\eta\pi_\eta f_\eta^*g_\eta$.
+
+The positive quadratic form of the generator is
+
+$$
+\mathcal D(f)=-\langle f,\mathcal Lf\rangle_\pi
+=\frac12\sum_{\eta,\eta'}\pi_\eta w_{\eta\eta'}|f_{\eta'}-f_\eta|^2.
+$$ {#eq-hydro-dirichlet}
+
+To derive it, expand the square. The two diagonal terms become identical after exchanging $\eta$ and $\eta'$ using detailed balance. Their difference with the cross terms is precisely the negative generator expectation. Positivity follows term by term. This is the stochastic counterpart of a variational energy expectation.
+
+Choose $f=n_k$, normalized with a factor $V^{-1/2}$. A bounded-range number-conserving hop from $x$ to $x+a$ changes it by
+$V^{-1/2}e^{-ikx}(e^{-ika}-1)$, of magnitude at most $|ka|/\sqrt V$. If local rates and local charge-transfer magnitudes are bounded, order $V$ possible events contribute a Dirichlet form no greater than $Ck^2$. Meanwhile $\langle|n_k|^2\rangle_\pi=S(k)$. The Rayleigh variational principle then bounds the lowest decay eigenvalue with density overlap in the corresponding sector:
+
+$$
+\lambda_{\mathrm{trial}}(k)=\frac{\mathcal D(n_k)}{S(k)}
+\leq\frac{Ck^2}{S(k)}.
+$$ {#eq-hydro-variational-rate}
+
+More precisely, some nonzero spectral weight of the trial vector lies at rates no greater than its Rayleigh quotient. If translation invariance is present, it remains in the wavevector-$k$ sector. For $S(k\to0^+)>0$, the bound forces rates approaching zero at least as quickly as $k^2$. It does not establish that the full spectrum has a single diffusion pole, that $D$ is nonzero, or that slower modes are absent. Those require further dynamical information.
+
+If $S(k)\sim|k|$, the bound still forces gaplessness, now through an upper bound proportional to $|k|$. If $S(k)\sim k^2$, it supplies no vanishing bound at all. Thus a finite nonzero structure factor is a sufficient static route to slow modes under these dynamical assumptions, rather than a necessary definition of SW-SSB. This distinction is central to the charge-scrambling analysis of @lee2026scrambling. The microscopic doubled-space constructions cited earlier use closely related single-mode reasoning; their conclusions about diffusion rely on more than the presence of a conserved symbol in the generator.
+
+For a generic nonreversible or nonnormal Lindbladian, replacing $-\mathcal L$ by a Hermitian Hamiltonian without justification is invalid. Complex eigenvalues, left and right eigenvectors, and transient growth alter how decay modes must be bounded. A conservation law always yields an exact constraint, but the particular Rayleigh proof above belongs to its stated self-adjoint setting.
+
+## Finite-time information spreading is faster than particle diffusion
+
+There is a revealing calculation entirely within Gaussian hydrodynamics. Let $p[n]$ be a zero-mean Gaussian distribution with covariance $C$, restricted to a fixed total charge. Compare it with the distribution obtained by moving a small charge $q$ from $y$ to $x$. The shift is $\delta n=q(\delta_x-\delta_y)$, which has zero total charge. Completing the square gives the Bhattacharyya overlap
+
+$$
+\int Dn\sqrt{p[n]p[n-\delta n]}
+=\exp\left[-\frac18\delta n^TC^{-1}\delta n\right].
+$$ {#eq-hydro-gaussian-overlap}
+
+Using @eq-hydro-growing-covariance, the logarithm contains
+
+$$
+-\log R_1(r,t)=\frac{q^2}{4\chi}\int^{\Lambda}\frac{d^dk}{(2\pi)^d}
+\frac{1-\cos(\mathbf k\cdot\mathbf r)}{1-e^{-2Dk^2t}}.
+$$ {#eq-hydro-overlap-integral}
+
+A microscopic cutoff $\Lambda$ regularizes the local cost. The infrared term uses $1-e^{-2Dk^2t}\simeq2Dk^2t$. In one dimension, $\int dk(1-\cos kr)/(2\pi k^2)=|r|/2$. Therefore, at large $r$,
+
+$$
+R_1(r,t)\propto\exp\left[-\frac{q^2|r|}{16\chi Dt}\right].
+$$ {#eq-hydro-ballistic-information}
+
+The overlap length grows as $t$, whereas a density disturbance spreads only as $\sqrt t$. The information question asks whether two *entire distributions* differing by a distant transfer can be distinguished. It need not track the path of a typical particle. This separation is one of the central conclusions supported by microscopic models, field theory, and numerical diagnostics in @hauser2026discrete.
+
+In two dimensions the same low-$k$ integral grows as $\log r/t$, giving an algebraic overlap. In $d>2$ its separation-dependent infrared part stays bounded. These statements describe a noncompact Gaussian continuum theory. They do not establish that every discrete microscopic system immediately has the same order. Integer particle worldlines and compact phase defects contain information omitted by the continuum approximation.
+
+In microscopic U(1) models, two-dimensional field theory and simulations support a finite-time BKT-like onset of algebraic nonlinear order. Vortices are bound on one side and proliferate on the other. In one dimension there is no such finite-time long-range onset in the local models studied; the information length grows without becoming infinite at finite time. Infinite-time fixed-sector steady states can nevertheless display SW-SSB in any dimension, as @eq-hydro-stationary-order demonstrates. The order of limits is therefore part of the physics:
+
+$$
+\lim_{t\to\infty}\lim_{r\to\infty}R_1(r,t)
+\quad\hbox{need not equal}\quad
+\lim_{r\to\infty}\lim_{t\to\infty}R_1(r,t).
+$$
+
+![Two different lengths in a conserved open system. The curves illustrate the scaling laws derived above in dimensionless units, with freely chosen equal prefactors at time one. They are a mechanism diagram, not a fit to experimental or microscopic simulation data.](figs/frontier-information-scales.png){#fig-frontier-information-scales}
+
+## Worked exercises
+
+### A density wave on a ring
+
+Prepare $\langle n_j(0)\rangle=\nu+\epsilon\cos(2\pi j/L)$ in the exclusion process. Find its amplitude at time $t$, and the time needed to reduce it by a factor ten.
+
+::: {.callout-note collapse="true" title="Solution"}
+The cosine is a sum of the two Fourier modes $k=\pm2\pi/L$. Each decays with the same exact rate. Thus the amplitude is $\epsilon e^{-4\gamma\sin^2(\pi/L)t}$ and the required time is $\log10/[4\gamma\sin^2(\pi/L)]$. This is an exact one-point prediction even though the evolving distribution contains correlations.
+:::
+
+### Fluctuations in a finite block
+
+For @eq-hydro-stationary, calculate the variance of the charge in a block containing $\ell$ sites. Check the limits $\ell=1$ and $\ell=L$.
+
+::: {.callout-note collapse="true" title="Solution"}
+Sum the covariance over all ordered pairs in the block:
+$$
+\operatorname{Var}(Q_A)=\nu(1-\nu)\left[\ell-\frac{\ell(\ell-1)}{L-1}\right]
+=\nu(1-\nu)\frac{\ell(L-\ell)}{L-1}.
+$$
+It equals the Bernoulli variance for one site and vanishes for the full system. For $1\ll\ell\ll L$ it is extensive even though the total charge is exact.
+:::
+
+### A dynamical countercheck
+
+Could the same stationary $\rho_Q$ be stationary under a generator with no diffusion?
+
+::: {.callout-note collapse="true" title="Solution"}
+Yes. The zero generator leaves every state stationary and has no spreading. Pure number dephasing also leaves $\rho_Q$ stationary while each $n_i$ is separately conserved. SW-SSB is a property of the state; diffusion requires sufficiently mixing transport dynamics. This simple counterexample prevents a state-only order parameter from determining a unique transport law.
+:::

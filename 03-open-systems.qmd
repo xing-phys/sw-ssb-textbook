@@ -1,0 +1,213 @@
+# Quantum channels and open-system dynamics {#sec-open-systems}
+
+## From inaccessible degrees of freedom to a map
+
+A system need not be thermally equilibrated to be mixed. An unobserved photon can carry away phase information; a random unitary can produce classical uncertainty; a measurement can leave a record that is discarded. The common description is a quantum channel, a map taking input density matrices to output density matrices.
+
+Assume initially that system and environment are uncorrelated, $\rho\otimes\ket0\bra0_E$. Let a joint unitary $V$ act, and discard $E$:
+
+$$
+\mathcal E(\rho)=\operatorname{Tr}_E\left[V(\rho\otimes\ket0\bra0_E)V^\dagger\right].
+$$ {#eq-channel-dilation}
+
+The initial-product assumption matters. If the input is correlated with $E$, a single channel on arbitrary system states need not describe the reduced dynamics. The environment can always be enlarged to purify its initially mixed state.
+
+Choose an orthonormal basis $\ket a_E$ and define $K_a={}_E\bra a V\ket0_E$. Inserting this basis into the partial trace gives
+
+$$
+\mathcal E(\rho)=\sum_aK_a\rho K_a^\dagger,\qquad
+\sum_aK_a^\dagger K_a=I.
+$$ {#eq-kraus}
+
+The second identity follows from $V^\dagger V=I$ and guarantees trace preservation. Each term is positive on positive inputs. The same construction remains positive when an arbitrary spectator system is included. This is complete positivity. A completely positive trace-preserving map is abbreviated CPTP.
+
+Ordinary positivity is insufficient because the input system may be entangled with a spectator. Matrix transposition preserves positivity on a single system but is not completely positive. Applied to one half of a Bell pair, it produces a matrix with a negative eigenvalue. It cannot be a deterministic physical channel.
+
+Kraus operators are not unique. Replacing $K_a$ by $\widetilde K_b=\sum_a w_{ba}K_a$ with an isometry $w$ gives the same channel. Thus a particular list of Kraus outcomes is additional structure until a physical measurement of the environment selects that list.
+
+## Measurement, selection, and discarded records
+
+A measurement instrument consists of completely positive maps $\mathcal E_a$ with $\sum_a\mathcal E_a$ trace preserving. Outcome $a$ has probability $p_a=\operatorname{Tr}\mathcal E_a(\rho)$, and the conditioned state is $\rho_a=\mathcal E_a(\rho)/p_a$. The map $\rho\mapsto\rho_a$ is nonlinear because of this normalization. The unconditioned state is the linear average $\sum_ap_a\rho_a$.
+
+For a projective $Z$ measurement on a qubit,
+
+$$
+\mathcal M_Z(\rho)=P_0\rho P_0+P_1\rho P_1
+=\frac12(\rho+Z\rho Z).
+$$
+
+If the input is $\ket+$, either conditioned state is pure, while the discarded-record output is $I/2$. A monitored trajectory and its record-averaged density matrix are different physical objects. They may undergo different phase transitions.
+
+To keep the record explicitly, introduce a classical register:
+
+$$
+\rho_{SC}=\sum_ap_a\rho_a\otimes\ket a\bra a_C.
+$$
+
+Tracing $C$ produces the unconditioned state. Reading $C$ can reveal correlations absent from the density matrix of $S$ alone. Later comparisons with charge sharpening, spin-glass-like trajectory order, and decoding will always specify which records are available.
+
+## Three elementary channels
+
+### Dephasing
+
+With probability $p$ apply $Z$:
+
+$$
+\mathcal D_p(\rho)=(1-p)\rho+pZ\rho Z.
+$$ {#eq-qubit-dephasing}
+
+In the $Z$ basis, diagonal entries remain fixed and off-diagonal entries are multiplied by $1-2p$. The Bloch vector transforms as $(r_x,r_y,r_z)\mapsto((1-2p)r_x,(1-2p)r_y,r_z)$. At $p=1/2$ all coherence in this basis disappears. At $p=1$ the map is a reversible unitary, so a noise parameter need not be globally monotone unless its domain is specified. We usually take $0\leq p\leq1/2$.
+
+Composition gives
+
+$$
+\mathcal D_p\mathcal D_q=\mathcal D_{p+q-2pq}.
+$$
+
+The attenuation factors multiply. This simple identity lets us translate finite-time dephasing into a noise probability.
+
+### Amplitude damping
+
+Spontaneous relaxation from $\ket1$ to $\ket0$ is described by
+
+$$
+K_0=\ket0\bra0+\sqrt{1-\gamma}\ket1\bra1,
+\qquad K_1=\sqrt\gamma\ket0\bra1.
+$$
+
+Then $\rho_{11}\mapsto(1-\gamma)\rho_{11}$ and $\rho_{01}\mapsto\sqrt{1-\gamma}\rho_{01}$. The maximally mixed state does not remain maximally mixed. A channel satisfying $\mathcal E(I)=I$ is called unital; amplitude damping is not unital. Unitality and trace preservation are different conditions.
+
+### Erasure and replacement
+
+The map $\mathcal R(\rho)=\tau\operatorname{Tr}\rho$ replaces every input by a fixed state $\tau$. It is CPTP and destroys all input information. If arbitrary one-way local channels defined phase equivalence, every state could be sent to a trivial product state. Any useful mixed-state phase definition therefore needs additional conditions, such as a reverse channel, local reversibility, or symmetry constraints.
+
+## The Choi representation
+
+Let $d=\dim\mathcal H$ and $\ket\Phi=d^{-1/2}\sum_i\ket i\ket i$. Define
+
+$$
+J_{\mathcal E}=(\mathcal E\otimes\mathrm{id})(\ket\Phi\bra\Phi).
+$$
+
+Complete positivity is equivalent to $J_{\mathcal E}\geq0$, and trace preservation is equivalent to $\operatorname{Tr}_{\mathrm{out}}J_{\mathcal E}=I_{\mathrm{in}}/d$. Conversely,
+
+$$
+\mathcal E(A)=d\operatorname{Tr}_{\mathrm{in}}
+\left[J_{\mathcal E}(I\otimes A^T)\right].
+$$
+
+This follows by expanding $\ket\Phi\bra\Phi=d^{-1}\sum_{ij}\ket i\bra j\otimes\ket i\bra j$. It provides a finite matrix test for physicality and makes clear that a channel has more structure than its action on one selected state.
+
+The Choi matrix of a channel should not be confused with vectorizing a density matrix as $\ket\rho\!\rangle$. Both use doubled spaces, but one represents a map and the other a state. The canonical vector $\ket{\sqrt\rho}\!\rangle$ is a third construction, with yet another normalization.
+
+## Continuous time and the Lindblad equation
+
+Markovian time-homogeneous dynamics assumes $\mathcal E_{t+s}=\mathcal E_t\mathcal E_s$ and $\mathcal E_0=\mathrm{id}$. Under the usual continuity assumptions in finite dimension, $\mathcal E_t=e^{t\mathcal L}$ with a generator of the Gorini-Kossakowski-Sudarshan-Lindblad form [@gks1976; @lindblad1976]:
+
+$$
+\partial_t\rho=\mathcal L(\rho)
+=-i[H,\rho]+\sum_a\left(L_a\rho L_a^\dagger
+-\frac12\{L_a^\dagger L_a,\rho\}\right).
+$$ {#eq-lindblad-foundation}
+
+The $L_a$ are jump operators; rates may be absorbed into their normalization. The anticommutator terms compensate the probability lost from no-jump evolution.
+
+To see the structure, take a small step $dt$ with
+
+$$
+K_0=I-dt\left(iH+\frac12\sum_aL_a^\dagger L_a\right),
+\qquad K_a=\sqrt{dt}\,L_a.
+$$
+
+Then $\sum_\alpha K_\alpha^\dagger K_\alpha=I+O(dt^2)$. Expanding the Kraus sum to first order gives @eq-lindblad-foundation. The exact exponential is CPTP. A first-order Euler step is only an approximation and need not stay positive for a large step.
+
+Trace preservation follows directly by cyclicity. Hermiticity is also preserved. The nontrivial positivity guarantee comes from the generator's structure, not from these two easier checks.
+
+### Worked example: continuous dephasing
+
+For $L=\sqrt\kappa Z$, the master equation is $\dot\rho=\kappa(Z\rho Z-\rho)$. The off-diagonal equation is $\dot\rho_{01}=-2\kappa\rho_{01}$, so
+
+$$
+\rho_{01}(t)=e^{-2\kappa t}\rho_{01}(0),\qquad
+p(t)=\frac{1-e^{-2\kappa t}}2.
+$$
+
+The diagonal entries remain fixed. Complete dephasing is reached only at infinite time. A collective or many-body transition may nevertheless occur at a finite $p_c<1/2$, hence at a finite time. Conversely, in some one-dimensional models only the infinite-time limit has long-range nonlinear order.
+
+## Heisenberg evolution and conservation laws
+
+The adjoint generator is defined by $\operatorname{Tr}[O\mathcal L(\rho)]=\operatorname{Tr}[\mathcal L^\dagger(O)\rho]$. It is
+
+$$
+\mathcal L^\dagger(O)=i[H,O]+\sum_a
+\left(L_a^\dagger OL_a-\frac12\{L_a^\dagger L_a,O\}\right).
+$$
+
+An observable $Q$ is conserved in mean for all states if $\mathcal L^\dagger(Q)=0$. The sufficient conditions $[H,Q]=[L_a,Q]=0$ are stronger: each jump preserves every charge sector. That is the dynamical strong-symmetry condition relevant to this book. Covariance under conjugation by a symmetry is weaker and can allow jumps that exchange charge with the environment.
+
+For example, local raising and lowering jumps can preserve covariance under $e^{i\theta Q}$ because their phases cancel between $L_a$ and $L_a^\dagger$, yet they do not preserve fixed-$Q$ sectors. These distinctions are developed precisely in @sec-symmetry.
+
+## Stationary states, gaps, and mixing
+
+A stationary state satisfies $\mathcal L(\rho_*)=0$. A stationary manifold may contain multiple states, especially if sectors cannot communicate. Uniqueness must be stated either globally or within a selected sector.
+
+The spectrum of $\mathcal L$ lies in the closed left half-plane for a finite CPTP semigroup. A positive spectral gap is the smallest nonzero decay rate $-\operatorname{Re}\lambda$ after stationary and other nondecaying modes are treated appropriately. It is tempting to equate its inverse with equilibration time. That can fail.
+
+Define a trace-distance mixing time within an invariant sector by
+
+$$
+t_{\mathrm{mix}}(\epsilon)=\inf\left\{t:
+\sup_{\rho\ \mathrm{in\ sector}}\frac12\|e^{t\mathcal L}(\rho)-\rho_*\|_1\leq\epsilon\right\}.
+$$
+
+Even when eigenvalues are known, coefficients, nonorthogonal eigenvectors, Jordan blocks, and the size of the state space can introduce size-dependent factors. A uniform spectral gap alone does not establish size-independent mixing. This is relevant to proposed links between steady-state SW-SSB and rapid mixing.
+
+## Local channels and causal structure
+
+A finite-depth local channel circuit has a bounded number of layers; each layer contains disjoint gates supported on bounded regions. Information can propagate only a bounded distance through a fixed-depth circuit. A local Lindbladian with bounded, short-range terms has an approximate causal cone, with exponentially small tails outside a Lieb-Robinson-type cone. Finite-time dynamics is therefore related to shallow channels, but the desired accuracy may introduce logarithmic corrections in system size.
+
+Depth, range, norm bounds, and error convention must all be specified before claiming that a phase cannot be transformed locally. A circuit of depth proportional to $L$ can communicate across the sample and is outside fixed-depth stability statements.
+
+The environment also matters. A collection of fresh, initially uncorrelated local ancillas is different from preloading a globally correlated environment with the state one wants to prepare. Allowing the latter would insert the order by assumption.
+
+## Exercises and worked solutions
+
+### 1. Complete positivity of transposition
+
+Apply transposition to the second qubit of $\ket{\Phi^+}\bra{\Phi^+}$ and find the spectrum.
+
+::: {.callout-note collapse="true" title="Solution"}
+The partially transposed matrix is half the swap operator: $\frac12\sum_{ij}\ket i\bra j\otimes\ket j\bra i$. Swap has eigenvalue $+1$ on the three-dimensional symmetric subspace and $-1$ on the singlet. The spectrum is $1/2,1/2,1/2,-1/2$. Hence transposition cannot act as a deterministic channel on an arbitrary subsystem entangled with a spectator.
+:::
+
+### 2. An environment realization of dephasing
+
+Construct an isometry producing @eq-qubit-dephasing, and identify the record basis.
+
+::: {.callout-note collapse="true" title="Solution"}
+Take $W\ket\psi=\sqrt{1-p}\ket\psi\ket0_E+\sqrt p\,Z\ket\psi\ket1_E$. Orthogonality of the environment states gives $W^\dagger W=I$. Tracing $E$ yields the Kraus sum. Measuring $E$ in this basis reveals which random unitary occurred. Measuring a different basis gives a different unraveling of the same reduced channel.
+:::
+
+### 3. Strong symmetry of pair noise
+
+Let $U=\prod_iX_i$ and let each bond jump be $L_{ij}=\sqrt\kappa Z_iZ_j$. Show that the sector of $U$ is conserved. Compare a single-site $Z_i$ jump.
+
+::: {.callout-note collapse="true" title="Solution"}
+Conjugating $Z_iZ_j$ by $U$ produces two minus signs and leaves it unchanged. Thus every pair jump commutes with $U$, preserving each eigenspace in every trajectory. A single $Z_i$ anticommutes with $U$ and flips its eigenvalue. The single-site dissipator is still covariant under $U$ because the two signs in $Z_i\rho Z_i$ cancel. It preserves weak symmetry of the averaged state but exchanges strong-charge sectors.
+:::
+
+### 4. What does a gap prove?
+
+Suppose a bound has the form $\|\rho(t)-\rho_*\|_1\leq C_Ne^{-\Delta t}$, with $C_N=e^{aN}$. Estimate the time needed to reach error $\epsilon$ when $\Delta$ is independent of $N$.
+
+::: {.callout-note collapse="true" title="Solution"}
+It is sufficient to take $t\geq(aN+\ln(1/\epsilon))/\Delta$. Thus this estimate allows a mixing time linear in $N$ despite a constant gap. Better estimates may exist, but the eigenvalue statement alone does not supply them. One must control the prefactor or an appropriate stronger mixing inequality.
+:::
+
+### 5. Selection versus averaging
+
+Starting from a two-spin cat, projectively measure $Z_1$. Give the conditioned and unconditioned states and identify which have a definite value of $X_1X_2$.
+
+::: {.callout-note collapse="true" title="Solution"}
+The outcomes give $\ket{00}$ or $\ket{11}$ with equal probability. Discarding the outcome gives their classical coin. The input cat is an eigenvector of $X_1X_2$ with eigenvalue $+1$. Neither selected branch nor the unconditioned coin is supported in that eigenspace. The coin remains invariant under conjugation by $X_1X_2$, whereas the selected branches do not. This is an explicit channel-induced loss of strong symmetry, distinct from spontaneous breaking diagnosed in a strongly symmetric state.
+:::

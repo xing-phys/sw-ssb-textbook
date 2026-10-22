@@ -1,0 +1,21 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='1000' height='560' viewBox='0 0 1000 560'><rect width='1000' height='560' rx='12' fill='#faf8f3'/><g font-family='DejaVu Sans, sans-serif'>
+<text x='45' y='45' font-size='27' fill='#223640' text-anchor='start' font-weight='bold'>Local correlations and global constraints</text>
+<rect x='45' y='100' width='210' height='230' rx='14' fill='#dceeed' stroke='#a8b8b8'/>
+<text x='65' y='134' font-size='23' fill='#223640' text-anchor='start' font-weight='bold'>A: probe</text>
+<text x='65' y='188' font-size='18' fill='#223640' text-anchor='start' font-weight='normal'>Fixed local region</text>
+<text x='65' y='214' font-size='18' fill='#223640' text-anchor='start' font-weight='normal'>Charged operation</text>
+<text x='65' y='240' font-size='18' fill='#223640' text-anchor='start' font-weight='normal'>Untouched by recovery</text>
+<rect x='280' y='100' width='285' height='230' rx='14' fill='#eee5d3' stroke='#a8b8b8'/>
+<text x='300' y='134' font-size='23' fill='#223640' text-anchor='start' font-weight='bold'>B: buffer</text>
+<text x='300' y='188' font-size='18' fill='#223640' text-anchor='start' font-weight='normal'>Width l_B is varied</text>
+<text x='300' y='214' font-size='18' fill='#223640' text-anchor='start' font-weight='normal'>Mediates ordinary</text>
+<text x='300' y='240' font-size='18' fill='#223640' text-anchor='start' font-weight='normal'>short-range correlations</text>
+<rect x='590' y='100' width='365' height='230' rx='14' fill='#e1e5f2' stroke='#a8b8b8'/>
+<text x='610' y='134' font-size='23' fill='#223640' text-anchor='start' font-weight='bold'>C: distant remainder</text>
+<text x='610' y='188' font-size='18' fill='#223640' text-anchor='start' font-weight='normal'>Can hold a global constraint</text>
+<text x='610' y='214' font-size='18' fill='#223640' text-anchor='start' font-weight='normal'>Invisible to separate probes</text>
+<text x='610' y='240' font-size='18' fill='#223640' text-anchor='start' font-weight='normal'>Correlated after conditioning</text>
+<text x='50' y='395' font-size='23' fill='#223640' text-anchor='start' font-weight='normal'>MI: what do A and C share without knowing B?</text>
+<text x='50' y='444' font-size='23' fill='#223640' text-anchor='start' font-weight='normal'>CMI: what remains shared when B is known?</text>
+<text x='50' y='512' font-size='19' fill='#223640' text-anchor='start' font-weight='normal'>Fixed parity: MI = 0, CMI = ln 2 for nonempty A, B, C covering the system.</text>
+</g></svg>
